@@ -1,11 +1,11 @@
 package datatypes;
 
-public class DtUsuario {
-	private String nickname;
-	private String nombre;	
-	private String apellido;
-	private String email;
-	private DtFecha fecNac;
+public abstract class DtUsuario {
+	protected String nickname;
+	protected String nombre;
+	protected String apellido;
+	protected String email;
+	protected DtFecha fecNac;
 	
 	public DtUsuario(String n, String nom, String a, String e, DtFecha f) {
 		super();
