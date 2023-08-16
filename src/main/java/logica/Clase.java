@@ -9,6 +9,9 @@ public class Clase {
     private LocalTime hora;
     private String url;
     private LocalDate fechaReg;
+    //pseudos
+    private Profesor profe;
+    private ActividadDeportiva actividad;
 
 
     public Clase(){
@@ -63,5 +66,21 @@ public class Clase {
     public void setFechaReg(LocalDate fechaReg){
         this.fechaReg = fechaReg;
     }
+
+	public Profesor getProfe() {
+		return profe;
+	}
+
+	public void setProfe(Profesor profe) {
+		this.profe = profe;
+	}
+
+	public ActividadDeportiva getActividad() {
+		return actividad;
+	}
+
+	public void setActividad(ActividadDeportiva actividad) {
+		this.actividad = actividad;
+	}
 
 }

@@ -11,6 +11,8 @@ public class ActividadDeportiva {
     private int duracion;
     private float costo;
     private LocalDate fecReg;
+    //pseudos
+    private InstitucionDeportiva institucion;
 
     public ActividadDeportiva(String n, String d, int dur, float c, LocalDate f) {
         super();
@@ -51,4 +53,12 @@ public class ActividadDeportiva {
     public void setFecReg(LocalDate fecReg) {
         this.fecReg = fecReg;
     }
+
+	public InstitucionDeportiva getInstitucion() {
+		return institucion;
+	}
+
+	public void setInstitucion(InstitucionDeportiva institucion) {
+		this.institucion = institucion;
+	}
 }

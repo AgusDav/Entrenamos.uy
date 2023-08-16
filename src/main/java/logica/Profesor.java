@@ -6,9 +6,11 @@ public class Profesor extends Usuario{
     private  String descripcion;
     private String biografia;
     private String sitioWeb;
+    //pseudos
+    private InstitucionDeportiva institucion;
 
     public Profesor(){
-        super();
+    	super();
     }
 
     public Profesor(String nickname, String nombre, String apellido, String email, LocalDate fechaNac, String descripcion, String biografia, String sitioWeb){
