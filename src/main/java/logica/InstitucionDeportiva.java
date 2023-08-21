@@ -1,15 +1,20 @@
 package logica;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import datatypes.DtActividadDeportiva;
+
 public class InstitucionDeportiva {
     private String nombre;
     private String descripcion;
     private String url;
-
+    private List<ActividadDeportiva> actD = new ArrayList<>();
 
     public InstitucionDeportiva(){
         super();
     }
-
+    
     public InstitucionDeportiva(String nombre, String descripcion, String url){
         super();
         this.nombre = nombre;
@@ -39,5 +44,10 @@ public class InstitucionDeportiva {
 
     public void setUrl(String url){
         this.url = url;
+    }
+
+    public void agregarActividadDeportiva(DtActividadDeportiva data){
+        ActividadDeportiva i = new ActividadDeportiva(data.getNombre(),data.getDescripcion(),data.getDuracion(),data.getCosto(),data.getFecReg());
+		actD.add(i);
     }
 }

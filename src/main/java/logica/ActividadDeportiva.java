@@ -14,6 +14,10 @@ public class ActividadDeportiva {
     //pseudos
     private InstitucionDeportiva institucion;
 
+    public ActividadDeportiva() {
+        super();
+    }
+
     public ActividadDeportiva(String n, String d, int dur, float c, LocalDate f) {
         super();
         this.nombre = n;
@@ -22,6 +26,7 @@ public class ActividadDeportiva {
         this.costo  = c;
         this.fecReg = f;
     }
+
 
     public String getNombre() {
         return nombre;
