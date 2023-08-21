@@ -1,13 +1,15 @@
 package datatypes;
 
+import java.time.LocalDate;
+
 public abstract class DtUsuario {
 	protected String nickname;
 	protected String nombre;
 	protected String apellido;
 	protected String email;
-	protected DtFecha fecNac;
+	protected LocalDate fecNac;
 	
-	public DtUsuario(String n, String nom, String a, String e, DtFecha f) {
+	public DtUsuario(String n, String nom, String a, String e, LocalDate f) {
 		super();
 		this.nickname = n;
 		this.nombre = nom;
@@ -39,10 +41,10 @@ public abstract class DtUsuario {
 	public void setEmail(String email) {
 		this.email = email;
 	}
-	public DtFecha getFecNac() {
+	public LocalDate getFecNac() {
 		return fecNac;
 	}
-	public void setFecNac(DtFecha fecNac) {
+	public void setFecNac(LocalDate fecNac) {
 		this.fecNac = fecNac;
 	}
 	@Override

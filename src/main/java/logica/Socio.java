@@ -1,7 +1,5 @@
 package logica;
 
-import datatypes.DtFecha;
-
 import java.time.LocalDate;
 
 public class Socio extends Usuario{

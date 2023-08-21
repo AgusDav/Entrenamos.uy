@@ -1,13 +1,16 @@
 package datatypes;
 
+import java.time.LocalDate;
+import java.time.LocalTime;
+
 public class DtClase {
 	private String nombre;	
-	private DtFecha fecha;
-	private DtHora horaInicio;
+	private LocalDate fecha;
+	private LocalTime horaInicio;
 	private String url;
-	private DtFecha fechaReg;
+	private LocalDate fechaReg;
 	
-	public DtClase(String n, DtFecha f, DtHora h, String u, DtFecha fR) {
+	public DtClase(String n, LocalDate f, LocalTime h, String u, LocalDate fR) {
 		super();
 		this.nombre = n;
 		this.fecha = f;
@@ -21,16 +24,16 @@ public class DtClase {
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
 	}
-	public DtFecha getFecha() {
+	public LocalDate getFecha() {
 		return fecha;
 	}
-	public void setFecha(DtFecha fecha) {
+	public void setFecha(LocalDate fecha) {
 		this.fecha = fecha;
 	}
-	public DtHora getHoraInicio() {
+	public LocalTime getHoraInicio() {
 		return horaInicio;
 	}
-	public void setHoraInicio(DtHora horaInicio) {
+	public void setHoraInicio(LocalTime horaInicio) {
 		this.horaInicio = horaInicio;
 	}
 	public String getUrl() {
@@ -39,10 +42,10 @@ public class DtClase {
 	public void setUrl(String url) {
 		this.url = url;
 	}
-	public DtFecha getFechaReg() {
+	public LocalDate getFechaReg() {
 		return fechaReg;
 	}
-	public void setFechaReg(DtFecha fechaReg) {
+	public void setFechaReg(LocalDate fechaReg) {
 		this.fechaReg = fechaReg;
 	}
 	@Override

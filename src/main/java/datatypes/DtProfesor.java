@@ -1,11 +1,13 @@
 package datatypes;
 
+import java.time.LocalDate;
+
 public class DtProfesor extends DtUsuario{
 	private String descripcion;
 	private String biografia;
 	private String sitioWeb;
 	
-	public DtProfesor(String n, String nom, String a, String e, DtFecha f, String d, String b, String w) {
+	public DtProfesor(String n, String nom, String a, String e, LocalDate f, String d, String b, String w) {
 		super(n, nom, a, e, f);
 		this.biografia = b;
 		this.descripcion = d;

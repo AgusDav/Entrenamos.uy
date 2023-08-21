@@ -1,7 +1,5 @@
 package logica;
 
-import datatypes.DtFecha;
-
 import java.time.LocalDate;
 
 public class ActividadDeportiva {
@@ -11,8 +9,9 @@ public class ActividadDeportiva {
     private int duracion;
     private float costo;
     private LocalDate fecReg;
-    //pseudos
+
     private InstitucionDeportiva institucion;
+    //lista clases
 
     public ActividadDeportiva() {
         super();
@@ -26,7 +25,6 @@ public class ActividadDeportiva {
         this.costo  = c;
         this.fecReg = f;
     }
-
 
     public String getNombre() {
         return nombre;

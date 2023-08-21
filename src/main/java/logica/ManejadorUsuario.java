@@ -18,5 +18,15 @@ public class ManejadorUsuario {
 	public void addUser(Usuario user) {
 		users.add(user);
 	}
+
+	public Usuario buscarUsuario(String nick){
+		Usuario ret = null;
+		for(Usuario u: users){
+			if(u.getNickname().equals(nick)){
+				ret = u;
+			}
+		}
+		return ret;
+	}
 	
 }

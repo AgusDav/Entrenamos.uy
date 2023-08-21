@@ -30,6 +30,8 @@ public class Principal {
     private CardLayout cardLayout;
     private JDialog agregarInstitutoDialog;
     private AgregarInstitucion agregarInstitutoInternalFrame;
+    private AgregarUsuario agregarUsuarioInternalFrame;
+    private JDialog agregarUsuarioDialog;
 
     public static void main(String[] args) {
         EventQueue.invokeLater(new Runnable() {
@@ -60,6 +62,17 @@ public class Principal {
         agregarInstitutoDialog.setLocationRelativeTo(null);
         agregarInstitutoDialog.setVisible(false);
         agregarInstitutoInternalFrame.setVisible(true);
+
+        agregarUsuarioDialog = new JDialog(frame, "Agregar Usuario", true);
+        agregarUsuarioDialog.setSize(400, 400);
+        agregarUsuarioDialog.setLocationRelativeTo(frame);
+        agregarUsuarioDialog.getContentPane().setLayout(new BorderLayout());
+
+        agregarUsuarioInternalFrame = new AgregarUsuario(icon, agregarUsuarioDialog);
+        agregarUsuarioDialog.getContentPane().add(agregarUsuarioInternalFrame);
+        agregarUsuarioDialog.setLocationRelativeTo(null);
+        agregarUsuarioDialog.setVisible(false);
+        agregarUsuarioInternalFrame.setVisible(true);
     }
 
     public void iniciar() {
@@ -79,7 +92,7 @@ public class Principal {
         panelDeTarjetas.add(panelBienvenida, "bienvenida");
 
         // Crear Panel de Otro Menú
-        JPanel panelPrincipal = crearpanelPrincipal();
+        JPanel panelPrincipal = crearPanelPrincipal();
         panelDeTarjetas.add(panelPrincipal, "otroMenu");
 
         // Establecer la vista inicial en la pantalla de bienvenida
@@ -197,7 +210,7 @@ public class Principal {
         timer.start();
     }
 
-    private JPanel crearpanelPrincipal() {
+    private JPanel crearPanelPrincipal() {
         JPanel panelPrincipal = new JPanel();
         panelPrincipal.setBackground(new Color(54, 61, 75));
         panelPrincipal.setLayout(null);
@@ -209,20 +222,29 @@ public class Principal {
         	}
         });
         
-        JButton btnAlta = new JButton("Alta");
-        btnAlta.addActionListener(new ActionListener() {
+        JButton btnAltaInstitucion = new JButton("Alta Institucion");
+        btnAltaInstitucion.addActionListener(new ActionListener() {
         	public void actionPerformed(ActionEvent e) {
         		agregarInstitutoDialog.setVisible(true);
         	}
         });
-        btnAlta.setBounds(185, 144, 117, 25);
-        panelPrincipal.add(btnAlta);
+        btnAltaInstitucion.setBounds(130, 144, 172, 25);
+        panelPrincipal.add(btnAltaInstitucion);
         btnSalir.setBounds(618, 625, 117, 25);
         panelPrincipal.add(btnSalir);
         
         JButton btnInformacion = new JButton("Informacion");
         btnInformacion.setBounds(185, 204, 117, 25);
         panelPrincipal.add(btnInformacion);
+
+        JButton btnAltaUsuario = new JButton("Alta Usuario");
+        btnAltaUsuario.addActionListener(new ActionListener() {
+        	public void actionPerformed(ActionEvent e) {
+        		agregarUsuarioDialog.setVisible(true);
+        	}
+        });
+        btnAltaUsuario.setBounds(130, 246, 172, 25);
+        panelPrincipal.add(btnAltaUsuario);
         // Crear el contenido para el panel de otro menú aquí
 
         return panelPrincipal;
