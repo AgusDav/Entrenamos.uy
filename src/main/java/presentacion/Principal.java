@@ -14,6 +14,10 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.Timer;
 import javax.swing.border.LineBorder;
+
+import interfaces.Fabrica;
+import interfaces.IControlador;
+
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
@@ -22,6 +26,7 @@ public class Principal {
     private JFrame frame;
     private JPanel panelDeTarjetas;
     private CardLayout cardLayout;
+    private AgregarInstitucion agregarInstitutoInternalFrame;
 
     public static void main(String[] args) {
         EventQueue.invokeLater(new Runnable() {
@@ -38,6 +43,20 @@ public class Principal {
 
     public Principal() {
         iniciar();
+        
+        Fabrica fabrica = Fabrica.getInstancia();
+        IControlador icon = fabrica.getIControlador();
+        
+        Dimension desktopSize = frame.getSize();
+		Dimension jInternalFrameSize;
+		
+		agregarInstitutoInternalFrame = new AgregarInstitucion(icon);
+		jInternalFrameSize = agregarInstitutoInternalFrame.getSize();
+		agregarInstitutoInternalFrame.setLocation((desktopSize.width - jInternalFrameSize.width)/2,
+		    (desktopSize.height- jInternalFrameSize.height)/2);
+		agregarInstitutoInternalFrame.setVisible(false);
+		frame.getContentPane().add(agregarInstitutoInternalFrame);
+		agregarInstitutoInternalFrame.getContentPane().setLayout(null);
     }
 
     public void iniciar() {
@@ -83,7 +102,7 @@ public class Principal {
         gif.setIconTextGap(-100);
 
         // Crear botones "Entrar" y "Salir"
-        JButton botonEntrar = new JButton("Entrar");
+        final JButton botonEntrar = new JButton("Entrar");
         botonEntrar.setForeground(Color.WHITE);
         botonEntrar.setBackground(new Color(54, 61, 75));
         botonEntrar.setBorder(new LineBorder(new Color(33, 37, 43), 3, true));
@@ -106,7 +125,7 @@ public class Principal {
             }
         });
 
-        JButton botonSalir = new JButton("Salir");
+        final JButton botonSalir = new JButton("Salir");
         botonSalir.setForeground(Color.WHITE);
         botonSalir.setBackground(new Color(54, 61, 75));
         botonSalir.setBorder(new LineBorder(new Color(33, 37, 43), 3, true));
@@ -178,6 +197,29 @@ public class Principal {
     private JPanel crearpanelPrincipal() {
         JPanel panelPrincipal = new JPanel();
         panelPrincipal.setBackground(new Color(54, 61, 75));
+        panelPrincipal.setLayout(null);
+        
+        JButton btnSalir = new JButton("Salir");
+        btnSalir.addActionListener(new ActionListener() {
+        	public void actionPerformed(ActionEvent e) {
+        		System.exit(0);
+        	}
+        });
+        btnSalir.setBounds(618, 625, 117, 25);
+        panelPrincipal.add(btnSalir);
+        
+        JButton btnAlta = new JButton("Alta");
+        btnAlta.addActionListener(new ActionListener() {
+        	public void actionPerformed(ActionEvent e) {
+        		agregarInstitutoInternalFrame.setVisible(true);
+        	}
+        });
+        btnAlta.setBounds(185, 144, 117, 25);
+        panelPrincipal.add(btnAlta);
+        
+        JButton btnInformacion = new JButton("Informacion");
+        btnInformacion.setBounds(185, 204, 117, 25);
+        panelPrincipal.add(btnInformacion);
         // Crear el contenido para el panel de otro menú aquí
 
         return panelPrincipal;

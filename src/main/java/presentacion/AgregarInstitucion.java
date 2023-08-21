@@ -77,6 +77,11 @@ public class AgregarInstitucion extends JInternalFrame {
 		getContentPane().add(btnAceptar);
 		
 		JButton btnCancelar = new JButton("Cancelar");
+		btnCancelar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				agregarInstitutoCancelar(e);
+			}
+		});
 		btnCancelar.setBounds(240, 210, 117, 25);
 		getContentPane().add(btnCancelar);
 
@@ -84,19 +89,32 @@ public class AgregarInstitucion extends JInternalFrame {
 	
 	protected void agregarInstitucionAceptarActionPerformed(ActionEvent arg0) {
 		String nombre = this.textFieldNombre.getText();
-        String ci = this.textFieldDescripcion.getText();
+        String desc = this.textFieldDescripcion.getText();
         String url = this.textFieldUrl.getText();
-  
+        
+        if (nombre.isEmpty()){
+        	JOptionPane.showMessageDialog(this, "No puede haber campos vacíos", "Agregar Inscripcion", JOptionPane.ERROR_MESSAGE);
+        }else{
             try {
-                this.icon.altaInstitucion(nombre, ci, url);
+                this.icon.altaInstitucion(nombre, desc, url);
                 JOptionPane.showMessageDialog(this, "La Institucion se ha creado con éxito", "Agregar ",
                         JOptionPane.INFORMATION_MESSAGE);
+                limpiar();
+                setVisible(false);
             } catch (InstitucionDeportivaRepetidaException e) {
                 JOptionPane.showMessageDialog(this, e.getMessage(), "Agregar Institucion", JOptionPane.ERROR_MESSAGE);
             }
- 
-            setVisible(false);
-        
-		
-	} 
+        } 
+	}
+	
+	protected void agregarInstitutoCancelar(ActionEvent arg0) {
+		limpiar();
+		setVisible(false);
+	}
+	private void limpiar() {
+		textFieldNombre.setText("");
+        textFieldDescripcion.setText("");
+        textFieldUrl.setText("");
+	}
 }
+
