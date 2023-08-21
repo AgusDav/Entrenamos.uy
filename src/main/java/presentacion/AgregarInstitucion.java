@@ -14,6 +14,8 @@ import javax.swing.JTextField;
 import excepciones.InstitucionDeportivaRepetidaException;
 
 import javax.swing.JButton;
+import javax.swing.JDialog;
+
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
@@ -22,13 +24,14 @@ public class AgregarInstitucion extends JInternalFrame {
 	private static final long serialVersionUID = 1L;
 
 	private IControlador icon;
-	
+	private JDialog dialogoPadre;
 	private JTextField textFieldNombre;
 	private JTextField textFieldDescripcion;
 	private JTextField textFieldUrl;
 
 	
-	public AgregarInstitucion(IControlador icon) {
+	public AgregarInstitucion(IControlador icon, JDialog dialogoPadre) {
+		this.dialogoPadre = dialogoPadre;
 		this.icon = icon;
 		setBounds(100, 100, 450, 300);
 		getContentPane().setLayout(null);
@@ -100,7 +103,7 @@ public class AgregarInstitucion extends JInternalFrame {
                 JOptionPane.showMessageDialog(this, "La Institucion se ha creado con éxito", "Agregar ",
                         JOptionPane.INFORMATION_MESSAGE);
                 limpiar();
-                setVisible(false);
+                dialogoPadre.dispose();
             } catch (InstitucionDeportivaRepetidaException e) {
                 JOptionPane.showMessageDialog(this, e.getMessage(), "Agregar Institucion", JOptionPane.ERROR_MESSAGE);
             }

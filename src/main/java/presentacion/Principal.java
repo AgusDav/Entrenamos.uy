@@ -1,4 +1,6 @@
 package presentacion;
+
+import java.awt.BorderLayout;
 import java.awt.CardLayout;
 import java.awt.Color;
 import java.awt.Dimension;
@@ -9,6 +11,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -21,11 +24,11 @@ import interfaces.IControlador;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
-
 public class Principal {
     private JFrame frame;
     private JPanel panelDeTarjetas;
     private CardLayout cardLayout;
+    private JDialog agregarInstitutoDialog;
     private AgregarInstitucion agregarInstitutoInternalFrame;
 
     public static void main(String[] args) {
@@ -43,20 +46,26 @@ public class Principal {
 
     public Principal() {
         iniciar();
-        
+
         Fabrica fabrica = Fabrica.getInstancia();
         IControlador icon = fabrica.getIControlador();
-        
+
+        agregarInstitutoDialog = new JDialog(frame, "Agregar Institución", true);
+        agregarInstitutoDialog.setSize(600, 400);
+        agregarInstitutoDialog.setLocationRelativeTo(frame);
+        agregarInstitutoDialog.getContentPane().setLayout(new BorderLayout());
+
+        agregarInstitutoInternalFrame = new AgregarInstitucion(icon, agregarInstitutoDialog);
+        agregarInstitutoDialog.getContentPane().add(agregarInstitutoInternalFrame);
+
         Dimension desktopSize = frame.getSize();
-		Dimension jInternalFrameSize;
-		
-		agregarInstitutoInternalFrame = new AgregarInstitucion(icon);
-		jInternalFrameSize = agregarInstitutoInternalFrame.getSize();
-		agregarInstitutoInternalFrame.setLocation((desktopSize.width - jInternalFrameSize.width)/2,
-		    (desktopSize.height- jInternalFrameSize.height)/2);
-		agregarInstitutoInternalFrame.setVisible(false);
-		frame.getContentPane().add(agregarInstitutoInternalFrame);
-		agregarInstitutoInternalFrame.getContentPane().setLayout(null);
+        Dimension jInternalFrameSize;
+
+        jInternalFrameSize = agregarInstitutoDialog.getSize();
+        agregarInstitutoDialog.setLocation((desktopSize.width - jInternalFrameSize.width) / 2,
+                (desktopSize.height - jInternalFrameSize.height) / 2);
+        agregarInstitutoDialog.setVisible(false);
+        agregarInstitutoInternalFrame.setVisible(true);
     }
 
     public void iniciar() {
@@ -205,17 +214,17 @@ public class Principal {
         		System.exit(0);
         	}
         });
-        btnSalir.setBounds(618, 625, 117, 25);
-        panelPrincipal.add(btnSalir);
         
         JButton btnAlta = new JButton("Alta");
         btnAlta.addActionListener(new ActionListener() {
         	public void actionPerformed(ActionEvent e) {
-        		agregarInstitutoInternalFrame.setVisible(true);
+        		agregarInstitutoDialog.setVisible(true);
         	}
         });
         btnAlta.setBounds(185, 144, 117, 25);
         panelPrincipal.add(btnAlta);
+        btnSalir.setBounds(618, 625, 117, 25);
+        panelPrincipal.add(btnSalir);
         
         JButton btnInformacion = new JButton("Informacion");
         btnInformacion.setBounds(185, 204, 117, 25);
