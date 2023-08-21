@@ -54,7 +54,7 @@ public class AgregarInstitucion extends JInternalFrame {
 		getContentPane().add(lblUrl);
 		
 		textFieldNombre = new JTextField();
-		textFieldNombre.setBounds(107, 59, 114, 19);
+		textFieldNombre.setBounds(132, 59, 114, 19);
 		getContentPane().add(textFieldNombre);
 		textFieldNombre.setColumns(10);
 		
@@ -66,7 +66,7 @@ public class AgregarInstitucion extends JInternalFrame {
 		
 		textFieldUrl = new JTextField();
 		textFieldUrl.setText("");
-		textFieldUrl.setBounds(71, 141, 114, 19);
+		textFieldUrl.setBounds(132, 141, 114, 19);
 		getContentPane().add(textFieldUrl);
 		textFieldUrl.setColumns(10);
 		
