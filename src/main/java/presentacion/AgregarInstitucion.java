@@ -112,7 +112,7 @@ public class AgregarInstitucion extends JInternalFrame {
 	
 	protected void agregarInstitutoCancelar(ActionEvent arg0) {
 		limpiar();
-		setVisible(false);
+		dialogoPadre.dispose();
 	}
 	private void limpiar() {
 		textFieldNombre.setText("");

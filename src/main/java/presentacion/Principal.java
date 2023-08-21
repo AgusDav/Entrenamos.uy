@@ -57,13 +57,7 @@ public class Principal {
 
         agregarInstitutoInternalFrame = new AgregarInstitucion(icon, agregarInstitutoDialog);
         agregarInstitutoDialog.getContentPane().add(agregarInstitutoInternalFrame);
-
-        Dimension desktopSize = frame.getSize();
-        Dimension jInternalFrameSize;
-
-        jInternalFrameSize = agregarInstitutoDialog.getSize();
-        agregarInstitutoDialog.setLocation((desktopSize.width - jInternalFrameSize.width) / 2,
-                (desktopSize.height - jInternalFrameSize.height) / 2);
+        agregarInstitutoDialog.setLocationRelativeTo(null);
         agregarInstitutoDialog.setVisible(false);
         agregarInstitutoInternalFrame.setVisible(true);
     }
@@ -72,8 +66,8 @@ public class Principal {
         frame = new JFrame();
         frame.setTitle("Entrenamos.uy");
         frame.setSize(800, 800);
+        frame.setLocationRelativeTo(null);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-
         ImageIcon imagen = new ImageIcon(getClass().getResource("Icon.jpg"));
         frame.setIconImage(imagen.getImage());
 
