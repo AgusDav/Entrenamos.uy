@@ -53,7 +53,7 @@ public class Principal {
         IControlador icon = fabrica.getIControlador();
 
         agregarInstitutoDialog = new JDialog(frame, "Agregar Institución", true);
-        agregarInstitutoDialog.setSize(600, 400);
+        agregarInstitutoDialog.setSize(340, 310);
         agregarInstitutoDialog.setLocationRelativeTo(frame);
         agregarInstitutoDialog.getContentPane().setLayout(new BorderLayout());
 
@@ -64,7 +64,7 @@ public class Principal {
         agregarInstitutoInternalFrame.setVisible(true);
 
         agregarUsuarioDialog = new JDialog(frame, "Agregar Usuario", true);
-        agregarUsuarioDialog.setSize(400, 400);
+        agregarUsuarioDialog.setSize(400, 430);
         agregarUsuarioDialog.setLocationRelativeTo(frame);
         agregarUsuarioDialog.getContentPane().setLayout(new BorderLayout());
 
@@ -200,6 +200,7 @@ public class Principal {
                 if (posicionY > destino) {
                     panel.setBounds(0, posicionY, 800, 800);
                     posicionY -= velocidad;
+                    
                 } else {
                     timer.stop();
                     cardLayout.show(panelDeTarjetas, proximoPanel);
@@ -234,7 +235,7 @@ public class Principal {
         panelPrincipal.add(btnSalir);
         
         JButton btnInformacion = new JButton("Informacion");
-        btnInformacion.setBounds(185, 204, 117, 25);
+        btnInformacion.setBounds(185, 195, 117, 25);
         panelPrincipal.add(btnInformacion);
 
         JButton btnAltaUsuario = new JButton("Alta Usuario");

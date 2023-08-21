@@ -8,6 +8,7 @@ import javax.swing.JInternalFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 
+import java.awt.Color;
 import java.awt.Font;
 import javax.swing.JTextField;
 
@@ -31,42 +32,42 @@ public class AgregarInstitucion extends JInternalFrame {
 
 	
 	public AgregarInstitucion(IControlador icon, JDialog dialogoPadre) {
+		setTitle("Agregar Institucion");
 		this.dialogoPadre = dialogoPadre;
 		this.icon = icon;
-		setBounds(100, 100, 450, 300);
+		setBounds(100, 100, 340, 300);
 		getContentPane().setLayout(null);
-		
-		JLabel lblAltaInstitucionDeportiva = new JLabel("ALTA INSTITUCION DEPORTIVA");
-		lblAltaInstitucionDeportiva.setFont(new Font("Dialog", Font.BOLD, 15));
-		lblAltaInstitucionDeportiva.setBounds(93, 12, 264, 15);
-		getContentPane().add(lblAltaInstitucionDeportiva);
+		getContentPane().setBackground(new Color(54, 61, 75));;
 		
 		JLabel lblNombre = new JLabel("Nombre:");
-		lblNombre.setBounds(34, 61, 70, 15);
+		lblNombre.setForeground(new Color(255, 255, 255));
+		lblNombre.setBounds(34, 45, 70, 15);
 		getContentPane().add(lblNombre);
 		
 		JLabel lblNewLabel = new JLabel("Descripcion:");
-		lblNewLabel.setBounds(34, 101, 94, 15);
+		lblNewLabel.setForeground(new Color(255, 255, 255));
+		lblNewLabel.setBounds(34, 85, 94, 15);
 		getContentPane().add(lblNewLabel);
 		
 		JLabel lblUrl = new JLabel("Url:");
-		lblUrl.setBounds(34, 143, 70, 15);
+		lblUrl.setForeground(new Color(255, 255, 255));
+		lblUrl.setBounds(34, 129, 70, 15);
 		getContentPane().add(lblUrl);
 		
 		textFieldNombre = new JTextField();
-		textFieldNombre.setBounds(132, 59, 114, 19);
+		textFieldNombre.setBounds(132, 43, 114, 19);
 		getContentPane().add(textFieldNombre);
 		textFieldNombre.setColumns(10);
 		
 		textFieldDescripcion = new JTextField();
 		textFieldDescripcion.setText("");
-		textFieldDescripcion.setBounds(132, 99, 114, 19);
+		textFieldDescripcion.setBounds(132, 83, 114, 19);
 		getContentPane().add(textFieldDescripcion);
 		textFieldDescripcion.setColumns(10);
 		
 		textFieldUrl = new JTextField();
 		textFieldUrl.setText("");
-		textFieldUrl.setBounds(132, 141, 114, 19);
+		textFieldUrl.setBounds(132, 127, 114, 19);
 		getContentPane().add(textFieldUrl);
 		textFieldUrl.setColumns(10);
 		
@@ -76,7 +77,7 @@ public class AgregarInstitucion extends JInternalFrame {
 				agregarInstitucionAceptarActionPerformed(e);
 			}
 		});
-		btnAceptar.setBounds(104, 210, 117, 25);
+		btnAceptar.setBounds(34, 210, 117, 25);
 		getContentPane().add(btnAceptar);
 		
 		JButton btnCancelar = new JButton("Cancelar");
@@ -85,7 +86,7 @@ public class AgregarInstitucion extends JInternalFrame {
 				agregarInstitutoCancelar(e);
 			}
 		});
-		btnCancelar.setBounds(240, 210, 117, 25);
+		btnCancelar.setBounds(183, 210, 117, 25);
 		getContentPane().add(btnCancelar);
 
 	}
