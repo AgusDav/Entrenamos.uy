@@ -1,7 +1,5 @@
 package presentacion;
 
-
-
 import interfaces.IControlador;
 
 import javax.swing.JInternalFrame;
@@ -30,8 +28,8 @@ public class AgregarInstitucion extends JInternalFrame {
 	private JTextField textFieldDescripcion;
 	private JTextField textFieldUrl;
 
-	
 	public AgregarInstitucion(IControlador icon, JDialog dialogoPadre) {
+		// Título de la ventata
 		setTitle("Agregar Institucion");
 		this.dialogoPadre = dialogoPadre;
 		this.icon = icon;
@@ -39,25 +37,22 @@ public class AgregarInstitucion extends JInternalFrame {
 		getContentPane().setLayout(null);
 		getContentPane().setBackground(new Color(54, 61, 75));;
 		
+		// Campo nombre
 		JLabel lblNombre = new JLabel("Nombre:");
 		lblNombre.setForeground(new Color(255, 255, 255));
 		lblNombre.setBounds(34, 45, 70, 15);
 		getContentPane().add(lblNombre);
 		
-		JLabel lblNewLabel = new JLabel("Descripcion:");
-		lblNewLabel.setForeground(new Color(255, 255, 255));
-		lblNewLabel.setBounds(34, 85, 94, 15);
-		getContentPane().add(lblNewLabel);
-		
-		JLabel lblUrl = new JLabel("Url:");
-		lblUrl.setForeground(new Color(255, 255, 255));
-		lblUrl.setBounds(34, 129, 70, 15);
-		getContentPane().add(lblUrl);
-		
 		textFieldNombre = new JTextField();
 		textFieldNombre.setBounds(132, 43, 114, 19);
 		getContentPane().add(textFieldNombre);
 		textFieldNombre.setColumns(10);
+		
+		// Campo descripción
+		JLabel lblDescripcion = new JLabel("Descripción:");
+		lblDescripcion.setForeground(new Color(255, 255, 255));
+		lblDescripcion.setBounds(34, 85, 94, 15);
+		getContentPane().add(lblDescripcion);
 		
 		textFieldDescripcion = new JTextField();
 		textFieldDescripcion.setText("");
@@ -65,12 +60,19 @@ public class AgregarInstitucion extends JInternalFrame {
 		getContentPane().add(textFieldDescripcion);
 		textFieldDescripcion.setColumns(10);
 		
+		// Campo url
+		JLabel lblUrl = new JLabel("Url:");
+		lblUrl.setForeground(new Color(255, 255, 255));
+		lblUrl.setBounds(34, 129, 70, 15);
+		getContentPane().add(lblUrl);
+				
 		textFieldUrl = new JTextField();
 		textFieldUrl.setText("");
 		textFieldUrl.setBounds(132, 127, 114, 19);
 		getContentPane().add(textFieldUrl);
 		textFieldUrl.setColumns(10);
 		
+		// Botón aceptar
 		JButton btnAceptar = new JButton("Aceptar");
 		btnAceptar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -80,6 +82,7 @@ public class AgregarInstitucion extends JInternalFrame {
 		btnAceptar.setBounds(34, 210, 117, 25);
 		getContentPane().add(btnAceptar);
 		
+		// Botón cancelar
 		JButton btnCancelar = new JButton("Cancelar");
 		btnCancelar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -88,7 +91,6 @@ public class AgregarInstitucion extends JInternalFrame {
 		});
 		btnCancelar.setBounds(183, 210, 117, 25);
 		getContentPane().add(btnCancelar);
-
 	}
 	
 	protected void agregarInstitucionAceptarActionPerformed(ActionEvent arg0) {
@@ -96,25 +98,27 @@ public class AgregarInstitucion extends JInternalFrame {
         String desc = this.textFieldDescripcion.getText();
         String url = this.textFieldUrl.getText();
         
-        if (nombre.isEmpty()){
-        	JOptionPane.showMessageDialog(this, "No puede haber campos vacíos", "Agregar Inscripcion", JOptionPane.ERROR_MESSAGE);
+        if (nombre.isEmpty() || desc.isEmpty() || url.isEmpty()){
+        	JOptionPane.showMessageDialog(this, "No puede haber campos vacíos", "Agregar Institución", JOptionPane.ERROR_MESSAGE);
         }else{
             try {
                 this.icon.altaInstitucion(nombre, desc, url);
-                JOptionPane.showMessageDialog(this, "La Institucion se ha creado con éxito", "Agregar ",
-                        JOptionPane.INFORMATION_MESSAGE);
+                JOptionPane.showMessageDialog(this, "La Institucion se ha creado con éxito", "Agregar Institucioón ", JOptionPane.INFORMATION_MESSAGE);
                 limpiar();
                 dialogoPadre.dispose();
             } catch (InstitucionDeportivaRepetidaException e) {
-                JOptionPane.showMessageDialog(this, e.getMessage(), "Agregar Institucion", JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(this, e.getMessage(), "Agregar Institución", JOptionPane.ERROR_MESSAGE);
             }
         } 
 	}
 	
+	// Cancela el caso de uso
 	protected void agregarInstitutoCancelar(ActionEvent arg0) {
 		limpiar();
 		dialogoPadre.dispose();
 	}
+	
+	// Limpia los campos donde se insertan los datos
 	private void limpiar() {
 		textFieldNombre.setText("");
         textFieldDescripcion.setText("");

@@ -23,6 +23,7 @@ import interfaces.IControlador;
 
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import javax.swing.SwingConstants;
 
 public class Principal {
     private JFrame frame;
@@ -76,6 +77,7 @@ public class Principal {
     }
 
     public void iniciar() {
+    	// Título de la ventana
         frame = new JFrame();
         frame.setTitle("Entrenamos.uy");
         frame.setSize(800, 800);
@@ -216,6 +218,7 @@ public class Principal {
         panelPrincipal.setBackground(new Color(54, 61, 75));
         panelPrincipal.setLayout(null);
         
+        // Botón salir
         JButton btnSalir = new JButton("Salir");
         btnSalir.addActionListener(new ActionListener() {
         	public void actionPerformed(ActionEvent e) {
@@ -223,20 +226,21 @@ public class Principal {
         	}
         });
         
+        // Botón alta institución
         JButton btnAltaInstitucion = new JButton("Alta Institucion");
         btnAltaInstitucion.addActionListener(new ActionListener() {
         	public void actionPerformed(ActionEvent e) {
         		agregarInstitutoDialog.setVisible(true);
         	}
         });
-        btnAltaInstitucion.setBounds(130, 144, 172, 25);
+        btnAltaInstitucion.setBounds(12, 12, 172, 25);
         panelPrincipal.add(btnAltaInstitucion);
-        btnSalir.setBounds(618, 625, 117, 25);
+        btnSalir.setBounds(340, 700, 117, 25);
         panelPrincipal.add(btnSalir);
         
-        JButton btnInformacion = new JButton("Informacion");
-        btnInformacion.setBounds(185, 195, 117, 25);
-        panelPrincipal.add(btnInformacion);
+        JButton btnInformacion7 = new JButton("Informacion");
+        btnInformacion7.setBounds(376, 12, 117, 25);
+        panelPrincipal.add(btnInformacion7);
 
         JButton btnAltaUsuario = new JButton("Alta Usuario");
         btnAltaUsuario.addActionListener(new ActionListener() {
@@ -244,7 +248,7 @@ public class Principal {
         		agregarUsuarioDialog.setVisible(true);
         	}
         });
-        btnAltaUsuario.setBounds(130, 246, 172, 25);
+        btnAltaUsuario.setBounds(196, 12, 172, 25);
         panelPrincipal.add(btnAltaUsuario);
         // Crear el contenido para el panel de otro menú aquí
 

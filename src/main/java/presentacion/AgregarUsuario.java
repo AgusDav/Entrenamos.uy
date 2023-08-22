@@ -36,6 +36,7 @@ public class AgregarUsuario extends JInternalFrame {
 	private JTextField textFieldBio;
 	
 	public AgregarUsuario(IControlador icon, JDialog dialogoPadre) {
+		//Titulo de la ventana
 		setTitle("Agregar Usuario");
 		this.dialogoPadre = dialogoPadre;
 		this.icon = icon;
@@ -43,72 +44,61 @@ public class AgregarUsuario extends JInternalFrame {
 		getContentPane().setLayout(null);
 		getContentPane().setBackground(new Color(54, 61, 75));;
 		
+		// Campo nickname
 		JLabel lblNickname = new JLabel("Nickname");
 		lblNickname.setForeground(new Color(255, 255, 255));
 		lblNickname.setBounds(12, 22, 70, 15);
 		getContentPane().add(lblNickname);
 		
+		textFieldNick = new JTextField();
+        textFieldNick.setBounds(160, 20, 114, 19);
+        getContentPane().add(textFieldNick);
+        textFieldNick.setColumns(10);
+		
+        // Campo email
 		JLabel lblEmail = new JLabel("Email");
 		lblEmail.setForeground(new Color(255, 255, 255));
 		lblEmail.setBounds(12, 49, 70, 15);
 		getContentPane().add(lblEmail);
 		
+		textFieldEmail = new JTextField();
+        textFieldEmail.setBounds(160, 47, 114, 19);
+        getContentPane().add(textFieldEmail);
+        textFieldEmail.setColumns(10);
+		
+        // Campo nombre
 		JLabel lblNombre = new JLabel("Nombre");
 		lblNombre.setForeground(new Color(255, 255, 255));
 		lblNombre.setBounds(12, 76, 70, 15);
 		getContentPane().add(lblNombre);
 		
+		textFieldNombre = new JTextField();
+        textFieldNombre.setBounds(160, 74, 114, 19);
+        getContentPane().add(textFieldNombre);
+        textFieldNombre.setColumns(10);
+		
+        // Campo apellido
 		JLabel lblApellido = new JLabel("Apellido");
 		lblApellido.setForeground(new Color(255, 255, 255));
 		lblApellido.setBounds(12, 103, 70, 15);
 		getContentPane().add(lblApellido);
 		
-		JLabel lblFechaNacimiento = new JLabel("Fecha Nacimiento");
-		lblFechaNacimiento.setForeground(new Color(255, 255, 255));
-		lblFechaNacimiento.setBounds(12, 130, 139, 15);
-		getContentPane().add(lblFechaNacimiento);
-		fecNac = new JDateChooser();
-        fecNac.setBounds(160, 128, 150, 19);
-        getContentPane().add(fecNac);
-        
-        textFieldNick = new JTextField();
-        textFieldNick.setBounds(160, 20, 114, 19);
-        getContentPane().add(textFieldNick);
-        textFieldNick.setColumns(10);
-        
-        textFieldEmail = new JTextField();
-        textFieldEmail.setBounds(160, 47, 114, 19);
-        getContentPane().add(textFieldEmail);
-        textFieldEmail.setColumns(10);
-        
-        textFieldNombre = new JTextField();
-        textFieldNombre.setBounds(160, 74, 114, 19);
-        getContentPane().add(textFieldNombre);
-        textFieldNombre.setColumns(10);
-        
-        textFieldApellido = new JTextField();
+		textFieldApellido = new JTextField();
         textFieldApellido.setBounds(160, 101, 114, 19);
         getContentPane().add(textFieldApellido);
         textFieldApellido.setColumns(10);
         
-        JButton btnAceptar = new JButton("Aceptar");
-		btnAceptar.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				//agregarInstitucionAceptarActionPerformed(e);
-			}
-		});
-		btnAceptar.setBounds(102, 314, 117, 25);
-		getContentPane().add(btnAceptar);
+		// Campo fecha nacimiento
+		JLabel lblFechaNacimiento = new JLabel("Fecha Nacimiento");
+		lblFechaNacimiento.setForeground(new Color(255, 255, 255));
+		lblFechaNacimiento.setBounds(12, 130, 139, 15);
+		getContentPane().add(lblFechaNacimiento);
 		
-		JButton btnCancelar = new JButton("Cancelar");
-		btnCancelar.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				//agregarInstitutoCancelar(e);
-			}
-		});
-		btnCancelar.setBounds(231, 314, 117, 25);
-		getContentPane().add(btnCancelar);
+		fecNac = new JDateChooser();
+        fecNac.setBounds(160, 128, 150, 19);
+        getContentPane().add(fecNac);   
 		
+        // Campo tipo usuario
 		JLabel lblTipoUsuario = new JLabel("Tipo Usuario");
 		lblTipoUsuario.setForeground(new Color(255, 255, 255));
 		lblTipoUsuario.setBounds(12, 166, 102, 15);
@@ -122,6 +112,10 @@ public class AgregarUsuario extends JInternalFrame {
                     textFieldDescripcion.setEnabled(false); // Deshabilitar el JTextField
                     textFieldWeb.setEnabled(false);
                     textFieldBio.setEnabled(false);
+                }else {
+                	textFieldDescripcion.setEnabled(true); // Habilitar el JTextField
+                    textFieldWeb.setEnabled(true);
+                    textFieldBio.setEnabled(true);
                 }
 			}
 		});
@@ -129,25 +123,22 @@ public class AgregarUsuario extends JInternalFrame {
 		seleccionarTipoUser.setBounds(160, 161, 117, 24);
 		getContentPane().add(seleccionarTipoUser);
 		
+		// Campo descripción
 		JLabel lblDescripcion = new JLabel("Descripcion");
 		lblDescripcion.setForeground(new Color(255, 255, 255));
 		lblDescripcion.setBounds(12, 199, 102, 15);
 		getContentPane().add(lblDescripcion);
 		
-		JLabel lblWeb = new JLabel("Web");
-		lblWeb.setForeground(new Color(255, 255, 255));
-		lblWeb.setBounds(12, 226, 70, 15);
-		getContentPane().add(lblWeb);
-		
-		JLabel lblBiografia = new JLabel("Biografia");
-		lblBiografia.setForeground(new Color(255, 255, 255));
-		lblBiografia.setBounds(12, 253, 70, 15);
-		getContentPane().add(lblBiografia);
-		
 		textFieldDescripcion = new JTextField();
 		textFieldDescripcion.setBounds(160, 197, 114, 19);
 		getContentPane().add(textFieldDescripcion);
 		textFieldDescripcion.setColumns(10);
+		
+		// Campo sitio web
+		JLabel lblWeb = new JLabel("Web");
+		lblWeb.setForeground(new Color(255, 255, 255));
+		lblWeb.setBounds(12, 226, 70, 15);
+		getContentPane().add(lblWeb);
 		
 		textFieldWeb = new JTextField();
 		textFieldWeb.setText("");
@@ -155,12 +146,36 @@ public class AgregarUsuario extends JInternalFrame {
 		getContentPane().add(textFieldWeb);
 		textFieldWeb.setColumns(10);
 		
+		// Campo biografía		
+		JLabel lblBiografia = new JLabel("Biografia");
+		lblBiografia.setForeground(new Color(255, 255, 255));
+		lblBiografia.setBounds(12, 253, 70, 15);
+		getContentPane().add(lblBiografia);
+				
 		textFieldBio = new JTextField();
 		textFieldBio.setText("");
 		textFieldBio.setBounds(160, 251, 114, 19);
 		getContentPane().add(textFieldBio);
 		textFieldBio.setColumns(10);
 		
-
+		// Botón aceptar
+        JButton btnAceptar = new JButton("Aceptar");
+		btnAceptar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				//agregarInstitucionAceptarActionPerformed(e);
+			}
+		});
+		btnAceptar.setBounds(102, 314, 117, 25);
+		getContentPane().add(btnAceptar);
+		
+		// Botón cancelar
+		JButton btnCancelar = new JButton("Cancelar");
+		btnCancelar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				//agregarInstitutoCancelar(e);
+			}
+		});
+		btnCancelar.setBounds(231, 314, 117, 25);
+		getContentPane().add(btnCancelar);
 	}
 }
