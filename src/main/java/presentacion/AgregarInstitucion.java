@@ -9,6 +9,7 @@ import javax.swing.JOptionPane;
 import java.awt.Color;
 import java.awt.Font;
 import javax.swing.JTextField;
+import javax.swing.border.LineBorder;
 
 import excepciones.InstitucionDeportivaRepetidaException;
 
@@ -16,6 +17,8 @@ import javax.swing.JButton;
 import javax.swing.JDialog;
 
 import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.awt.event.ActionEvent;
 
 public class AgregarInstitucion extends JInternalFrame {
@@ -79,7 +82,20 @@ public class AgregarInstitucion extends JInternalFrame {
 				agregarInstitucionAceptarActionPerformed(e);
 			}
 		});
-		btnAceptar.setBounds(34, 210, 117, 25);
+		btnAceptar.setForeground(Color.WHITE);
+		btnAceptar.setBackground(new Color(54, 61, 75));
+		btnAceptar.setBorder(new LineBorder(new Color(33, 37, 43), 3, true));
+		btnAceptar.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseEntered(MouseEvent e) {
+            	btnAceptar.setBackground(new Color(69, 78, 95)); // Lighter blue when hovering
+            }
+            @Override
+            public void mouseExited(MouseEvent e) {
+            	btnAceptar.setBackground(new Color(54, 61, 75)); // Original color when not hovering
+            }
+        });
+		btnAceptar.setBounds(33, 189, 123, 32);
 		getContentPane().add(btnAceptar);
 		
 		// Botón cancelar
@@ -89,7 +105,20 @@ public class AgregarInstitucion extends JInternalFrame {
 				agregarInstitutoCancelar(e);
 			}
 		});
-		btnCancelar.setBounds(183, 210, 117, 25);
+		btnCancelar.setForeground(Color.WHITE);
+		btnCancelar.setBackground(new Color(54, 61, 75));
+		btnCancelar.setBorder(new LineBorder(new Color(33, 37, 43), 3, true));
+		btnCancelar.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseEntered(MouseEvent e) {
+            	btnCancelar.setBackground(new Color(69, 78, 95)); // Lighter blue when hovering
+            }
+            @Override
+            public void mouseExited(MouseEvent e) {
+            	btnCancelar.setBackground(new Color(54, 61, 75)); // Original color when not hovering
+            }
+        });
+		btnCancelar.setBounds(180, 189, 123, 32);
 		getContentPane().add(btnCancelar);
 	}
 	

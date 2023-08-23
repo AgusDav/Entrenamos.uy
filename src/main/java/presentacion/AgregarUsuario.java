@@ -3,21 +3,28 @@ package presentacion;
 import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.time.LocalDate;
 import java.util.Date;
+
 import javax.swing.JDialog;
 import javax.swing.JInternalFrame;
 import javax.swing.JTextField;
 import com.toedter.calendar.JDateChooser;
+
+import datatypes.DtProfesor;
+import datatypes.DtSocio;
+import datatypes.DtUsuario;
+import excepciones.InstitucionDeportivaRepetidaException;
+import excepciones.UsuarioRepetidoException;
 import interfaces.IControlador;
 import javax.swing.JLabel;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
-import javax.swing.JTextArea;
-import javax.swing.JRadioButton;
-import javax.swing.JToggleButton;
-import javax.swing.JCheckBox;
+import javax.swing.border.LineBorder;
 import javax.swing.JList;
+import javax.swing.JOptionPane;
 import javax.swing.DefaultComboBoxModel;
 
 public class AgregarUsuario extends JInternalFrame {
@@ -34,9 +41,9 @@ public class AgregarUsuario extends JInternalFrame {
 	private JTextField textFieldDescripcion;
 	private JTextField textFieldWeb;
 	private JTextField textFieldBio;
+	private JComboBox seleccionarTipoUser;
 	
 	public AgregarUsuario(IControlador icon, JDialog dialogoPadre) {
-		//Titulo de la ventana
 		setTitle("Agregar Usuario");
 		this.dialogoPadre = dialogoPadre;
 		this.icon = icon;
@@ -104,25 +111,6 @@ public class AgregarUsuario extends JInternalFrame {
 		lblTipoUsuario.setBounds(12, 166, 102, 15);
 		getContentPane().add(lblTipoUsuario);
 		
-		JComboBox seleccionarTipoUser = new JComboBox();
-		seleccionarTipoUser.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				String selectedItem = (String) seleccionarTipoUser.getSelectedItem();
-                if ("Socio".equals(selectedItem)) {
-                    textFieldDescripcion.setEnabled(false); // Deshabilitar el JTextField
-                    textFieldWeb.setEnabled(false);
-                    textFieldBio.setEnabled(false);
-                }else {
-                	textFieldDescripcion.setEnabled(true); // Habilitar el JTextField
-                    textFieldWeb.setEnabled(true);
-                    textFieldBio.setEnabled(true);
-                }
-			}
-		});
-		seleccionarTipoUser.setModel(new DefaultComboBoxModel(new String[] {"Profesor", "Socio"}));
-		seleccionarTipoUser.setBounds(160, 161, 117, 24);
-		getContentPane().add(seleccionarTipoUser);
-		
 		// Campo descripción
 		JLabel lblDescripcion = new JLabel("Descripcion");
 		lblDescripcion.setForeground(new Color(255, 255, 255));
@@ -158,24 +146,124 @@ public class AgregarUsuario extends JInternalFrame {
 		getContentPane().add(textFieldBio);
 		textFieldBio.setColumns(10);
 		
+		seleccionarTipoUser = new JComboBox();
+		seleccionarTipoUser.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				String selectedItem = (String) seleccionarTipoUser.getSelectedItem();
+				if ("Socio".equals(selectedItem)) {
+		            textFieldDescripcion.setVisible(false); // Ocultar el JTextField
+		            textFieldWeb.setVisible(false);
+		            textFieldBio.setVisible(false);
+		            lblDescripcion.setVisible(false);
+		            lblWeb.setVisible(false);
+		            lblBiografia.setVisible(false);
+		        } else {
+		            textFieldDescripcion.setVisible(true); // Mostrar el JTextField
+		            textFieldWeb.setVisible(true);
+		            textFieldBio.setVisible(true);
+		            lblDescripcion.setVisible(true);
+		            lblWeb.setVisible(true);
+		            lblBiografia.setVisible(true);
+		        }
+			}
+		});
+		seleccionarTipoUser.setModel(new DefaultComboBoxModel(new String[] {"Profesor", "Socio"}));
+		seleccionarTipoUser.setBounds(160, 161, 117, 24);
+		getContentPane().add(seleccionarTipoUser);
+		
+		
 		// Botón aceptar
         JButton btnAceptar = new JButton("Aceptar");
 		btnAceptar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				//agregarInstitucionAceptarActionPerformed(e);
+				agregarUsuarioAceptarActionPerformed(e);
 			}
 		});
-		btnAceptar.setBounds(102, 314, 117, 25);
+		btnAceptar.setForeground(Color.WHITE);
+		btnAceptar.setBackground(new Color(54, 61, 75));
+		btnAceptar.setBorder(new LineBorder(new Color(33, 37, 43), 3, true));
+		btnAceptar.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseEntered(MouseEvent e) {
+            	btnAceptar.setBackground(new Color(69, 78, 95)); // Lighter blue when hovering
+            }
+            @Override
+            public void mouseExited(MouseEvent e) {
+            	btnAceptar.setBackground(new Color(54, 61, 75)); // Original color when not hovering
+            }
+        });
+		btnAceptar.setBounds(95, 302, 124, 37);
 		getContentPane().add(btnAceptar);
 		
 		// Botón cancelar
 		JButton btnCancelar = new JButton("Cancelar");
 		btnCancelar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				//agregarInstitutoCancelar(e);
+				agregarUsuarioCancelar(e);
 			}
 		});
-		btnCancelar.setBounds(231, 314, 117, 25);
+		btnCancelar.setForeground(Color.WHITE);
+		btnCancelar.setBackground(new Color(54, 61, 75));
+		btnCancelar.setBorder(new LineBorder(new Color(33, 37, 43), 3, true));
+		btnCancelar.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseEntered(MouseEvent e) {
+            	btnCancelar.setBackground(new Color(69, 78, 95)); // Lighter blue when hovering
+            }
+            @Override
+            public void mouseExited(MouseEvent e) {
+            	btnCancelar.setBackground(new Color(54, 61, 75)); // Original color when not hovering
+            }
+        });
+		btnCancelar.setBounds(241, 302, 117, 37);
 		getContentPane().add(btnCancelar);
+	}
+	
+	protected void agregarUsuarioAceptarActionPerformed(ActionEvent arg0) {
+		String nick = this.textFieldNick.getText();
+		String nombre = this.textFieldNombre.getText();
+		String apellido = this.textFieldApellido.getText();
+		String email = this.textFieldEmail.getText();
+		String web = this.textFieldWeb.getText();
+		String bio = this.textFieldBio.getText();
+		String desc = this.textFieldDescripcion.getText();
+		Date selectedDate = fecNac.getDate();
+		LocalDate fecha = selectedDate.toInstant().atZone(java.time.ZoneId.systemDefault()).toLocalDate();
+		String tipoUser = (String) this.seleccionarTipoUser.getSelectedItem();
+		DtUsuario dt = null;
+		if(tipoUser.equals("Profesor")) {
+			dt = new DtProfesor(nick, nombre, apellido, email, fecha, desc, bio, web);
+		}else if(tipoUser.equals("Socio")){
+			dt = new DtSocio(nick, nombre, apellido, email, fecha);
+		}
+		if (nombre.isEmpty() || nick.isEmpty() || apellido.isEmpty() || fecha == null){
+        	JOptionPane.showMessageDialog(this, "No puede haber campos vacíos", "Agregar Usuario", JOptionPane.ERROR_MESSAGE);
+        }else{
+            try {
+                this.icon.agregarUsuario(dt);
+                JOptionPane.showMessageDialog(this, "El usuario se ha creado con éxito", "Agregar Usuario ", JOptionPane.INFORMATION_MESSAGE);
+                limpiar();
+                dialogoPadre.dispose();
+            } catch (UsuarioRepetidoException e) {
+                JOptionPane.showMessageDialog(this, e.getMessage(), "Agregar Usuario", JOptionPane.ERROR_MESSAGE);
+            }
+        }
+				
+	}
+	
+	// Cancela el caso de uso
+		protected void agregarUsuarioCancelar(ActionEvent arg0) {
+			limpiar();
+			dialogoPadre.dispose();
+		}
+	
+	private void limpiar() {
+		textFieldNick.setText("");
+		textFieldEmail.setText("");
+		textFieldNombre.setText("");
+		textFieldApellido.setText("");
+		textFieldDescripcion.setText("");
+		textFieldWeb.setText("");
+		textFieldBio.setText("");
 	}
 }

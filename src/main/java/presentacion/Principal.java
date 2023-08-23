@@ -7,6 +7,7 @@ import java.awt.Dimension;
 import java.awt.EventQueue;
 import java.awt.FlowLayout;
 import java.awt.Font;
+import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.ImageIcon;
@@ -24,6 +25,7 @@ import interfaces.IControlador;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import javax.swing.SwingConstants;
+import java.awt.Insets;
 
 public class Principal {
     private JFrame frame;
@@ -112,6 +114,7 @@ public class Principal {
         // Cargar el GIF y crear un JLabel para mostrarlo
         ImageIcon iconoGif = new ImageIcon(getClass().getResource("Presentacion.gif"));
         JLabel gif = new JLabel(iconoGif);
+        gif.setBounds(0, 0, 800, 600);
         gif.setText("Bienvenido a Entrenamos.uy");
         gif.setHorizontalTextPosition(JLabel.CENTER);
         gif.setVerticalTextPosition(JLabel.TOP);
@@ -173,17 +176,15 @@ public class Principal {
 
         // Crear un JPanel para los botones con FlowLayout
         JPanel panelBotones = new JPanel(new FlowLayout(FlowLayout.CENTER, 80, 80));
+        panelBotones.setBounds(0, 600, 800, 200);
         panelBotones.setBorder(null);
         panelBotones.setBackground(new Color(54, 61, 75));
         panelBotones.add(botonEntrar);
         panelBotones.add(botonSalir);
 
-        // Configurar posiciones y tamaños de componentes manualmente
-        gif.setBounds(0, 0, 800, 600);
-        panelBotones.setBounds(0, 600, 800, 200);
-
         // Agregar componentes al panelBienvenida
         panelBienvenida.setBackground(new Color(54, 61, 75));
+        panelBienvenida.setLayout(null);
         panelBienvenida.add(gif);
         panelBienvenida.add(panelBotones);
 
@@ -218,8 +219,29 @@ public class Principal {
         panelPrincipal.setBackground(new Color(54, 61, 75));
         panelPrincipal.setLayout(null);
         
+        ImageIcon icon = new ImageIcon(Principal.class.getResource("/presentacion/transparencia.png"));
+        Image image = icon.getImage().getScaledInstance(25, 25, Image.SCALE_SMOOTH);
+        ImageIcon iconoInfo = new ImageIcon(image);
+        
+        ImageIcon iconMas = new ImageIcon(Principal.class.getResource("/presentacion/mas.png"));
+        Image imageMas = iconMas.getImage().getScaledInstance(25, 25, Image.SCALE_SMOOTH);
+        ImageIcon iconoMas = new ImageIcon(imageMas);
+        
         // Botón salir
         JButton btnSalir = new JButton("Salir");
+        btnSalir.setForeground(Color.WHITE);
+        btnSalir.setBackground(new Color(54, 61, 75));
+        btnSalir.setBorder(new LineBorder(new Color(33, 37, 43), 3, true));
+        btnSalir.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseEntered(MouseEvent e) {
+                btnSalir.setBackground(new Color(69, 78, 95)); // Lighter blue when hovering
+            }
+            @Override
+            public void mouseExited(MouseEvent e) {
+                btnSalir.setBackground(new Color(54, 61, 75)); // Original color when not hovering
+            }
+        });
         btnSalir.addActionListener(new ActionListener() {
         	public void actionPerformed(ActionEvent e) {
         		System.exit(0);
@@ -228,28 +250,88 @@ public class Principal {
         
         // Botón alta institución
         JButton btnAltaInstitucion = new JButton("Alta Institucion");
+        btnAltaInstitucion.setIcon(iconoMas);
         btnAltaInstitucion.addActionListener(new ActionListener() {
         	public void actionPerformed(ActionEvent e) {
         		agregarInstitutoDialog.setVisible(true);
         	}
         });
-        btnAltaInstitucion.setBounds(12, 12, 172, 25);
+        btnAltaInstitucion.setForeground(Color.WHITE);
+        btnAltaInstitucion.setBackground(new Color(54, 61, 75));
+        btnAltaInstitucion.setBorder(new LineBorder(new Color(33, 37, 43), 3, true));
+        btnAltaInstitucion.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseEntered(MouseEvent e) {
+            	btnAltaInstitucion.setBackground(new Color(69, 78, 95)); // Lighter blue when hovering
+            }
+            @Override
+            public void mouseExited(MouseEvent e) {
+            	btnAltaInstitucion.setBackground(new Color(54, 61, 75)); // Original color when not hovering
+            }
+        });
+        btnAltaInstitucion.setBounds(83, 195, 196, 53);
         panelPrincipal.add(btnAltaInstitucion);
-        btnSalir.setBounds(340, 700, 117, 25);
+        btnSalir.setBounds(319, 681, 158, 45);
         panelPrincipal.add(btnSalir);
         
         JButton btnInformacion7 = new JButton("Informacion");
-        btnInformacion7.setBounds(376, 12, 117, 25);
+        btnInformacion7.setIcon(iconoInfo);
+        btnInformacion7.setSelected(true);
+        btnInformacion7.setPreferredSize(new Dimension(1, 1));
+        btnInformacion7.setMargin(new Insets(1, 1, 1, 1));
+        btnInformacion7.setMinimumSize(new Dimension(1, 1));
+        btnInformacion7.setMaximumSize(new Dimension(1, 1));
+        btnInformacion7.setSize(new Dimension(9, 10));
+        btnInformacion7.addActionListener(new ActionListener() {
+        	public void actionPerformed(ActionEvent arg0) {
+        	}
+        });
+        btnInformacion7.setForeground(Color.WHITE);
+        btnInformacion7.setBackground(new Color(54, 61, 75));
+        btnInformacion7.setBorder(new LineBorder(new Color(33, 37, 43), 3, true));
+        btnInformacion7.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseEntered(MouseEvent e) {
+            	btnInformacion7.setBackground(new Color(69, 78, 95)); // Lighter blue when hovering
+            }
+            @Override
+            public void mouseExited(MouseEvent e) {
+            	btnInformacion7.setBackground(new Color(54, 61, 75)); // Original color when not hovering
+            }
+        });
+        btnInformacion7.setBounds(83, 355, 196, 53);
         panelPrincipal.add(btnInformacion7);
 
         JButton btnAltaUsuario = new JButton("Alta Usuario");
+        btnAltaUsuario.setIcon(iconoMas);
         btnAltaUsuario.addActionListener(new ActionListener() {
         	public void actionPerformed(ActionEvent e) {
         		agregarUsuarioDialog.setVisible(true);
         	}
         });
-        btnAltaUsuario.setBounds(196, 12, 172, 25);
+        btnAltaUsuario.setForeground(Color.WHITE);
+        btnAltaUsuario.setBackground(new Color(54, 61, 75));
+        btnAltaUsuario.setBorder(new LineBorder(new Color(33, 37, 43), 3, true));
+        btnAltaUsuario.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseEntered(MouseEvent e) {
+            	btnAltaUsuario.setBackground(new Color(69, 78, 95)); // Lighter blue when hovering
+            }
+            @Override
+            public void mouseExited(MouseEvent e) {
+            	btnAltaUsuario.setBackground(new Color(54, 61, 75)); // Original color when not hovering
+            }
+        });
+        btnAltaUsuario.setBounds(83, 275, 196, 53);
         panelPrincipal.add(btnAltaUsuario);
+        
+        JLabel lblMenu = new JLabel("Menu");
+        lblMenu.setHorizontalAlignment(SwingConstants.CENTER);
+        lblMenu.setFont(new Font("DejaVu Sans Mono", Font.BOLD, 70));
+        lblMenu.setForeground(new Color(255, 255, 255));
+        lblMenu.setBackground(new Color(255, 255, 255));
+        lblMenu.setBounds(250, 22, 282, 148);
+        panelPrincipal.add(lblMenu);
         // Crear el contenido para el panel de otro menú aquí
 
         return panelPrincipal;
