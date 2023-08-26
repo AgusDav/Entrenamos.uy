@@ -4,6 +4,9 @@ import excepciones.InstitucionDeportivaRepetidaException;
 import excepciones.UsuarioRepetidoException;
 import excepciones.ActividadDeportivaRepetidaException;
 import interfaces.IControlador;
+
+import java.util.ArrayList;
+
 import datatypes.DtActividadDeportiva;
 import datatypes.DtClase;
 import datatypes.DtUsuario;
@@ -43,9 +46,23 @@ public class Controlador implements IControlador{
 		if (nuevoUser != null)
 			throw new UsuarioRepetidoException("El usuario de nick "+ nuevoUser.getNickname() + " ya existe en el Sistema");
 		if (user instanceof DtProfesor)
-			nuevoUser = new Profesor(nuevoUser.getNickname(),nuevoUser.getNombre(),nuevoUser.getApellido(),nuevoUser.getEmail(),nuevoUser.getFecNac(),((DtProfesor) user).getDescripcion(),((DtProfesor) user).getBiografia(),((DtProfesor) user).getSitioWeb()); 
+			nuevoUser = new Profesor(user.getNickname(),user.getNombre(),user.getApellido(),user.getEmail(),user.getFecNac(),((DtProfesor) user).getDescripcion(),((DtProfesor) user).getBiografia(),((DtProfesor) user).getSitioWeb()); 
 		if (user instanceof DtSocio)
-			nuevoUser = new Socio(nuevoUser.getNickname(),nuevoUser.getNombre(),nuevoUser.getApellido(),nuevoUser.getEmail(),nuevoUser.getFecNac());
+			nuevoUser = new Socio(user.getNickname(),user.getNombre(),user.getApellido(),user.getEmail(),user.getFecNac());
 		mU.addUser(nuevoUser);
+	}
+	
+	@Override
+	public String[] listarInstitutos() {
+		ArrayList<String> instituto;
+		ManejadorInstitucion mI = ManejadorInstitucion.getInstancia();
+		instituto = mI.obtenerInstitutos();
+		String[] institutos_ret = new String[instituto.size()];
+        int i=0;
+        for(String ins:instituto) {
+        	institutos_ret[i]=ins;
+        	i++;
+        }
+        return institutos_ret;
 	}
 }

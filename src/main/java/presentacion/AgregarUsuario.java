@@ -248,7 +248,6 @@ public class AgregarUsuario extends JInternalFrame {
                 JOptionPane.showMessageDialog(this, e.getMessage(), "Agregar Usuario", JOptionPane.ERROR_MESSAGE);
             }
         }
-				
 	}
 	
 	// Cancela el caso de uso
@@ -265,5 +264,7 @@ public class AgregarUsuario extends JInternalFrame {
 		textFieldDescripcion.setText("");
 		textFieldWeb.setText("");
 		textFieldBio.setText("");
+		fecNac.setDate(null);
+
 	}
 }

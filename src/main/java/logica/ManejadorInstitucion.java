@@ -25,4 +25,12 @@ public class ManejadorInstitucion{
 	public void addInstitucion(InstitucionDeportiva inst) {
 		ins.add(inst);
 	}
+	
+	public ArrayList<String> obtenerInstitutos(){
+		ArrayList<String> aRetornar = new ArrayList<>();
+		for(InstitucionDeportiva i: ins) {
+			aRetornar.add(i.getNombre());
+		}
+		return aRetornar;
+	}
 }

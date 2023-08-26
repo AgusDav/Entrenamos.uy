@@ -35,6 +35,8 @@ public class Principal {
     private AgregarInstitucion agregarInstitutoInternalFrame;
     private AgregarUsuario agregarUsuarioInternalFrame;
     private JDialog agregarUsuarioDialog;
+    private AgregarActividadDeportiva agregarActividadDeportivaInternalFrame;
+    private JDialog agregarActividadDeportivaDialog;
 
     public static void main(String[] args) {
         EventQueue.invokeLater(new Runnable() {
@@ -76,6 +78,17 @@ public class Principal {
         agregarUsuarioDialog.setLocationRelativeTo(null);
         agregarUsuarioDialog.setVisible(false);
         agregarUsuarioInternalFrame.setVisible(true);
+        
+        agregarActividadDeportivaDialog = new JDialog(frame, "Agregar Actividad Deportiva", true);
+        agregarActividadDeportivaDialog.setSize(350, 360);
+        agregarActividadDeportivaDialog.setLocationRelativeTo(frame);
+        agregarActividadDeportivaDialog.getContentPane().setLayout(new BorderLayout());
+
+        agregarActividadDeportivaInternalFrame = new AgregarActividadDeportiva(icon, agregarActividadDeportivaDialog);
+        agregarActividadDeportivaDialog.getContentPane().add(agregarActividadDeportivaInternalFrame);
+        agregarActividadDeportivaDialog.setLocationRelativeTo(null);
+        agregarActividadDeportivaDialog.setVisible(false);
+        agregarActividadDeportivaInternalFrame.setVisible(true);
     }
 
     public void iniciar() {
@@ -322,8 +335,58 @@ public class Principal {
             	btnAltaUsuario.setBackground(new Color(54, 61, 75)); // Original color when not hovering
             }
         });
-        btnAltaUsuario.setBounds(83, 275, 196, 53);
+        btnAltaUsuario.setBounds(83, 276, 196, 53);
         panelPrincipal.add(btnAltaUsuario);
+        
+        
+        JButton btnAltaActividadDeportiva = new JButton("Alta Actividad Deportiva");
+        btnAltaActividadDeportiva.setIcon(iconoMas);
+        btnAltaActividadDeportiva.addActionListener(new ActionListener() {
+        	public void actionPerformed(ActionEvent e) {
+        		agregarActividadDeportivaInternalFrame.iniciarlizarComboBoxes();
+        		agregarActividadDeportivaDialog.setVisible(true);
+        	}
+        });
+        btnAltaActividadDeportiva.setForeground(Color.WHITE);
+        btnAltaActividadDeportiva.setBackground(new Color(54, 61, 75));
+        btnAltaActividadDeportiva.setBorder(new LineBorder(new Color(33, 37, 43), 3, true));
+        btnAltaActividadDeportiva.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseEntered(MouseEvent e) {
+            	btnAltaActividadDeportiva.setBackground(new Color(69, 78, 95)); // Lighter blue when hovering
+            }
+            @Override
+            public void mouseExited(MouseEvent e) {
+            	btnAltaActividadDeportiva.setBackground(new Color(54, 61, 75)); // Original color when not hovering
+            }
+        });
+        btnAltaActividadDeportiva.setBounds(319, 195, 223, 53);
+        panelPrincipal.add(btnAltaActividadDeportiva);
+        
+        JButton btnAltaDictadoDeClase = new JButton("Alta Dictado De Clase");
+        btnAltaDictadoDeClase.setIcon(iconoMas);
+        btnAltaDictadoDeClase.addActionListener(new ActionListener() {
+        	public void actionPerformed(ActionEvent e) {
+        		
+        	}
+        });
+        btnAltaDictadoDeClase.setForeground(Color.WHITE);
+        btnAltaDictadoDeClase.setBackground(new Color(54, 61, 75));
+        btnAltaDictadoDeClase.setBorder(new LineBorder(new Color(33, 37, 43), 3, true));
+        btnAltaDictadoDeClase.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseEntered(MouseEvent e) {
+            	btnAltaDictadoDeClase.setBackground(new Color(69, 78, 95)); // Lighter blue when hovering
+            	moveButtonRandomly(btnAltaDictadoDeClase, frame);
+            }
+            @Override
+            public void mouseExited(MouseEvent e) {
+            	btnAltaDictadoDeClase.setBackground(new Color(54, 61, 75)); // Original color when not hovering
+            }
+        });
+        btnAltaDictadoDeClase.setBounds(567, 195, 223, 53);
+        panelPrincipal.add(btnAltaDictadoDeClase);
+        
         
         JLabel lblMenu = new JLabel("Menu");
         lblMenu.setHorizontalAlignment(SwingConstants.CENTER);
@@ -333,9 +396,29 @@ public class Principal {
         lblMenu.setBounds(250, 22, 282, 148);
         panelPrincipal.add(lblMenu);
         // Crear el contenido para el panel de otro menú aquí
+        
 
         return panelPrincipal;
     } 
+    
+    
+    
+    //La funcion del trolleo
+    public void moveButtonRandomly(JButton button, JFrame frame) {
+        int frameWidth = frame.getWidth();
+        int frameHeight = frame.getHeight();
+        int buttonWidth = button.getWidth();
+        int buttonHeight = button.getHeight();
+
+        int maxX = frameWidth - buttonWidth;
+        int maxY = frameHeight - buttonHeight;
+
+        int randomX = (int) (Math.random() * maxX);
+        int randomY = (int) (Math.random() * maxY);
+
+        button.setLocation(randomX, randomY);
+    };
+    
 }
 
 
