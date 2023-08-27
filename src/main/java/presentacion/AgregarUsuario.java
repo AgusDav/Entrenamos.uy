@@ -228,19 +228,19 @@ public class AgregarUsuario extends JInternalFrame {
 		String bio = this.textFieldBio.getText();
 		String desc = this.textFieldDescripcion.getText();
 		Date selectedDate = fecNac.getDate();
-		LocalDate fecha = selectedDate.toInstant().atZone(java.time.ZoneId.systemDefault()).toLocalDate();
 		String tipoUser = (String) this.seleccionarTipoUser.getSelectedItem();
-		DtUsuario dt = null;
-		if(tipoUser.equals("Profesor")) {
-			dt = new DtProfesor(nick, nombre, apellido, email, fecha, desc, bio, web);
-		}else if(tipoUser.equals("Socio")){
-			dt = new DtSocio(nick, nombre, apellido, email, fecha);
-		}
-		if (nombre.isEmpty() || nick.isEmpty() || apellido.isEmpty() || fecha == null){
+		DtUsuario dtU = null;
+		if (nombre.isEmpty() || nick.isEmpty() || apellido.isEmpty() || selectedDate == null){
         	JOptionPane.showMessageDialog(this, "No puede haber campos vacíos", "Agregar Usuario", JOptionPane.ERROR_MESSAGE);
         }else{
             try {
-                this.icon.agregarUsuario(dt);
+            	LocalDate fecha = selectedDate.toInstant().atZone(java.time.ZoneId.systemDefault()).toLocalDate();
+            	if(tipoUser.equals("Profesor")) {
+        			dtU = new DtProfesor(nick, nombre, apellido, email, fecha, desc, bio, web);
+        		}else if(tipoUser.equals("Socio")){
+        			dtU = new DtSocio(nick, nombre, apellido, email, fecha);
+        		}
+                this.icon.agregarUsuario(dtU);
                 JOptionPane.showMessageDialog(this, "El usuario se ha creado con éxito", "Agregar Usuario ", JOptionPane.INFORMATION_MESSAGE);
                 limpiar();
                 dialogoPadre.dispose();
@@ -265,6 +265,5 @@ public class AgregarUsuario extends JInternalFrame {
 		textFieldWeb.setText("");
 		textFieldBio.setText("");
 		fecNac.setDate(null);
-
 	}
 }

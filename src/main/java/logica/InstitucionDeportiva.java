@@ -10,7 +10,8 @@ public class InstitucionDeportiva {
     private String descripcion;
     private String url;
     private List<ActividadDeportiva> actD = new ArrayList<>();
-
+    private List<Profesor> profesores = new ArrayList<>();
+    
     public InstitucionDeportiva(){
         super();
     }
@@ -49,5 +50,21 @@ public class InstitucionDeportiva {
     public void agregarActividadDeportiva(DtActividadDeportiva data){
         ActividadDeportiva i = new ActividadDeportiva(data.getNombre(),data.getDescripcion(),data.getDuracion(),data.getCosto(),data.getFecReg());
 		actD.add(i);
+    }
+    
+    public ArrayList<String> obtenerActividades(){
+        ArrayList<String> aRetornar = new ArrayList<>();
+        for(ActividadDeportiva i: actD) {
+            aRetornar.add(i.getNombre());
+        }
+        return aRetornar;
+    }
+    
+    public ArrayList<String> obtenerProfesores(){
+        ArrayList<String> aRetornar = new ArrayList<>();
+        for(Profesor i: profesores) {
+            aRetornar.add(i.getNombre());
+        }
+        return aRetornar;
     }
 }

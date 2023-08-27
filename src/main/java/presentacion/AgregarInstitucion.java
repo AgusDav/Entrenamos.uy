@@ -38,7 +38,7 @@ public class AgregarInstitucion extends JInternalFrame {
 		this.icon = icon;
 		setBounds(100, 100, 340, 300);
 		getContentPane().setLayout(null);
-		getContentPane().setBackground(new Color(54, 61, 75));;
+		getContentPane().setBackground(new Color(54, 61, 75));
 		
 		// Campo nombre
 		JLabel lblNombre = new JLabel("Nombre:");

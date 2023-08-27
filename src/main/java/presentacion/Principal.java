@@ -37,6 +37,8 @@ public class Principal {
     private JDialog agregarUsuarioDialog;
     private AgregarActividadDeportiva agregarActividadDeportivaInternalFrame;
     private JDialog agregarActividadDeportivaDialog;
+    private AltaDictadoClase altaDictadoClaseInternalFrame;
+    private JDialog altaDictadoClaseDialog;
 
     public static void main(String[] args) {
         EventQueue.invokeLater(new Runnable() {
@@ -89,6 +91,17 @@ public class Principal {
         agregarActividadDeportivaDialog.setLocationRelativeTo(null);
         agregarActividadDeportivaDialog.setVisible(false);
         agregarActividadDeportivaInternalFrame.setVisible(true);
+        
+        altaDictadoClaseDialog = new JDialog(frame, "Agregar Institución", true);
+        altaDictadoClaseDialog.setSize(375, 450);
+        altaDictadoClaseDialog.setLocationRelativeTo(frame);
+        altaDictadoClaseDialog.getContentPane().setLayout(new BorderLayout());
+
+        altaDictadoClaseInternalFrame = new AltaDictadoClase(icon, altaDictadoClaseDialog);
+        altaDictadoClaseDialog.getContentPane().add(altaDictadoClaseInternalFrame);
+        altaDictadoClaseDialog.setLocationRelativeTo(null);
+        altaDictadoClaseDialog.setVisible(false);
+        altaDictadoClaseInternalFrame.setVisible(true);
     }
 
     public void iniciar() {
@@ -367,7 +380,8 @@ public class Principal {
         btnAltaDictadoDeClase.setIcon(iconoMas);
         btnAltaDictadoDeClase.addActionListener(new ActionListener() {
         	public void actionPerformed(ActionEvent e) {
-        		
+        		altaDictadoClaseInternalFrame.inicializarComboBoxes();
+        		altaDictadoClaseDialog.setVisible(true);
         	}
         });
         btnAltaDictadoDeClase.setForeground(Color.WHITE);
@@ -377,7 +391,7 @@ public class Principal {
             @Override
             public void mouseEntered(MouseEvent e) {
             	btnAltaDictadoDeClase.setBackground(new Color(69, 78, 95)); // Lighter blue when hovering
-            	moveButtonRandomly(btnAltaDictadoDeClase, frame);
+            	//moveButtonRandomly(btnAltaDictadoDeClase, frame);
             }
             @Override
             public void mouseExited(MouseEvent e) {

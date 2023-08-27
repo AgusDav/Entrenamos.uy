@@ -65,4 +65,32 @@ public class Controlador implements IControlador{
         }
         return institutos_ret;
 	}
+	
+	@Override
+    public String[] listarActividadesDeportivas(String nombre) {
+        ArrayList<String> insActD;
+        ManejadorInstitucion mI = ManejadorInstitucion.getInstancia();
+        insActD = mI.buscarInstitucionDeportiva(nombre).obtenerActividades();
+        String[] actIns_ret = new String[insActD.size()];
+        int i=0;
+        for(String ins:insActD) {
+            actIns_ret[i]=ins;
+            i++;
+        }
+        return actIns_ret;
+    }
+	
+	@Override
+    public String[] listarProfesores(String nombre) {
+        ArrayList<String> insActD;
+        ManejadorInstitucion mI = ManejadorInstitucion.getInstancia();
+        insActD = mI.buscarInstitucionDeportiva(nombre).obtenerProfesores();
+        String[] actIns_ret = new String[insActD.size()];
+        int i=0;
+        for(String ins:insActD) {
+            actIns_ret[i]=ins;
+            i++;
+        }
+        return actIns_ret;
+    }
 }
