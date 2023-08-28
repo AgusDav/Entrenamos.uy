@@ -29,4 +29,12 @@ public class ManejadorUsuario {
 		return ret;
 	}
 	
+	public ArrayList<String> obtenerUsuariosNick(){
+        ArrayList<String> aRetornar = new ArrayList<>();
+        for(Usuario u: users) {
+            aRetornar.add(u.getNickname());
+        }
+        return aRetornar;
+    }
+	
 }

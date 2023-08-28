@@ -39,6 +39,8 @@ public class Principal {
     private JDialog agregarActividadDeportivaDialog;
     private AltaDictadoClase altaDictadoClaseInternalFrame;
     private JDialog altaDictadoClaseDialog;
+    private ConsultaUsuario consultaUsuarioInternalFrame;
+    private JDialog consultaUsuarioDialog;
 
     public static void main(String[] args) {
         EventQueue.invokeLater(new Runnable() {
@@ -102,6 +104,17 @@ public class Principal {
         altaDictadoClaseDialog.setLocationRelativeTo(null);
         altaDictadoClaseDialog.setVisible(false);
         altaDictadoClaseInternalFrame.setVisible(true);
+        
+        consultaUsuarioDialog = new JDialog(frame, "Consulta Usuario", true);
+        consultaUsuarioDialog.setSize(400, 430);
+        consultaUsuarioDialog.setLocationRelativeTo(frame);
+        consultaUsuarioDialog.getContentPane().setLayout(new BorderLayout());
+
+        consultaUsuarioInternalFrame = new ConsultaUsuario(icon, consultaUsuarioDialog);
+        consultaUsuarioDialog.getContentPane().add(consultaUsuarioInternalFrame);
+        consultaUsuarioDialog.setLocationRelativeTo(null);
+        consultaUsuarioDialog.setVisible(false);
+        consultaUsuarioInternalFrame.setVisible(true);
     }
 
     public void iniciar() {
@@ -301,33 +314,35 @@ public class Principal {
         panelPrincipal.add(btnSalir);
         
         // Boton informacion
-        JButton btnInformacion7 = new JButton("Informacion");
-        btnInformacion7.setIcon(iconoInfo);
-        btnInformacion7.setSelected(true);
-        btnInformacion7.setPreferredSize(new Dimension(1, 1));
-        btnInformacion7.setMargin(new Insets(1, 1, 1, 1));
-        btnInformacion7.setMinimumSize(new Dimension(1, 1));
-        btnInformacion7.setMaximumSize(new Dimension(1, 1));
-        btnInformacion7.setSize(new Dimension(9, 10));
-        btnInformacion7.addActionListener(new ActionListener() {
+        JButton btnInformacionUsuario = new JButton("Informacion Usuario");
+        btnInformacionUsuario.setIcon(iconoInfo);
+        btnInformacionUsuario.setSelected(true);
+        btnInformacionUsuario.setPreferredSize(new Dimension(1, 1));
+        btnInformacionUsuario.setMargin(new Insets(1, 1, 1, 1));
+        btnInformacionUsuario.setMinimumSize(new Dimension(1, 1));
+        btnInformacionUsuario.setMaximumSize(new Dimension(1, 1));
+        btnInformacionUsuario.setSize(new Dimension(9, 10));
+        btnInformacionUsuario.addActionListener(new ActionListener() {
         	public void actionPerformed(ActionEvent arg0) {
+        		consultaUsuarioInternalFrame.inciarComboBoxUsuario();
+        		consultaUsuarioDialog.setVisible(true);
         	}
         });
-        btnInformacion7.setForeground(Color.WHITE);
-        btnInformacion7.setBackground(new Color(54, 61, 75));
-        btnInformacion7.setBorder(new LineBorder(new Color(33, 37, 43), 3, true));
-        btnInformacion7.addMouseListener(new MouseAdapter() {
+        btnInformacionUsuario.setForeground(Color.WHITE);
+        btnInformacionUsuario.setBackground(new Color(54, 61, 75));
+        btnInformacionUsuario.setBorder(new LineBorder(new Color(33, 37, 43), 3, true));
+        btnInformacionUsuario.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseEntered(MouseEvent e) {
-            	btnInformacion7.setBackground(new Color(69, 78, 95)); // Lighter blue when hovering
+            	btnInformacionUsuario.setBackground(new Color(69, 78, 95)); // Lighter blue when hovering
             }
             @Override
             public void mouseExited(MouseEvent e) {
-            	btnInformacion7.setBackground(new Color(54, 61, 75)); // Original color when not hovering
+            	btnInformacionUsuario.setBackground(new Color(54, 61, 75)); // Original color when not hovering
             }
         });
-        btnInformacion7.setBounds(83, 355, 196, 53);
-        panelPrincipal.add(btnInformacion7);
+        btnInformacionUsuario.setBounds(83, 355, 196, 53);
+        panelPrincipal.add(btnInformacionUsuario);
 
         // Boton alta usuario
         JButton btnAltaUsuario = new JButton("Alta Usuario");

@@ -248,19 +248,20 @@ public class AgregarUsuario extends JInternalFrame {
 		Date selectedDate = fecNac.getDate();
 		String tipoUser = this.seleccionarTipoUser.getSelectedItem().toString();
 		DtUsuario dtU = null;
-		if (nombre.isEmpty() || nick.isEmpty() || apellido.isEmpty() || selectedDate == null || this.comboBoxNombreInstitucion.getSelectedItem() == null){
+		if (nombre.isEmpty() || nick.isEmpty() || apellido.isEmpty() || selectedDate == null || (tipoUser.equals("Profesor") && (desc.isEmpty() || bio.isEmpty() || web.isEmpty() || this.comboBoxNombreInstitucion.getSelectedItem() == null))){
         	JOptionPane.showMessageDialog(this, "No puede haber campos vacíos", "Agregar Usuario", JOptionPane.ERROR_MESSAGE);
         }else{
             try {
-            	String inst = this.comboBoxNombreInstitucion.getSelectedItem().toString();
             	LocalDate fecha = selectedDate.toInstant().atZone(java.time.ZoneId.systemDefault()).toLocalDate();
             	if(tipoUser.equals("Profesor")) {
+					String inst = this.comboBoxNombreInstitucion.getSelectedItem().toString();
         			dtU = new DtProfesor(nick, nombre, apellido, email, fecha, desc, bio, web);
+        			this.icon.agregarUsuario(dtU, inst);
         		}else if(tipoUser.equals("Socio")){
         			dtU = new DtSocio(nick, nombre, apellido, email, fecha);
+        			this.icon.agregarUsuario(dtU, "");
         		}
-                this.icon.agregarUsuario(dtU, inst);
-                JOptionPane.showMessageDialog(this, "El usuario se ha creado con éxito", "Agregar Usuario ", JOptionPane.INFORMATION_MESSAGE);
+            	JOptionPane.showMessageDialog(this, "El usuario se ha creado con éxito", "Agregar Usuario ", JOptionPane.INFORMATION_MESSAGE);
                 limpiar();
                 dialogoPadre.dispose();
             } catch (UsuarioRepetidoException e) {

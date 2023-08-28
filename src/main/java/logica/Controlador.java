@@ -81,6 +81,19 @@ public class Controlador implements IControlador{
         }
         return institutos_ret;
 	}
+	@Override
+	public String[] listarUsuarios() {
+		ArrayList<String> users;
+		ManejadorUsuario mU = ManejadorUsuario.getInstancia();
+		users = mU.obtenerUsuariosNick();
+		String[] ret = new String[users.size()];
+		int i = 0;
+		for(String ins:users) {
+			ret[i] = ins;
+			i++;
+		}
+		return ret;
+	}
 	
 	@Override
     public String[] listarActividadesDeportivas(String nombre) {
@@ -109,6 +122,5 @@ public class Controlador implements IControlador{
         }
         return actIns_ret;
     }
-	
 	
 }

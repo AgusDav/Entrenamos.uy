@@ -63,7 +63,7 @@ public class InstitucionDeportiva {
     public ArrayList<String> obtenerProfesores(){
         ArrayList<String> aRetornar = new ArrayList<>();
         for(Profesor i: profesores) {
-            aRetornar.add(i.getNombre());
+            aRetornar.add(i.getNickname());
         }
         return aRetornar;
     }
