@@ -67,4 +67,32 @@ public class InstitucionDeportiva {
         }
         return aRetornar;
     }
+    
+    public ActividadDeportiva buscarActividad(String nombre) {
+    	ActividadDeportiva aRetornar;
+    	aRetornar = new ActividadDeportiva();
+    	for(ActividadDeportiva i:actD) {
+    		if (i.getNombre().equals(nombre))
+				aRetornar=i;
+    	}
+    	return aRetornar;
+    }
+    
+    public void agregarProfesor(Profesor profe){
+        //Profesor i = new Profesor();
+        profesores.add(profe);
+    }
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
 }

@@ -41,21 +41,31 @@ public class Controlador implements IControlador{
 	}
 
 	@Override
-	public void agregarUsuario(DtUsuario user) throws UsuarioRepetidoException{
+	public void agregarUsuario(DtUsuario user, String ins) throws UsuarioRepetidoException{
 		ManejadorUsuario mU = ManejadorUsuario.getInstancia();
 		Usuario nuevoUser = mU.buscarUsuario(user.getNickname());
+		ManejadorInstitucion mI = ManejadorInstitucion.getInstancia();
+		InstitucionDeportiva inst = mI.buscarInstitucionDeportiva(ins);
 		if (nuevoUser != null)
 			throw new UsuarioRepetidoException("El usuario de nick "+ nuevoUser.getNickname() + " ya existe en el Sistema");
-		if (user instanceof DtProfesor)
-			nuevoUser = new Profesor(user.getNickname(),user.getNombre(),user.getApellido(),user.getEmail(),user.getFecNac(),((DtProfesor) user).getDescripcion(),((DtProfesor) user).getBiografia(),((DtProfesor) user).getSitioWeb()); 
+		if (user instanceof DtProfesor) {
+			nuevoUser = new Profesor(user.getNickname(),user.getNombre(),user.getApellido(),user.getEmail(),user.getFecNac(),((DtProfesor) user).getDescripcion(),((DtProfesor) user).getBiografia(),((DtProfesor) user).getSitioWeb(), inst); 
+			inst.agregarProfesor((Profesor) nuevoUser);
+		}
 		if (user instanceof DtSocio)
-			nuevoUser = new Socio(user.getNickname(),user.getNombre(),user.getApellido(),user.getEmail(),user.getFecNac());
+		nuevoUser = new Socio(user.getNickname(),user.getNombre(),user.getApellido(),user.getEmail(),user.getFecNac());
 		mU.addUser(nuevoUser);
 	}
 	
 	@Override
-	public void altaDictadoClase(DtClase clase) throws DictadoRepetidoException{
-		
+	public void altaDictadoClase(DtClase clase, String nomIns, String nomAct, String profe) throws DictadoRepetidoException{
+		ManejadorInstitucion mI = ManejadorInstitucion.getInstancia();
+		InstitucionDeportiva aux;
+		ManejadorUsuario mU = ManejadorUsuario.getInstancia();
+		Profesor profesor = (Profesor) mU.buscarUsuario(profe);
+		aux = mI.buscarInstitucionDeportiva(nomIns);
+		ActividadDeportiva actD = aux.buscarActividad(nomAct);
+		actD.agregarClase(clase, profesor);
 	}
 	
 	@Override

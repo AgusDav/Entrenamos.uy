@@ -2,6 +2,8 @@ package logica;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Clase {
     private String nombre;
@@ -12,19 +14,20 @@ public class Clase {
     //pseudos
     private Profesor profe;
     private ActividadDeportiva actividad;
-
+    private List<Registro> registros = new ArrayList<>();
 
     public Clase(){
         super();
     }
 
-    public Clase(String nombre, LocalDate fecha, LocalTime hora, String url, LocalDate fechaReg){
+    public Clase(String nombre, LocalDate fecha, LocalTime hora, String url, LocalDate fechaReg, Profesor profe){
         super();
         this.nombre = nombre;
         this.fecha = fecha;
         this.hora = hora;
         this.url = url;
         this.fechaReg = fechaReg;
+        this.profe = profe;
     }
 
     public String getNombre(){

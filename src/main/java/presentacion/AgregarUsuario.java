@@ -42,6 +42,7 @@ public class AgregarUsuario extends JInternalFrame {
 	private JTextField textFieldWeb;
 	private JTextField textFieldBio;
 	private JComboBox seleccionarTipoUser;
+	private JComboBox<String> comboBoxNombreInstitucion;
 	
 	public AgregarUsuario(IControlador icon, JDialog dialogoPadre) {
 		setTitle("Agregar Usuario");
@@ -146,6 +147,18 @@ public class AgregarUsuario extends JInternalFrame {
 		getContentPane().add(textFieldBio);
 		textFieldBio.setColumns(10);
 		
+		// Campo institucion
+		JLabel lblInstitucion = new JLabel("Institucion");
+		lblInstitucion.setForeground(Color.WHITE);
+		lblInstitucion.setBackground(Color.WHITE);
+		lblInstitucion.setBounds(12, 284, 95, 15);
+		getContentPane().add(lblInstitucion);
+
+		comboBoxNombreInstitucion = new JComboBox<String>();
+		comboBoxNombreInstitucion.setBounds(160, 282, 114, 19);
+		getContentPane().add(comboBoxNombreInstitucion);
+		
+		
 		seleccionarTipoUser = new JComboBox();
 		seleccionarTipoUser.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
@@ -154,22 +167,27 @@ public class AgregarUsuario extends JInternalFrame {
 		            textFieldDescripcion.setVisible(false); // Ocultar el JTextField
 		            textFieldWeb.setVisible(false);
 		            textFieldBio.setVisible(false);
+		            comboBoxNombreInstitucion.setVisible(false);
 		            lblDescripcion.setVisible(false);
 		            lblWeb.setVisible(false);
 		            lblBiografia.setVisible(false);
+		            lblInstitucion.setVisible(false);
 		        } else {
 		            textFieldDescripcion.setVisible(true); // Mostrar el JTextField
 		            textFieldWeb.setVisible(true);
 		            textFieldBio.setVisible(true);
+		            comboBoxNombreInstitucion.setVisible(true);
 		            lblDescripcion.setVisible(true);
 		            lblWeb.setVisible(true);
 		            lblBiografia.setVisible(true);
+		            lblInstitucion.setVisible(true);
 		        }
 			}
 		});
 		seleccionarTipoUser.setModel(new DefaultComboBoxModel(new String[] {"Profesor", "Socio"}));
 		seleccionarTipoUser.setBounds(160, 161, 117, 24);
 		getContentPane().add(seleccionarTipoUser);
+		
 		
 		
 		// Botón aceptar
@@ -192,7 +210,7 @@ public class AgregarUsuario extends JInternalFrame {
             	btnAceptar.setBackground(new Color(54, 61, 75)); // Original color when not hovering
             }
         });
-		btnAceptar.setBounds(95, 302, 124, 37);
+		btnAceptar.setBounds(92, 319, 124, 37);
 		getContentPane().add(btnAceptar);
 		
 		// Botón cancelar
@@ -215,7 +233,7 @@ public class AgregarUsuario extends JInternalFrame {
             	btnCancelar.setBackground(new Color(54, 61, 75)); // Original color when not hovering
             }
         });
-		btnCancelar.setBounds(241, 302, 117, 37);
+		btnCancelar.setBounds(239, 319, 117, 37);
 		getContentPane().add(btnCancelar);
 	}
 	
@@ -228,19 +246,20 @@ public class AgregarUsuario extends JInternalFrame {
 		String bio = this.textFieldBio.getText();
 		String desc = this.textFieldDescripcion.getText();
 		Date selectedDate = fecNac.getDate();
-		String tipoUser = (String) this.seleccionarTipoUser.getSelectedItem();
+		String tipoUser = this.seleccionarTipoUser.getSelectedItem().toString();
 		DtUsuario dtU = null;
-		if (nombre.isEmpty() || nick.isEmpty() || apellido.isEmpty() || selectedDate == null){
+		if (nombre.isEmpty() || nick.isEmpty() || apellido.isEmpty() || selectedDate == null || this.comboBoxNombreInstitucion.getSelectedItem() == null){
         	JOptionPane.showMessageDialog(this, "No puede haber campos vacíos", "Agregar Usuario", JOptionPane.ERROR_MESSAGE);
         }else{
             try {
+            	String inst = this.comboBoxNombreInstitucion.getSelectedItem().toString();
             	LocalDate fecha = selectedDate.toInstant().atZone(java.time.ZoneId.systemDefault()).toLocalDate();
             	if(tipoUser.equals("Profesor")) {
         			dtU = new DtProfesor(nick, nombre, apellido, email, fecha, desc, bio, web);
         		}else if(tipoUser.equals("Socio")){
         			dtU = new DtSocio(nick, nombre, apellido, email, fecha);
         		}
-                this.icon.agregarUsuario(dtU);
+                this.icon.agregarUsuario(dtU, inst);
                 JOptionPane.showMessageDialog(this, "El usuario se ha creado con éxito", "Agregar Usuario ", JOptionPane.INFORMATION_MESSAGE);
                 limpiar();
                 dialogoPadre.dispose();
@@ -251,10 +270,15 @@ public class AgregarUsuario extends JInternalFrame {
 	}
 	
 	// Cancela el caso de uso
-		protected void agregarUsuarioCancelar(ActionEvent arg0) {
-			limpiar();
-			dialogoPadre.dispose();
-		}
+	protected void agregarUsuarioCancelar(ActionEvent arg0) {
+		limpiar();
+		dialogoPadre.dispose();
+	}
+	
+	public void inicializarComboBoxes() {
+		DefaultComboBoxModel<String> modelInstitutos = new DefaultComboBoxModel<String>(icon.listarInstitutos());
+		comboBoxNombreInstitucion.setModel(modelInstitutos);
+	}
 	
 	private void limpiar() {
 		textFieldNick.setText("");

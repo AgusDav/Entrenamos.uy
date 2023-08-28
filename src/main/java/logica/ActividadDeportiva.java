@@ -1,6 +1,10 @@
 package logica;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
+
+import datatypes.DtClase;
 
 public class ActividadDeportiva {
 
@@ -11,7 +15,7 @@ public class ActividadDeportiva {
     private LocalDate fecReg;
 
     private InstitucionDeportiva institucion;
-    //lista clases
+    private List<Clase> clases = new ArrayList<>();
 
     public ActividadDeportiva() {
         super();
@@ -63,5 +67,10 @@ public class ActividadDeportiva {
 
 	public void setInstitucion(InstitucionDeportiva institucion) {
 		this.institucion = institucion;
+	}
+	
+	public void agregarClase(DtClase data, Profesor profe){
+		Clase i = new Clase(data.getNombre(), data.getFecha(),data.getHoraInicio(),data.getUrl(),data.getFechaReg(), profe);
+		clases.add(i);
 	}
 }

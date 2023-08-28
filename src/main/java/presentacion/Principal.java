@@ -334,6 +334,7 @@ public class Principal {
         btnAltaUsuario.setIcon(iconoMas);
         btnAltaUsuario.addActionListener(new ActionListener() {
         	public void actionPerformed(ActionEvent e) {
+        		agregarUsuarioInternalFrame.inicializarComboBoxes();
         		agregarUsuarioDialog.setVisible(true);
         	}
         });
@@ -383,10 +384,10 @@ public class Principal {
         btnAltaDictadoDeClase.setIcon(iconoMas);
         btnAltaDictadoDeClase.addActionListener(new ActionListener() {
         	public void actionPerformed(ActionEvent e) {
-        		if(!altaDictadoClaseInternalFrame.checkearComboBoxes()) {
+        		//if(!altaDictadoClaseInternalFrame.checkearComboBoxes()) {
         			altaDictadoClaseInternalFrame.inicializarComboBoxes();
             		altaDictadoClaseDialog.setVisible(true);
-        		}
+        		//}
         	}
         });
         btnAltaDictadoDeClase.setForeground(Color.WHITE);

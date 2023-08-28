@@ -209,29 +209,28 @@ public class AltaDictadoClase extends JInternalFrame {
 	public void inicializarComboBoxes() {
 		DefaultComboBoxModel<String> modelInstitutos = new DefaultComboBoxModel<String>(icon.listarInstitutos());
 		comboBoxNombreInstitucion.setModel(modelInstitutos);
-//		DefaultComboBoxModel<String> modelProfesores = new DefaultComboBoxModel<String>(icon.listarProfesores(this.comboBoxNombreInstitucion.getSelectedItem().toString()));
-//		comboBoxProfesores.setModel(modelProfesores);
-//		DefaultComboBoxModel<String> modelActDepor = new DefaultComboBoxModel<String>(icon.listarActividadesDeportivas(this.comboBoxNombreInstitucion.getSelectedItem().toString()));
-//		comboBoxActividadesDeportivas.setModel(modelActDepor);
+		DefaultComboBoxModel<String> modelProfesores = new DefaultComboBoxModel<String>(icon.listarProfesores(this.comboBoxNombreInstitucion.getSelectedItem().toString()));
+		comboBoxProfesores.setModel(modelProfesores);
+		DefaultComboBoxModel<String> modelActDepor = new DefaultComboBoxModel<String>(icon.listarActividadesDeportivas(this.comboBoxNombreInstitucion.getSelectedItem().toString()));
+		comboBoxActividadesDeportivas.setModel(modelActDepor);
 	}
 	
 	protected void altaDictadoClaseAceptarActionPerformed(ActionEvent arg0) {
 		String nomInstitucion = this.comboBoxNombreInstitucion.getSelectedItem().toString();
-		ActividadDeportiva actDepor = (ActividadDeportiva) this.comboBoxActividadesDeportivas.getSelectedItem();
+		String actDepor =  this.comboBoxActividadesDeportivas.getSelectedItem().toString();
 		String nomClase = this.textFieldNombreClase.getText();
 		Date fechaClase = this.fecClase.getDate();
-		Time horaClase = (Time) this.timeSpinnerHoraClase.getValue();
-		Profesor profe = (Profesor) this.comboBoxProfesores.getSelectedItem();
+		String profe =  this.comboBoxProfesores.getSelectedItem().toString();
 		String urlClase = this.textFieldUrlClase.getText();
 		Date fechaReg = this.fecAlta.getDate();
-		if(nomInstitucion.isEmpty() || fechaClase == null || urlClase.isEmpty() || fechaReg == null || profe == null || actDepor == null || horaClase == null) {
+		if(nomInstitucion.isEmpty() || fechaClase == null || urlClase.isEmpty() || fechaReg == null || profe.isEmpty() || actDepor.isEmpty()) {
 			JOptionPane.showMessageDialog(this, "No puede haber campos vacíos", "Alta Dictado de Clase", JOptionPane.ERROR_MESSAGE);
 		} else {
 			try {
+				LocalTime horaClase = convertToLocalTime(this.timeSpinnerHoraClase);
 				LocalDate fecha = fechaClase.toInstant().atZone(java.time.ZoneId.systemDefault()).toLocalDate();
-				LocalTime hora = horaClase.toInstant().atZone(java.time.ZoneId.systemDefault()).toLocalTime();;
-				DtClase dtC = new DtClase(nomClase, fecha, hora, urlClase, fecha);
-				this.icon.altaDictadoClase(dtC);
+				DtClase dtC = new DtClase(nomClase, fecha, horaClase, urlClase, fecha);
+				this.icon.altaDictadoClase(dtC, nomInstitucion, actDepor, profe);
 				JOptionPane.showMessageDialog(this, "Se ha registrado con éxito el dictado de la clase", "Alta Dictado Clase", JOptionPane.INFORMATION_MESSAGE);
 				limpiar();
 				dialogoPadre.dispose();
@@ -269,4 +268,11 @@ public class AltaDictadoClase extends JInternalFrame {
 		}
 		return true;
 	}
+	
+	// Método para convertir de JSpinner a LocalDateTime (hora local)
+    public static LocalTime convertToLocalTime(JSpinner jSpinner) {
+        int horas = (int) jSpinner.getValue();
+        LocalTime horaLocalTime = LocalTime.of(horas, 0);
+        return horaLocalTime;
+    }
 }

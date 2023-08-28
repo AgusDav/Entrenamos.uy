@@ -20,8 +20,8 @@ public interface IControlador {
 	//public void agregarUsuario(String nickname, String nombre, String apellido, String email, LocalDate fecNac) throws UsuarioRepetidoExcepcion;
 	public void altaInstitucion(String nombre,String descripcion, String url) throws InstitucionDeportivaRepetidaException;
 	public void altaActividadDeportiva(String nombreIns,DtActividadDeportiva data) throws ActividadDeportivaRepetidaException;
-	public void agregarUsuario(DtUsuario user) throws UsuarioRepetidoException;
-	public void altaDictadoClase(DtClase clase) throws DictadoRepetidoException;
+	public void agregarUsuario(DtUsuario user, String inst) throws UsuarioRepetidoException;
+	public void altaDictadoClase(DtClase clase, String nomIns, String nomAct, String profe) throws DictadoRepetidoException;
 	
 	
 	public String[] listarInstitutos();
