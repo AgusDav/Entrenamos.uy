@@ -11,6 +11,7 @@ import datatypes.DtUsuario;
 import logica.InstitucionDeportiva;
 import excepciones.InstitucionDeportivaRepetidaException;
 import excepciones.ActividadDeportivaRepetidaException;
+import excepciones.DictadoRepetidoException;
 import excepciones.UsuarioRepetidoException;
 
 //import excepciones.SocioRepetidoExcepcion;
@@ -20,6 +21,7 @@ public interface IControlador {
 	public void altaInstitucion(String nombre,String descripcion, String url) throws InstitucionDeportivaRepetidaException;
 	public void altaActividadDeportiva(String nombreIns,DtActividadDeportiva data) throws ActividadDeportivaRepetidaException;
 	public void agregarUsuario(DtUsuario user) throws UsuarioRepetidoException;
+	public void altaDictadoClase(DtClase clase) throws DictadoRepetidoException;
 	
 	
 	public String[] listarInstitutos();

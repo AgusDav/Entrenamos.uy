@@ -300,6 +300,7 @@ public class Principal {
         btnSalir.setBounds(319, 681, 158, 45);
         panelPrincipal.add(btnSalir);
         
+        // Boton informacion
         JButton btnInformacion7 = new JButton("Informacion");
         btnInformacion7.setIcon(iconoInfo);
         btnInformacion7.setSelected(true);
@@ -328,6 +329,7 @@ public class Principal {
         btnInformacion7.setBounds(83, 355, 196, 53);
         panelPrincipal.add(btnInformacion7);
 
+        // Boton alta usuario
         JButton btnAltaUsuario = new JButton("Alta Usuario");
         btnAltaUsuario.setIcon(iconoMas);
         btnAltaUsuario.addActionListener(new ActionListener() {
@@ -351,7 +353,7 @@ public class Principal {
         btnAltaUsuario.setBounds(83, 276, 196, 53);
         panelPrincipal.add(btnAltaUsuario);
         
-        
+        // Boton alta actividad deportiva
         JButton btnAltaActividadDeportiva = new JButton("Alta Actividad Deportiva");
         btnAltaActividadDeportiva.setIcon(iconoMas);
         btnAltaActividadDeportiva.addActionListener(new ActionListener() {
@@ -376,6 +378,7 @@ public class Principal {
         btnAltaActividadDeportiva.setBounds(319, 195, 223, 53);
         panelPrincipal.add(btnAltaActividadDeportiva);
         
+        // Boton alta dictado clase
         JButton btnAltaDictadoDeClase = new JButton("Alta Dictado De Clase");
         btnAltaDictadoDeClase.setIcon(iconoMas);
         btnAltaDictadoDeClase.addActionListener(new ActionListener() {

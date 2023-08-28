@@ -3,6 +3,7 @@ package logica;
 import excepciones.InstitucionDeportivaRepetidaException;
 import excepciones.UsuarioRepetidoException;
 import excepciones.ActividadDeportivaRepetidaException;
+import excepciones.DictadoRepetidoException;
 import interfaces.IControlador;
 
 import java.util.ArrayList;
@@ -53,6 +54,11 @@ public class Controlador implements IControlador{
 	}
 	
 	@Override
+	public void altaDictadoClase(DtClase clase) throws DictadoRepetidoException{
+		
+	}
+	
+	@Override
 	public String[] listarInstitutos() {
 		ArrayList<String> instituto;
 		ManejadorInstitucion mI = ManejadorInstitucion.getInstancia();
@@ -93,4 +99,6 @@ public class Controlador implements IControlador{
         }
         return actIns_ret;
     }
+	
+	
 }
