@@ -28,4 +28,5 @@ public interface IControlador {
 	public String[] listarActividadesDeportivas(String nombre);
 	public String[] listarProfesores(String nombre);
 	public String[] listarUsuarios();
+	public DtUsuario obtenerUsuario(String nick);
 }

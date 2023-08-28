@@ -2,6 +2,10 @@ package logica;
 
 import java.time.LocalDate;
 
+import datatypes.DtProfesor;
+import datatypes.DtSocio;
+import datatypes.DtUsuario;
+
 public class Profesor extends Usuario{
     private  String descripcion;
     private String biografia;
@@ -44,4 +48,9 @@ public class Profesor extends Usuario{
     public void setSitioWeb(String sitioWeb) {
         this.sitioWeb = sitioWeb;
     }
+    
+    @Override
+	public DtUsuario getDtUsuario() {
+		return new DtProfesor(this.nickname,this.nombre,this.apellido,this.email,this.fecNac,this.descripcion, this.biografia, this.sitioWeb);
+	}
 }

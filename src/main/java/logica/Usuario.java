@@ -2,6 +2,9 @@ package logica;
 
 import java.time.LocalDate;
 
+import datatypes.DtClase;
+import datatypes.DtUsuario;
+
 public abstract class Usuario {
     protected String nickname;
     protected String nombre;
@@ -22,6 +25,8 @@ public abstract class Usuario {
         this.email = email;
         this.fecNac = fecNac;
     }
+    
+    public abstract DtUsuario getDtUsuario();
 
     public String getNickname(){
         return this.nickname;

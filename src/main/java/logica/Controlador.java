@@ -123,4 +123,12 @@ public class Controlador implements IControlador{
         return actIns_ret;
     }
 	
+	@Override
+	public DtUsuario obtenerUsuario(String nick) {
+		ManejadorUsuario mU = ManejadorUsuario.getInstancia();
+		Usuario u = mU.buscarUsuario(nick);
+		DtUsuario dtU = u.getDtUsuario();
+		return dtU;
+	}
+	
 }
