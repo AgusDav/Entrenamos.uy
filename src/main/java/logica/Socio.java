@@ -21,4 +21,12 @@ public class Socio extends Usuario{
 	public DtUsuario getDtUsuario() {
 		return new DtSocio(this.nickname,this.nombre,this.apellido,this.email,this.fecNac);
 	}
+
+	public List<Registro> getRegistros() {
+		return registros;
+	}
+
+	public void setRegistros(List<Registro> registros) {
+		this.registros = registros;
+	}
 }

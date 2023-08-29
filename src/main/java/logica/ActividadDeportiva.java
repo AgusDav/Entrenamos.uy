@@ -4,6 +4,7 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
+import datatypes.DtActividadDeportiva;
 import datatypes.DtClase;
 
 public class ActividadDeportiva {
@@ -69,8 +70,16 @@ public class ActividadDeportiva {
 		this.institucion = institucion;
 	}
 	
+	public List<Clase> getClases() {
+	    return clases;
+	}
+	
 	public void agregarClase(DtClase data, Profesor profe){
 		Clase i = new Clase(data.getNombre(), data.getFecha(),data.getHoraInicio(),data.getUrl(),data.getFechaReg(), profe);
 		clases.add(i);
+	}
+
+	public DtActividadDeportiva getDtActividadDeportiva() {
+		return new DtActividadDeportiva(this.nombre, this.descripcion, this.duracion, this.costo, this.fecReg);
 	}
 }

@@ -2,12 +2,14 @@ package interfaces;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.List;
 
 import datatypes.DtActividadDeportiva;
 import datatypes.DtClase;
 import datatypes.DtInstitucionDeportiva;
 import datatypes.DtSocio;
 import datatypes.DtUsuario;
+import logica.Clase;
 import logica.InstitucionDeportiva;
 import excepciones.InstitucionDeportivaRepetidaException;
 import excepciones.ActividadDeportivaRepetidaException;
@@ -29,4 +31,6 @@ public interface IControlador {
 	public String[] listarProfesores(String nombre);
 	public String[] listarUsuarios();
 	public DtUsuario obtenerUsuario(String nick);
+	public DtActividadDeportiva obtenerActividad(String instituto, String actividad);
+	public List<Clase> obtenerClases(String instituto, String actividad);
 }

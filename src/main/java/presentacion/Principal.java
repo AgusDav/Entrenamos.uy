@@ -41,6 +41,8 @@ public class Principal {
     private JDialog altaDictadoClaseDialog;
     private ConsultaUsuario consultaUsuarioInternalFrame;
     private JDialog consultaUsuarioDialog;
+    private ConsultaActividadDeportiva consultaActividadInternalFrame;
+    private JDialog consultaActividadDialog;
 
     public static void main(String[] args) {
         EventQueue.invokeLater(new Runnable() {
@@ -115,6 +117,17 @@ public class Principal {
         consultaUsuarioDialog.setLocationRelativeTo(null);
         consultaUsuarioDialog.setVisible(false);
         consultaUsuarioInternalFrame.setVisible(true);
+        
+        consultaActividadDialog = new JDialog(frame, "Consulta Actividad Deportiva", true);
+        consultaActividadDialog.setSize(400, 480);
+        consultaActividadDialog.setLocationRelativeTo(frame);
+        consultaActividadDialog.getContentPane().setLayout(new BorderLayout());
+
+        consultaActividadInternalFrame = new ConsultaActividadDeportiva(icon, consultaActividadDialog);
+        consultaActividadDialog.getContentPane().add(consultaActividadInternalFrame);
+        consultaActividadDialog.setLocationRelativeTo(null);
+        consultaActividadDialog.setVisible(false);
+        consultaActividadInternalFrame.setVisible(true);
     }
 
     public void iniciar() {
@@ -308,7 +321,7 @@ public class Principal {
             	btnAltaInstitucion.setBackground(new Color(54, 61, 75)); // Original color when not hovering
             }
         });
-        btnAltaInstitucion.setBounds(83, 195, 196, 53);
+        btnAltaInstitucion.setBounds(83, 276, 213, 53);
         panelPrincipal.add(btnAltaInstitucion);
         btnSalir.setBounds(319, 681, 158, 45);
         panelPrincipal.add(btnSalir);
@@ -317,10 +330,6 @@ public class Principal {
         JButton btnInformacionUsuario = new JButton("Informacion Usuario");
         btnInformacionUsuario.setIcon(iconoInfo);
         btnInformacionUsuario.setSelected(true);
-        btnInformacionUsuario.setPreferredSize(new Dimension(1, 1));
-        btnInformacionUsuario.setMargin(new Insets(1, 1, 1, 1));
-        btnInformacionUsuario.setMinimumSize(new Dimension(1, 1));
-        btnInformacionUsuario.setMaximumSize(new Dimension(1, 1));
         btnInformacionUsuario.setSize(new Dimension(9, 10));
         btnInformacionUsuario.addActionListener(new ActionListener() {
         	public void actionPerformed(ActionEvent arg0) {
@@ -341,7 +350,7 @@ public class Principal {
             	btnInformacionUsuario.setBackground(new Color(54, 61, 75)); // Original color when not hovering
             }
         });
-        btnInformacionUsuario.setBounds(83, 355, 196, 53);
+        btnInformacionUsuario.setBounds(319, 195, 273, 53);
         panelPrincipal.add(btnInformacionUsuario);
 
         // Boton alta usuario
@@ -366,7 +375,7 @@ public class Principal {
             	btnAltaUsuario.setBackground(new Color(54, 61, 75)); // Original color when not hovering
             }
         });
-        btnAltaUsuario.setBounds(83, 276, 196, 53);
+        btnAltaUsuario.setBounds(83, 195, 213, 53);
         panelPrincipal.add(btnAltaUsuario);
         
         // Boton alta actividad deportiva
@@ -391,7 +400,7 @@ public class Principal {
             	btnAltaActividadDeportiva.setBackground(new Color(54, 61, 75)); // Original color when not hovering
             }
         });
-        btnAltaActividadDeportiva.setBounds(319, 195, 223, 53);
+        btnAltaActividadDeportiva.setBounds(83, 355, 213, 53);
         panelPrincipal.add(btnAltaActividadDeportiva);
         
         // Boton alta dictado clase
@@ -419,7 +428,7 @@ public class Principal {
             	btnAltaDictadoDeClase.setBackground(new Color(54, 61, 75)); // Original color when not hovering
             }
         });
-        btnAltaDictadoDeClase.setBounds(567, 195, 223, 53);
+        btnAltaDictadoDeClase.setBounds(83, 436, 213, 53);
         panelPrincipal.add(btnAltaDictadoDeClase);
         
         
@@ -430,6 +439,33 @@ public class Principal {
         lblMenu.setBackground(new Color(255, 255, 255));
         lblMenu.setBounds(250, 22, 282, 148);
         panelPrincipal.add(lblMenu);
+        
+        JButton btnInformacionActividadDeportiva = new JButton("Informacion Actividad Deportiva");
+        btnInformacionActividadDeportiva.setIcon(iconoInfo);
+        btnInformacionActividadDeportiva.setSize(new Dimension(9, 10));
+        btnInformacionActividadDeportiva.setSelected(true);
+        btnInformacionActividadDeportiva.setForeground(Color.WHITE);
+        btnInformacionActividadDeportiva.setBorder(new LineBorder(new Color(33, 37, 43), 3, true));
+        btnInformacionActividadDeportiva.setBackground(new Color(54, 61, 75));
+        btnInformacionActividadDeportiva.setBounds(319, 355, 273, 53);
+        btnInformacionActividadDeportiva.addActionListener(new ActionListener() {
+        	public void actionPerformed(ActionEvent arg0) {
+        		consultaActividadInternalFrame.inciarComboBoxActividadDeportiva();
+        		consultaActividadDialog.setVisible(true);
+        	}
+        });
+        btnInformacionActividadDeportiva.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseEntered(MouseEvent e) {
+            	btnInformacionActividadDeportiva.setBackground(new Color(69, 78, 95)); // Lighter blue when hovering
+            	//moveButtonRandomly(btnAltaDictadoDeClase, frame);
+            }
+            @Override
+            public void mouseExited(MouseEvent e) {
+            	btnInformacionActividadDeportiva.setBackground(new Color(54, 61, 75)); // Original color when not hovering
+            }
+        });
+        panelPrincipal.add(btnInformacionActividadDeportiva);
         // Crear el contenido para el panel de otro menú aquí
         
 
@@ -452,8 +488,7 @@ public class Principal {
         int randomY = (int) (Math.random() * maxY);
 
         button.setLocation(randomX, randomY);
-    };
-    
+    }
 }
 
 

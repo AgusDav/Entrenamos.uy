@@ -9,8 +9,6 @@ import interfaces.IControlador;
 import javax.swing.JLabel;
 
 import datatypes.DtClase;
-import datatypes.DtEntrenamiento;
-import datatypes.DtSpinning;
 import datatypes.DtUsuario;
 
 import javax.swing.DefaultComboBoxModel;
@@ -22,7 +20,6 @@ public class ConsultaUsuario extends JInternalFrame{
 
 	private static final long serialVersionUID = 1L;
 	private IControlador icon;
-	private JDialog dialogoPadre;
 	private JComboBox<String> comboBoxNickname;
 	private JLabel datoFecNac;
 	private JLabel datoNombre;
@@ -32,7 +29,6 @@ public class ConsultaUsuario extends JInternalFrame{
 	public ConsultaUsuario(IControlador icon, JDialog dialogoPadre) {
 		// Título de la ventata
 				setTitle("Consulta Usuario");
-				this.dialogoPadre = dialogoPadre;
 				this.icon = icon;
 				setBounds(100, 100, 377, 443);
 				getContentPane().setBackground(new Color(54, 61, 75));

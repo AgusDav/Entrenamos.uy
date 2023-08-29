@@ -7,6 +7,7 @@ import excepciones.DictadoRepetidoException;
 import interfaces.IControlador;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import datatypes.DtActividadDeportiva;
 import datatypes.DtClase;
@@ -130,5 +131,23 @@ public class Controlador implements IControlador{
 		DtUsuario dtU = u.getDtUsuario();
 		return dtU;
 	}
+	
+	@Override
+	public DtActividadDeportiva obtenerActividad(String instituto, String actividad) {
+		ManejadorInstitucion mI = ManejadorInstitucion.getInstancia();
+		InstitucionDeportiva I = mI.buscarInstitucionDeportiva(instituto);
+		ActividadDeportiva a = I.buscarActividad(actividad);
+		DtActividadDeportiva dtA = a.getDtActividadDeportiva();
+		return dtA;
+	}
+	
+	@Override
+	public List<Clase> obtenerClases(String instituto, String actividad) {
+		ManejadorInstitucion mI = ManejadorInstitucion.getInstancia();
+		InstitucionDeportiva I = mI.buscarInstitucionDeportiva(instituto);
+		ActividadDeportiva a = I.buscarActividad(actividad);
+		return a.getClases();
+	}
+	
 	
 }
