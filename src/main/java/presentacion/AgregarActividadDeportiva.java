@@ -219,6 +219,7 @@ public class AgregarActividadDeportiva extends JInternalFrame {
 		textFieldDescripcion.setText("");
 		textFieldDuracion.setText("");
 		textFieldCosto.setText("");
+		fechaSistemaLabel.setDate(null);
 	}
 		
 	private boolean checkFormulario() {

@@ -76,6 +76,12 @@ public class AltaDictadoClase extends JInternalFrame {
 		getContentPane().add(lblInstitucion);
 
 		comboBoxNombreInstitucion = new JComboBox<String>();
+		comboBoxNombreInstitucion.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				actualizarComboBoxActividades();
+				actualizarComboBoxProfesores();
+	        }
+	    });
 		comboBoxNombreInstitucion.setBounds(210, 28, 114, 19);
 		getContentPane().add(comboBoxNombreInstitucion);
 		
@@ -209,24 +215,43 @@ public class AltaDictadoClase extends JInternalFrame {
 	public void inicializarComboBoxes() {
 		DefaultComboBoxModel<String> modelInstitutos = new DefaultComboBoxModel<String>(icon.listarInstitutos());
 		comboBoxNombreInstitucion.setModel(modelInstitutos);
-		DefaultComboBoxModel<String> modelProfesores = new DefaultComboBoxModel<String>(icon.listarProfesores(this.comboBoxNombreInstitucion.getSelectedItem().toString()));
+		/*DefaultComboBoxModel<String> modelProfesores = new DefaultComboBoxModel<String>(icon.listarProfesores(this.comboBoxNombreInstitucion.getSelectedItem().toString()));
 		comboBoxProfesores.setModel(modelProfesores);
 		DefaultComboBoxModel<String> modelActDepor = new DefaultComboBoxModel<String>(icon.listarActividadesDeportivas(this.comboBoxNombreInstitucion.getSelectedItem().toString()));
-		comboBoxActividadesDeportivas.setModel(modelActDepor);
+		comboBoxActividadesDeportivas.setModel(modelActDepor);*/
+		if(comboBoxActividadesDeportivas.getSelectedItem() == null) {
+			if(comboBoxNombreInstitucion.getSelectedItem() != null){
+				actualizarComboBoxActividades();
+				comboBoxActividadesDeportivas.setVisible(true);
+			}
+			else
+				comboBoxActividadesDeportivas.setVisible(false);
+		}
+		if(comboBoxProfesores.getSelectedItem() == null) {
+			if(comboBoxNombreInstitucion.getSelectedItem() != null){
+				actualizarComboBoxProfesores();
+				comboBoxProfesores.setVisible(true);
+			}
+			else
+				comboBoxProfesores.setVisible(false);
+		}
 	}
 	
 	protected void altaDictadoClaseAceptarActionPerformed(ActionEvent arg0) {
-		String nomInstitucion = this.comboBoxNombreInstitucion.getSelectedItem().toString();
-		String actDepor =  this.comboBoxActividadesDeportivas.getSelectedItem().toString();
+		/*String nomInstitucion = this.comboBoxNombreInstitucion.getSelectedItem().toString();
+		String actDepor =  this.comboBoxActividadesDeportivas.getSelectedItem().toString();*/
 		String nomClase = this.textFieldNombreClase.getText();
 		Date fechaClase = this.fecClase.getDate();
-		String profe =  this.comboBoxProfesores.getSelectedItem().toString();
 		String urlClase = this.textFieldUrlClase.getText();
 		Date fechaReg = this.fecAlta.getDate();
-		if(nomInstitucion.isEmpty() || fechaClase == null || urlClase.isEmpty() || fechaReg == null || profe.isEmpty() || actDepor.isEmpty()) {
+		if(fechaClase == null || urlClase.isEmpty() || fechaReg == null) {
 			JOptionPane.showMessageDialog(this, "No puede haber campos vacíos", "Alta Dictado de Clase", JOptionPane.ERROR_MESSAGE);
 		} else {
+			if(checkearComboBoxes()) {
 			try {
+				String profe =  this.comboBoxProfesores.getSelectedItem().toString();
+				String nomInstitucion = this.comboBoxNombreInstitucion.getSelectedItem().toString();
+				String actDepor =  this.comboBoxActividadesDeportivas.getSelectedItem().toString();
 				LocalTime horaClase = convertToLocalTime(this.timeSpinnerHoraClase);
 				LocalDate fecha = fechaClase.toInstant().atZone(java.time.ZoneId.systemDefault()).toLocalDate();
 				DtClase dtC = new DtClase(nomClase, fecha, horaClase, urlClase, fecha);
@@ -237,8 +262,20 @@ public class AltaDictadoClase extends JInternalFrame {
 			} catch(DictadoRepetidoException e) {
 				JOptionPane.showMessageDialog(this, e.getMessage(), "Alta Dictado Clase", JOptionPane.ERROR_MESSAGE);
 			}
+			}
 		}
 	}
+	
+	private void actualizarComboBoxActividades() {
+		DefaultComboBoxModel<String> modelActDepor = new DefaultComboBoxModel<String>(icon.listarActividadesDeportivas(this.comboBoxNombreInstitucion.getSelectedItem().toString()));
+		comboBoxActividadesDeportivas.setModel(modelActDepor);
+    }
+	
+	private void actualizarComboBoxProfesores() {
+		DefaultComboBoxModel<String> modelProfesores = new DefaultComboBoxModel<String>(icon.listarProfesores(this.comboBoxNombreInstitucion.getSelectedItem().toString()));
+		comboBoxProfesores.setModel(modelProfesores);
+    }
+
 	
 	// Cancela el caso de uso
 	protected void altaDictadoClaseCancelar(ActionEvent arg0) {
@@ -254,16 +291,16 @@ public class AltaDictadoClase extends JInternalFrame {
 	}
 	
 	public Boolean checkearComboBoxes() {
-		if(comboBoxNombreInstitucion == null) {
+		if(comboBoxNombreInstitucion.getSelectedItem() == null) {
 			JOptionPane.showMessageDialog(this, "Debe haber institutos registrados", "Alta Dictado de Clase", JOptionPane.ERROR_MESSAGE);	
 			return false;
 		}
-		if(comboBoxProfesores == null) {
-			JOptionPane.showMessageDialog(this, "Debe haber profesores registrados", "Alta Dictado de Clase", JOptionPane.ERROR_MESSAGE);
+		if(comboBoxActividadesDeportivas.getSelectedItem() == null) {
+			JOptionPane.showMessageDialog(this, "Debe haber actividades deportivas registradas", "Alta Dictado de Clase", JOptionPane.ERROR_MESSAGE);	
 			return false;
 		}
-		if(comboBoxActividadesDeportivas == null) {
-			JOptionPane.showMessageDialog(this, "Debe haber actividades deportivas registradas", "Alta Dictado de Clase", JOptionPane.ERROR_MESSAGE);	
+		if(comboBoxProfesores.getSelectedItem() == null) {
+			JOptionPane.showMessageDialog(this, "Debe haber profesores registrados", "Alta Dictado de Clase", JOptionPane.ERROR_MESSAGE);
 			return false;
 		}
 		return true;
