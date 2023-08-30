@@ -40,6 +40,7 @@ public class ConsultaActividadDeportiva extends JInternalFrame{
 		getContentPane().setBackground(new Color(54, 61, 75));
 		getContentPane().setLayout(null);
 		
+		// Campo institucion
 		JLabel lblInstitucion = new JLabel("Institucion: ");
 		lblInstitucion.setBounds(12, 25, 96, 20);
 		lblInstitucion.setForeground(new Color(255, 255, 255));
@@ -52,6 +53,7 @@ public class ConsultaActividadDeportiva extends JInternalFrame{
 		comboBoxInstituto.addActionListener(this::comboBoxInstitutoActionPerformed);
 		getContentPane().add(comboBoxInstituto);
 		
+		// Campo actividad deportiva
 		JLabel lblActividadDeportiva = new JLabel("Actividad Deportiva:");
 		lblActividadDeportiva.setBounds(12, 83, 156, 20);
 		lblActividadDeportiva.setFont(new Font("Dialog", Font.BOLD, 11));
@@ -65,54 +67,59 @@ public class ConsultaActividadDeportiva extends JInternalFrame{
 		comboBoxActividad.addActionListener(this::comboBoxActividadActionPerformed);
 		getContentPane().add(comboBoxActividad);
 		
+		// Campo descripción
 		JLabel lblDescripcion = new JLabel("Descripcion:");
 		lblDescripcion.setBounds(12, 144, 96, 20);
 		lblDescripcion.setForeground(new Color(255, 255, 255));
 		getContentPane().add(lblDescripcion);
-		
-		JLabel lblDuracion = new JLabel("Duracion:");
-		lblDuracion.setBounds(12, 194, 96, 20);
-		lblDuracion.setForeground(Color.WHITE);
-		getContentPane().add(lblDuracion);
-		
-		JLabel lblCosto = new JLabel("Costo:");
-		lblCosto.setBounds(12, 244, 96, 20);
-		lblCosto.setForeground(Color.WHITE);
-		getContentPane().add(lblCosto);
-		
-		JLabel lblFecha = new JLabel("Fecha Registro:");
-		lblFecha.setBounds(12, 294, 111, 20);
-		lblFecha.setForeground(Color.WHITE);
-		getContentPane().add(lblFecha);
 		
 		datoDescripcion = new JLabel("");
 		datoDescripcion.setBounds(163, 147, 156, 15);
 		datoDescripcion.setForeground(new Color(255, 255, 255));
 		getContentPane().add(datoDescripcion);
 		
-		 datoDuracion = new JLabel("");
-		 datoDuracion.setBounds(163, 197, 156, 15);
+		// Campo duracion
+		JLabel lblDuracion = new JLabel("Duracion:");
+		lblDuracion.setBounds(12, 194, 96, 20);
+		lblDuracion.setForeground(Color.WHITE);
+		getContentPane().add(lblDuracion);
+		
+		datoDuracion = new JLabel("");
+		datoDuracion.setBounds(163, 197, 156, 15);
 		datoDuracion.setForeground(Color.WHITE);
 		getContentPane().add(datoDuracion);
+		
+		// Campo costo
+		JLabel lblCosto = new JLabel("Costo:");
+		lblCosto.setBounds(12, 244, 96, 20);
+		lblCosto.setForeground(Color.WHITE);
+		getContentPane().add(lblCosto);
 		
 		datoCosto = new JLabel("");
 		datoCosto.setBounds(163, 247, 156, 15);
 		datoCosto.setForeground(Color.WHITE);
 		getContentPane().add(datoCosto);
 		
+		// Campo fecha
+		JLabel lblFecha = new JLabel("Fecha Registro:");
+		lblFecha.setBounds(12, 294, 111, 20);
+		lblFecha.setForeground(Color.WHITE);
+		getContentPane().add(lblFecha);
+		
 		datoFecha = new JLabel("");
 		datoFecha.setBounds(163, 297, 156, 15);
 		datoFecha.setForeground(Color.WHITE);
 		getContentPane().add(datoFecha);
 		
-		clases = new JList();
-		clases.setBounds(163, 346, 156, 20);
-		getContentPane().add(clases);
-		
+		// Campo clases
 		lblClases = new JLabel("Clases:");
 		lblClases.setForeground(Color.WHITE);
 		lblClases.setBounds(12, 346, 111, 20);
 		getContentPane().add(lblClases);
+		
+		clases = new JList();
+		clases.setBounds(163, 346, 156, 20);
+		getContentPane().add(clases);
 	}
 	
 	
