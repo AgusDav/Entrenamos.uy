@@ -96,7 +96,7 @@ public class Principal {
         agregarActividadDeportivaDialog.setVisible(false);
         agregarActividadDeportivaInternalFrame.setVisible(true);
         
-        altaDictadoClaseDialog = new JDialog(frame, "Agregar Institución", true);
+        altaDictadoClaseDialog = new JDialog(frame, "Agregar Clase", true);
         altaDictadoClaseDialog.setSize(375, 450);
         altaDictadoClaseDialog.setLocationRelativeTo(frame);
         altaDictadoClaseDialog.getContentPane().setLayout(new BorderLayout());
@@ -139,6 +139,7 @@ public class Principal {
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         ImageIcon imagen = new ImageIcon(getClass().getResource("Icon.jpg"));
         frame.setIconImage(imagen.getImage());
+        frame.setResizable(false);
 
         cardLayout = new CardLayout();
         panelDeTarjetas = new JPanel(cardLayout);

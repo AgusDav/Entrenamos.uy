@@ -33,8 +33,10 @@ import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.sql.Time;
+import java.time.Instant;
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.time.ZoneId;
 import java.util.Calendar;
 import java.util.Date;
 import java.awt.event.ActionEvent;
@@ -126,7 +128,7 @@ public class AltaDictadoClase extends JInternalFrame {
         SpinnerDateModel spinnerDateModel = new SpinnerDateModel();
         spinnerDateModel.setCalendarField(Calendar.MINUTE);
         
-        JSpinner timeSpinnerHoraClase = new JSpinner(spinnerDateModel);
+        timeSpinnerHoraClase = new JSpinner(spinnerDateModel);
         timeSpinnerHoraClase.setBounds(210, 162, 67, 28);
         getContentPane().add(timeSpinnerHoraClase);
         JSpinner.DateEditor de_timeSpinnerHoraClase = new JSpinner.DateEditor(timeSpinnerHoraClase, "HH:mm");
@@ -215,10 +217,6 @@ public class AltaDictadoClase extends JInternalFrame {
 	public void inicializarComboBoxes() {
 		DefaultComboBoxModel<String> modelInstitutos = new DefaultComboBoxModel<String>(icon.listarInstitutos());
 		comboBoxNombreInstitucion.setModel(modelInstitutos);
-		/*DefaultComboBoxModel<String> modelProfesores = new DefaultComboBoxModel<String>(icon.listarProfesores(this.comboBoxNombreInstitucion.getSelectedItem().toString()));
-		comboBoxProfesores.setModel(modelProfesores);
-		DefaultComboBoxModel<String> modelActDepor = new DefaultComboBoxModel<String>(icon.listarActividadesDeportivas(this.comboBoxNombreInstitucion.getSelectedItem().toString()));
-		comboBoxActividadesDeportivas.setModel(modelActDepor);*/
 		if(comboBoxActividadesDeportivas.getSelectedItem() == null) {
 			if(comboBoxNombreInstitucion.getSelectedItem() != null){
 				actualizarComboBoxActividades();
@@ -238,8 +236,6 @@ public class AltaDictadoClase extends JInternalFrame {
 	}
 	
 	protected void altaDictadoClaseAceptarActionPerformed(ActionEvent arg0) {
-		/*String nomInstitucion = this.comboBoxNombreInstitucion.getSelectedItem().toString();
-		String actDepor =  this.comboBoxActividadesDeportivas.getSelectedItem().toString();*/
 		String nomClase = this.textFieldNombreClase.getText();
 		Date fechaClase = this.fecClase.getDate();
 		String urlClase = this.textFieldUrlClase.getText();
@@ -307,9 +303,23 @@ public class AltaDictadoClase extends JInternalFrame {
 	}
 	
 	// Método para convertir de JSpinner a LocalDateTime (hora local)
-    public static LocalTime convertToLocalTime(JSpinner jSpinner) {
+    /*public static LocalTime convertToLocalTime(JSpinner jSpinner) {
         int horas = (int) jSpinner.getValue();
         LocalTime horaLocalTime = LocalTime.of(horas, 0);
         return horaLocalTime;
+    }*/
+	public static LocalTime convertToLocalTime(JSpinner jSpinner) {
+        Date dateValue = (Date) jSpinner.getValue();
+
+        // Convertir Date a Instant
+        Instant instant = dateValue.toInstant();
+
+        // Obtener la zona horaria del sistema
+        ZoneId zone = ZoneId.systemDefault();
+
+        // Crear objeto LocalTime a partir del Instant y la zona horaria
+        LocalTime localTime = instant.atZone(zone).toLocalTime();
+
+        return localTime;
     }
 }

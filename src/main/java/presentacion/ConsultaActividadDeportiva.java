@@ -25,11 +25,11 @@ public class ConsultaActividadDeportiva extends JInternalFrame{
 	private IControlador icon;
 	private JComboBox<String> comboBoxInstituto;
 	private JComboBox<String> comboBoxActividad;
+	private JComboBox<String> comboBoxClases;
 	private JLabel datoDescripcion;
 	private JLabel datoDuracion;
 	private JLabel datoCosto;
 	private JLabel datoFecha;
-	private JList<String> clases;
 	private JLabel lblClases;
 
 	public ConsultaActividadDeportiva(IControlador icon, JDialog dialogoPadre) {
@@ -117,9 +117,11 @@ public class ConsultaActividadDeportiva extends JInternalFrame{
 		lblClases.setBounds(12, 346, 111, 20);
 		getContentPane().add(lblClases);
 		
-		clases = new JList();
-		clases.setBounds(163, 346, 156, 20);
-		getContentPane().add(clases);
+		comboBoxClases = new JComboBox<String>();
+		comboBoxClases.setForeground(Color.WHITE);
+		comboBoxClases.setBackground(new Color(54, 61, 75));
+		comboBoxClases.setBounds(163, 344, 156, 24);
+		getContentPane().add(comboBoxClases);
 	}
 	
 	
@@ -141,16 +143,9 @@ public class ConsultaActividadDeportiva extends JInternalFrame{
 	        datoDuracion.setText(String.valueOf(dtA.getDuracion()));
 	        datoCosto.setText(String.valueOf(dtA.getCosto()));
 	        datoFecha.setText(dtA.getFecReg().toString());
-	        
-	     // Obtener la lista de clases de la actividad
-	        List<Clase> listaClases = icon.obtenerClases(instituto, actividad);
-	        
-	        // Crear un modelo de lista y agregar las clases
-	        DefaultListModel<String> modelClases = new DefaultListModel<>();
-	        for (Clase clase : listaClases) {
-	            modelClases.addElement(clase.getNombre()); // Suponiendo que la clase tiene un método getNombre()
-	        }
-	        clases.setModel(modelClases);
+	       
+	        DefaultComboBoxModel<String> modelClases = new DefaultComboBoxModel<String>(icon.listarClases(instituto, actividad));
+	        comboBoxClases.setModel(modelClases);
 	    }
 	}
 	

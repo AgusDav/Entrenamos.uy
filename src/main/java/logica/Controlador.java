@@ -149,5 +149,20 @@ public class Controlador implements IControlador{
 		return a.getClases();
 	}
 	
+	@Override
+	public String[] listarClases(String instituto, String actividad) {
+		ManejadorInstitucion mI = ManejadorInstitucion.getInstancia();
+		InstitucionDeportiva I = mI.buscarInstitucionDeportiva(instituto);
+		ActividadDeportiva a = I.buscarActividad(actividad);
+		List<Clase> c = a.getClases();
+		String[] ret = new String[c.size()];
+        int i=0;
+        for(Clase aux:c) {
+            ret[i]=aux.getNombre();
+            i++;
+        }
+        return ret;
+	}
+	
 	
 }
