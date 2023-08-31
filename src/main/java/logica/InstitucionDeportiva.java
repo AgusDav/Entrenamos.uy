@@ -4,9 +4,22 @@ import java.util.ArrayList;
 import java.util.List;
 
 import datatypes.DtActividadDeportiva;
+import java.io.Serializable;
+import javax.persistence.Basic;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 
-public class InstitucionDeportiva {
+
+@Entity
+public class InstitucionDeportiva implements Serializable {
+    @Id
+    @GeneratedValue(strategy=GenerationType.IDENTITY)
+    @Column (name="Nombre")
     private String nombre;
+    @Basic
     private String descripcion;
     private String url;
     private List<ActividadDeportiva> actD = new ArrayList<>();

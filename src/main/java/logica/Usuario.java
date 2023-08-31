@@ -1,15 +1,30 @@
 package logica;
 
 import java.time.LocalDate;
-
 import datatypes.DtClase;
 import datatypes.DtUsuario;
+import java.io.Serializable;
+import javax.persistence.Column;
+import javax.persistence.DiscriminatorColumn;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
-public abstract class Usuario {
+
+@Entity
+@DiscriminatorColumn(name="TIPOUSUARIO")
+public abstract class Usuario implements Serializable {
+    @Id
+    @GeneratedValue(strategy=GenerationType.IDENTITY)
+    @Column(name="Nickname")
     protected String nickname;
     protected String nombre;
     protected String apellido;
     protected String email;
+    @Temporal(TemporalType.DATE)
     protected LocalDate fecNac;
 
 

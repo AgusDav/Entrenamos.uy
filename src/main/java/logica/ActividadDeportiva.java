@@ -6,13 +6,27 @@ import java.util.List;
 
 import datatypes.DtActividadDeportiva;
 import datatypes.DtClase;
+import java.io.Serializable;
+import javax.persistence.Basic;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
+@Entity
+public class ActividadDeportiva implements Serializable {
 
-public class ActividadDeportiva {
-
+    @Id
+    @GeneratedValue(strategy=GenerationType.IDENTITY)
+    @Column (name="Nombre")
     private String nombre;
+    @Basic
     private String descripcion;
     private int duracion;
     private float costo;
+    @Temporal(TemporalType.DATE)
     private LocalDate fecReg;
 
     private InstitucionDeportiva institucion;

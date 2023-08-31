@@ -6,8 +6,13 @@ import java.util.List;
 
 import datatypes.DtSocio;
 import datatypes.DtUsuario;
+import java.io.Serializable;
+import javax.persistence.DiscriminatorValue;
+import javax.persistence.Entity;
 
-public class Socio extends Usuario{
+@Entity
+@DiscriminatorValue("S")
+public class Socio extends Usuario implements Serializable{
 	private List<Registro> registros = new ArrayList<>();
     public Socio(){
     	super();

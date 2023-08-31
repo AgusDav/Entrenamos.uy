@@ -1,15 +1,32 @@
 package logica;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
+import javax.persistence.Basic;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
-public class Clase {
+@Entity
+public class Clase implements Serializable {
+    @Id
+    @GeneratedValue(strategy=GenerationType.IDENTITY)
+    @Column (name="Nombre")
     private String nombre;
+    @Temporal(TemporalType.DATE)
     private LocalDate fecha;
+    @Temporal(TemporalType.TIME)
     private LocalTime hora;
+    @Basic
     private String url;
+    @Temporal(TemporalType.DATE)
     private LocalDate fechaReg;
     //pseudos
     private Profesor profe;

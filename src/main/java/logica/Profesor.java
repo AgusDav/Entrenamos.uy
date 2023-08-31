@@ -5,8 +5,13 @@ import java.time.LocalDate;
 import datatypes.DtProfesor;
 import datatypes.DtSocio;
 import datatypes.DtUsuario;
+import java.io.Serializable;
+import javax.persistence.DiscriminatorValue;
+import javax.persistence.Entity;
 
-public class Profesor extends Usuario{
+@Entity
+@DiscriminatorValue("P")
+public class Profesor extends Usuario implements Serializable{
     private  String descripcion;
     private String biografia;
     private String sitioWeb;
