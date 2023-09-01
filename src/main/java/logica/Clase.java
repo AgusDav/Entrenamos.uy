@@ -18,7 +18,6 @@ import javax.persistence.TemporalType;
 public class Clase implements Serializable {
     @Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)
-    @Column (name="Nombre")
     private String nombre;
     @Temporal(TemporalType.DATE)
     private LocalDate fecha;

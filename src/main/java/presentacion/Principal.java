@@ -61,10 +61,9 @@ public class Principal {
 
     public Principal() {
         iniciar();
-        persistencia = new ControladorPersistencia();
         Fabrica fabrica = Fabrica.getInstancia();
         IControlador icon = fabrica.getIControlador();
-
+        persistencia = new ControladorPersistencia();
         agregarInstitutoDialog = new JDialog(frame, "Agregar Institución", true);
         agregarInstitutoDialog.setSize(340, 310);
         agregarInstitutoDialog.setLocationRelativeTo(frame);

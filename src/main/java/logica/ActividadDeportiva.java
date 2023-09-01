@@ -20,7 +20,6 @@ public class ActividadDeportiva implements Serializable {
 
     @Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)
-    @Column (name="Nombre")
     private String nombre;
     @Basic
     private String descripcion;

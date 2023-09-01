@@ -17,7 +17,6 @@ import javax.persistence.Id;
 public class InstitucionDeportiva implements Serializable {
     @Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)
-    @Column (name="Nombre")
     private String nombre;
     @Basic
     private String descripcion;

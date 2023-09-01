@@ -19,7 +19,6 @@ import javax.persistence.TemporalType;
 public abstract class Usuario implements Serializable {
     @Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)
-    @Column(name="Nickname")
     protected String nickname;
     protected String nombre;
     protected String apellido;
