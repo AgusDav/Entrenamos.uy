@@ -44,6 +44,7 @@ public class Principal {
     private JDialog consultaUsuarioDialog;
     private ConsultaActividadDeportiva consultaActividadInternalFrame;
     private JDialog consultaActividadDialog;
+    private ControladorPersistencia persistencia;
 
     public static void main(String[] args) {
         EventQueue.invokeLater(new Runnable() {
@@ -60,7 +61,7 @@ public class Principal {
 
     public Principal() {
         iniciar();
-        ControladorPersistencia persistencia = new ControladorPersistencia();
+        persistencia = new ControladorPersistencia();
         Fabrica fabrica = Fabrica.getInstancia();
         IControlador icon = fabrica.getIControlador();
 
