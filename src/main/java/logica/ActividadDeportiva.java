@@ -11,11 +11,14 @@ import datatypes.DtActividadDeportiva;
 import datatypes.DtClase;
 import java.io.Serializable;
 import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 @Entity
@@ -32,8 +35,9 @@ public class ActividadDeportiva implements Serializable {
     private float costo;
     @Temporal(TemporalType.DATE)
     private Date fecReg;
-
+    @ManyToOne
     private InstitucionDeportiva institucion;
+    @OneToMany(mappedBy = "actividad", cascade = CascadeType.ALL)
     private List<Clase> clases = new ArrayList<>();
 
     public ActividadDeportiva() {
@@ -100,6 +104,8 @@ public class ActividadDeportiva implements Serializable {
 		Date hora = Date.from(localDateTimeHora.atZone(ZoneId.systemDefault()).toInstant());
 		Clase i = new Clase(data.getNombre(), fecha, hora, data.getUrl(), fechaReg, profe);
 		clases.add(i);
+		i.setActividad(this);
+		
 	}
 
 	public DtActividadDeportiva getDtActividadDeportiva() {

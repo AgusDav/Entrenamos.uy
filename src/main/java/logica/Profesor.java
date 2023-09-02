@@ -11,6 +11,7 @@ import datatypes.DtUsuario;
 import java.io.Serializable;
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
+import javax.persistence.ManyToOne;
 
 @Entity
 @DiscriminatorValue("P")
@@ -20,6 +21,7 @@ public class Profesor extends Usuario implements Serializable{
     private String biografia;
     private String sitioWeb;
     //pseudos
+    @ManyToOne
     private InstitucionDeportiva institucion;
 
     public Profesor(){

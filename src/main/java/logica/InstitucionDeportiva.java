@@ -9,11 +9,13 @@ import java.io.Serializable;
 import java.time.ZoneId;
 
 import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 
 
 @Entity
@@ -26,7 +28,9 @@ public class InstitucionDeportiva implements Serializable {
     @Basic
     private String descripcion;
     private String url;
+    @OneToMany(mappedBy = "institucion", cascade = CascadeType.ALL)
     private List<ActividadDeportiva> actD = new ArrayList<>();
+    @OneToMany(mappedBy = "institucion", cascade = CascadeType.ALL)
     private List<Profesor> profesores = new ArrayList<>();
     
     public InstitucionDeportiva(){
@@ -68,6 +72,7 @@ public class InstitucionDeportiva implements Serializable {
     	Date fecha = Date.from(data.getFecReg().atStartOfDay(ZoneId.systemDefault()).toInstant());
         ActividadDeportiva i = new ActividadDeportiva(data.getNombre(),data.getDescripcion(),data.getDuracion(),data.getCosto(), fecha);
 		actD.add(i);
+		i.setInstitucion(this);
     }
     
     public ArrayList<String> obtenerActividades(){

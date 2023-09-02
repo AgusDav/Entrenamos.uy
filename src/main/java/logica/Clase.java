@@ -14,6 +14,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
@@ -33,7 +34,9 @@ public class Clase implements Serializable {
     @Temporal(TemporalType.DATE)
     private Date fechaReg;
     //pseudos
+    @ManyToOne
     private Profesor profe;
+    @ManyToOne
     private ActividadDeportiva actividad;
     private List<Registro> registros = new ArrayList<>();
 
