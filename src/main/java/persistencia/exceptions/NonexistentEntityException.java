@@ -1,7 +1,8 @@
 package persistencia.exceptions;
 
 public class NonexistentEntityException extends Exception {
-    public NonexistentEntityException(String message, Throwable cause) {
+    private static final long serialVersionUID = 1L;
+	public NonexistentEntityException(String message, Throwable cause) {
         super(message, cause);
     }
     public NonexistentEntityException(String message) {

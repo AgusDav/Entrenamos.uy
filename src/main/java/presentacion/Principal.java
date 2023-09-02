@@ -26,7 +26,7 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import javax.swing.SwingConstants;
 import java.awt.Insets;
-import persistencia.ControladorPersistencia;
+import persistencia.Conexion;
 
 public class Principal {
     private JFrame frame;
@@ -44,7 +44,7 @@ public class Principal {
     private JDialog consultaUsuarioDialog;
     private ConsultaActividadDeportiva consultaActividadInternalFrame;
     private JDialog consultaActividadDialog;
-    private ControladorPersistencia persistencia;
+    private Conexion persistencia;
 
     public static void main(String[] args) {
         EventQueue.invokeLater(new Runnable() {
@@ -61,9 +61,10 @@ public class Principal {
 
     public Principal() {
         iniciar();
+        persistencia = persistencia.getInstancia();
         Fabrica fabrica = Fabrica.getInstancia();
         IControlador icon = fabrica.getIControlador();
-        persistencia = new ControladorPersistencia();
+
         agregarInstitutoDialog = new JDialog(frame, "Agregar Institución", true);
         agregarInstitutoDialog.setSize(340, 310);
         agregarInstitutoDialog.setLocationRelativeTo(frame);

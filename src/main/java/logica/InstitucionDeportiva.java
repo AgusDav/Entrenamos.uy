@@ -1,10 +1,13 @@
 package logica;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import datatypes.DtActividadDeportiva;
 import java.io.Serializable;
+import java.time.ZoneId;
+
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -15,8 +18,10 @@ import javax.persistence.Id;
 
 @Entity
 public class InstitucionDeportiva implements Serializable {
-    @Id
+    private static final long serialVersionUID = 1L;
+	@Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)
+    @Column (name="Nombre")
     private String nombre;
     @Basic
     private String descripcion;
@@ -60,7 +65,8 @@ public class InstitucionDeportiva implements Serializable {
     }
 
     public void agregarActividadDeportiva(DtActividadDeportiva data){
-        ActividadDeportiva i = new ActividadDeportiva(data.getNombre(),data.getDescripcion(),data.getDuracion(),data.getCosto(),data.getFecReg());
+    	Date fecha = Date.from(data.getFecReg().atStartOfDay(ZoneId.systemDefault()).toInstant());
+        ActividadDeportiva i = new ActividadDeportiva(data.getNombre(),data.getDescripcion(),data.getDuracion(),data.getCosto(), fecha);
 		actD.add(i);
     }
     

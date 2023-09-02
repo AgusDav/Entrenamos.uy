@@ -41,7 +41,7 @@ public class AgregarUsuario extends JInternalFrame {
 	private JTextField textFieldDescripcion;
 	private JTextField textFieldWeb;
 	private JTextField textFieldBio;
-	private JComboBox seleccionarTipoUser;
+	private JComboBox<String> seleccionarTipoUser;
 	private JComboBox<String> comboBoxNombreInstitucion;
 	
 	public AgregarUsuario(IControlador icon, JDialog dialogoPadre) {
@@ -159,7 +159,7 @@ public class AgregarUsuario extends JInternalFrame {
 		getContentPane().add(comboBoxNombreInstitucion);
 		
 		
-		seleccionarTipoUser = new JComboBox();
+		seleccionarTipoUser = new JComboBox<String>();
 		seleccionarTipoUser.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				String selectedItem = (String) seleccionarTipoUser.getSelectedItem();
@@ -184,7 +184,7 @@ public class AgregarUsuario extends JInternalFrame {
 		        }
 			}
 		});
-		seleccionarTipoUser.setModel(new DefaultComboBoxModel(new String[] {"Profesor", "Socio"}));
+		seleccionarTipoUser.setModel(new DefaultComboBoxModel<String>(new String[] {"Profesor", "Socio"}));
 		seleccionarTipoUser.setBounds(160, 161, 117, 24);
 		getContentPane().add(seleccionarTipoUser);
 		

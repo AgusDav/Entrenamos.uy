@@ -1,6 +1,9 @@
 package logica;
 
 import java.time.LocalDate;
+import java.time.ZoneId;
+import java.util.Date;
+
 
 import datatypes.DtProfesor;
 import datatypes.DtSocio;
@@ -12,7 +15,8 @@ import javax.persistence.Entity;
 @Entity
 @DiscriminatorValue("P")
 public class Profesor extends Usuario implements Serializable{
-    private  String descripcion;
+    private static final long serialVersionUID = 1L;
+	private  String descripcion;
     private String biografia;
     private String sitioWeb;
     //pseudos
@@ -22,7 +26,7 @@ public class Profesor extends Usuario implements Serializable{
     	super();
     }
 
-    public Profesor(String nickname, String nombre, String apellido, String email, LocalDate fechaNac, String descripcion, String biografia, String sitioWeb, InstitucionDeportiva institucion){
+    public Profesor(String nickname, String nombre, String apellido, String email, Date fechaNac, String descripcion, String biografia, String sitioWeb, InstitucionDeportiva institucion){
         super(nickname, nombre, apellido, email, fechaNac);
         this.descripcion = descripcion;
         this.biografia = biografia;
@@ -56,6 +60,7 @@ public class Profesor extends Usuario implements Serializable{
     
     @Override
 	public DtUsuario getDtUsuario() {
-		return new DtProfesor(this.nickname,this.nombre,this.apellido,this.email,this.fecNac,this.descripcion, this.biografia, this.sitioWeb);
+    	LocalDate fecha = this.fecNac.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+		return new DtProfesor(this.nickname,this.nombre,this.apellido,this.email,fecha,this.descripcion, this.biografia, this.sitioWeb);
 	}
 }
