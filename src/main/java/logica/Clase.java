@@ -1,10 +1,13 @@
 package logica;
 
 import java.io.Serializable;
+
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -21,13 +24,13 @@ public class Clase implements Serializable {
     @Column (name="Nombre")
     private String nombre;
     @Temporal(TemporalType.DATE)
-    private LocalDate fecha;
+    private Date fecha;
     @Temporal(TemporalType.TIME)
-    private LocalTime hora;
+    private Date hora;
     @Basic
     private String url;
     @Temporal(TemporalType.DATE)
-    private LocalDate fechaReg;
+    private Date fechaReg;
     //pseudos
     private Profesor profe;
     private ActividadDeportiva actividad;
@@ -37,7 +40,7 @@ public class Clase implements Serializable {
         super();
     }
 
-    public Clase(String nombre, LocalDate fecha, LocalTime hora, String url, LocalDate fechaReg, Profesor profe){
+    public Clase(String nombre, Date fecha, Date hora, String url, Date fechaReg, Profesor profe){
         super();
         this.nombre = nombre;
         this.fecha = fecha;
@@ -55,19 +58,19 @@ public class Clase implements Serializable {
         this.nombre = nombre;
     }
 
-    public LocalDate getFecha(){
+    public Date getFecha(){
         return this.fecha;
     }
 
-    public void setFecha(LocalDate fecha){
+    public void setFecha(Date fecha){
         this.fecha = fecha;
     }
 
-    public LocalTime getHora(){
+    public Date getHora(){
         return this.hora;
     }
 
-    public void setHora(LocalTime hora){
+    public void setHora(Date hora){
         this.hora = hora;
     }
 
@@ -79,11 +82,11 @@ public class Clase implements Serializable {
         this.url = url;
     }
 
-    public LocalDate getFechaReg(){
+    public Date getFechaReg(){
         return this.fechaReg;
     }
 
-    public void setFechaReg(LocalDate fechaReg){
+    public void setFechaReg(Date fechaReg){
         this.fechaReg = fechaReg;
     }
 

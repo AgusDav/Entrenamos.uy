@@ -1,7 +1,10 @@
 package logica;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import datatypes.DtActividadDeportiva;
@@ -27,7 +30,7 @@ public class ActividadDeportiva implements Serializable {
     private int duracion;
     private float costo;
     @Temporal(TemporalType.DATE)
-    private LocalDate fecReg;
+    private Date fecReg;
 
     private InstitucionDeportiva institucion;
     private List<Clase> clases = new ArrayList<>();
@@ -36,7 +39,7 @@ public class ActividadDeportiva implements Serializable {
         super();
     }
 
-    public ActividadDeportiva(String n, String d, int dur, float c, LocalDate f) {
+    public ActividadDeportiva(String n, String d, int dur, float c, Date f) {
         super();
         this.nombre = n;
         this.descripcion = d;
@@ -69,10 +72,10 @@ public class ActividadDeportiva implements Serializable {
     public void setCosto(float costo) {
         this.costo = costo;
     }
-    public LocalDate getFecReg() {
+    public Date getFecReg() {
         return fecReg;
     }
-    public void setFecReg(LocalDate fecReg) {
+    public void setFecReg(Date fecReg) {
         this.fecReg = fecReg;
     }
 
@@ -89,11 +92,17 @@ public class ActividadDeportiva implements Serializable {
 	}
 	
 	public void agregarClase(DtClase data, Profesor profe){
-		Clase i = new Clase(data.getNombre(), data.getFecha(),data.getHoraInicio(),data.getUrl(),data.getFechaReg(), profe);
+		Date fecha = Date.from(data.getFecha().atStartOfDay(ZoneId.systemDefault()).toInstant());
+		Date fechaReg = Date.from(data.getFechaReg().atStartOfDay(ZoneId.systemDefault()).toInstant());
+		
+		LocalDateTime localDateTimeHora = LocalDateTime.of(LocalDate.now(), data.getHoraInicio());
+		Date hora = Date.from(localDateTimeHora.atZone(ZoneId.systemDefault()).toInstant());
+		Clase i = new Clase(data.getNombre(), fecha, hora, data.getUrl(), fechaReg, profe);
 		clases.add(i);
 	}
 
 	public DtActividadDeportiva getDtActividadDeportiva() {
-		return new DtActividadDeportiva(this.nombre, this.descripcion, this.duracion, this.costo, this.fecReg);
+		LocalDate fecha = this.fecReg.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+		return new DtActividadDeportiva(this.nombre, this.descripcion, this.duracion, this.costo, fecha);
 	}
 }

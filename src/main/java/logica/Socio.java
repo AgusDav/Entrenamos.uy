@@ -1,7 +1,9 @@
 package logica;
 
 import java.time.LocalDate;
+import java.time.ZoneId;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import datatypes.DtSocio;
@@ -18,13 +20,14 @@ public class Socio extends Usuario implements Serializable{
     	super();
     }
 	
-	public Socio(String n, String nom, String a, String e, LocalDate f){
+	public Socio(String n, String nom, String a, String e, Date f){
         super(n, nom, a, e, f);
     }
 	
 	@Override
 	public DtUsuario getDtUsuario() {
-		return new DtSocio(this.nickname,this.nombre,this.apellido,this.email,this.fecNac);
+		LocalDate fecha = this.fecNac.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+		return new DtSocio(this.nickname,this.nombre,this.apellido,this.email,fecha);
 	}
 
 	public List<Registro> getRegistros() {

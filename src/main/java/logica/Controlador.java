@@ -6,7 +6,10 @@ import excepciones.ActividadDeportivaRepetidaException;
 import excepciones.DictadoRepetidoException;
 import interfaces.IControlador;
 
+import java.time.LocalDate;
+import java.time.ZoneId;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import datatypes.DtActividadDeportiva;
@@ -50,11 +53,14 @@ public class Controlador implements IControlador{
 		if (nuevoUser != null)
 			throw new UsuarioRepetidoException("El usuario de nick "+ nuevoUser.getNickname() + " ya existe en el Sistema");
 		if (user instanceof DtProfesor) {
-			nuevoUser = new Profesor(user.getNickname(),user.getNombre(),user.getApellido(),user.getEmail(),user.getFecNac(),((DtProfesor) user).getDescripcion(),((DtProfesor) user).getBiografia(),((DtProfesor) user).getSitioWeb(), inst); 
+			Date fecha = Date.from(user.getFecNac().atStartOfDay(ZoneId.systemDefault()).toInstant());
+			nuevoUser = new Profesor(user.getNickname(),user.getNombre(),user.getApellido(),user.getEmail(),fecha,((DtProfesor) user).getDescripcion(),((DtProfesor) user).getBiografia(),((DtProfesor) user).getSitioWeb(), inst); 
 			inst.agregarProfesor((Profesor) nuevoUser);
 		}
-		if (user instanceof DtSocio)
-		nuevoUser = new Socio(user.getNickname(),user.getNombre(),user.getApellido(),user.getEmail(),user.getFecNac());
+		if (user instanceof DtSocio) {
+			Date fecha = Date.from(user.getFecNac().atStartOfDay(ZoneId.systemDefault()).toInstant());
+			nuevoUser = new Socio(user.getNickname(),user.getNombre(),user.getApellido(),user.getEmail(),fecha);
+		}
 		mU.addUser(nuevoUser);
 	}
 	

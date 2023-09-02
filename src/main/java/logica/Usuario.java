@@ -1,10 +1,16 @@
 package logica;
 
 import java.time.LocalDate;
+import java.util.Calendar;
+import java.util.Date;
+
 import datatypes.DtClase;
 import datatypes.DtUsuario;
 import java.io.Serializable;
+
+import javax.persistence.AttributeConverter;
 import javax.persistence.Column;
+import javax.persistence.Converter;
 import javax.persistence.DiscriminatorColumn;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -13,11 +19,11 @@ import javax.persistence.Id;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
-
 @Entity
 @DiscriminatorColumn(name="TIPOUSUARIO")
 public abstract class Usuario implements Serializable {
-    @Id
+    private static final long serialVersionUID = 1L;
+	@Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)
     @Column(name="Nickname")
     protected String nickname;
@@ -25,14 +31,13 @@ public abstract class Usuario implements Serializable {
     protected String apellido;
     protected String email;
     @Temporal(TemporalType.DATE)
-    protected LocalDate fecNac;
-
+    protected Date fecNac;
 
     public Usuario(){
         super();
     }
 
-    public Usuario(String nickname, String nombre, String apellido, String email, LocalDate fecNac){
+    public Usuario(String nickname, String nombre, String apellido, String email, Date fecNac){
         super();
         this.nickname = nickname;
         this.nombre = nombre;
@@ -75,14 +80,12 @@ public abstract class Usuario implements Serializable {
         this.email = email;
     }
 
-    public LocalDate getFecNac(){
+    public Date getFecNac(){
         return this.fecNac;
     }
 
-    public void setFecNac(LocalDate fecNac){
+    public void setFecNac(Date fecNac){
         this.fecNac = fecNac;
     }
 
-
 }
-
