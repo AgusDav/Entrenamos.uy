@@ -43,7 +43,7 @@ public class ConsultaUsuario extends JInternalFrame{
 				comboBoxNickname = new JComboBox<String>();
 				comboBoxNickname.setBackground(new Color(54, 61, 75));
 				comboBoxNickname.setForeground(new Color(255, 255, 255));
-				comboBoxNickname.setBounds(104, 16, 115, 24);
+				comboBoxNickname.setBounds(174, 16, 115, 24);
 				comboBoxNickname.addActionListener(this::comboBoxNicknameActionPerformed);
 				getContentPane().add(comboBoxNickname);
 				

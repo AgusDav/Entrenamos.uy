@@ -44,7 +44,8 @@ public class Principal {
     private JDialog consultaUsuarioDialog;
     private ConsultaActividadDeportiva consultaActividadInternalFrame;
     private JDialog consultaActividadDialog;
-    private Conexion persistencia;
+    private RegistroADictadoClase registroADictadoClaseInternalFrame;
+    private JDialog registroADictadoClaseDialog;
 
     public static void main(String[] args) {
         EventQueue.invokeLater(new Runnable() {
@@ -61,7 +62,6 @@ public class Principal {
 
     public Principal() {
         iniciar();
-        persistencia = persistencia.getInstancia();
         Fabrica fabrica = Fabrica.getInstancia();
         IControlador icon = fabrica.getIControlador();
 
@@ -130,6 +130,17 @@ public class Principal {
         consultaActividadDialog.setLocationRelativeTo(null);
         consultaActividadDialog.setVisible(false);
         consultaActividadInternalFrame.setVisible(true);
+        
+        registroADictadoClaseDialog = new JDialog(frame, "Registro a Dictado Clase", true);
+        registroADictadoClaseDialog.setSize(400, 480);
+        registroADictadoClaseDialog.setLocationRelativeTo(frame);
+        registroADictadoClaseDialog.getContentPane().setLayout(new BorderLayout());
+
+        registroADictadoClaseInternalFrame = new RegistroADictadoClase(icon, registroADictadoClaseDialog);
+        registroADictadoClaseDialog.getContentPane().add(registroADictadoClaseInternalFrame);
+        registroADictadoClaseDialog.setLocationRelativeTo(null);
+        registroADictadoClaseDialog.setVisible(false);
+        registroADictadoClaseInternalFrame.setVisible(true);
     }
 
     public void iniciar() {
@@ -324,7 +335,7 @@ public class Principal {
             	btnAltaInstitucion.setBackground(new Color(54, 61, 75)); // Original color when not hovering
             }
         });
-        btnAltaInstitucion.setBounds(83, 276, 213, 53);
+        btnAltaInstitucion.setBounds(83, 276, 273, 53);
         panelPrincipal.add(btnAltaInstitucion);
         btnSalir.setBounds(319, 681, 158, 45);
         panelPrincipal.add(btnSalir);
@@ -353,7 +364,7 @@ public class Principal {
             	btnInformacionUsuario.setBackground(new Color(54, 61, 75)); // Original color when not hovering
             }
         });
-        btnInformacionUsuario.setBounds(319, 195, 273, 53);
+        btnInformacionUsuario.setBounds(387, 195, 273, 53);
         panelPrincipal.add(btnInformacionUsuario);
 
         // Boton alta usuario
@@ -378,7 +389,7 @@ public class Principal {
             	btnAltaUsuario.setBackground(new Color(54, 61, 75)); // Original color when not hovering
             }
         });
-        btnAltaUsuario.setBounds(83, 195, 213, 53);
+        btnAltaUsuario.setBounds(83, 195, 273, 53);
         panelPrincipal.add(btnAltaUsuario);
         
         // Boton alta actividad deportiva
@@ -403,7 +414,7 @@ public class Principal {
             	btnAltaActividadDeportiva.setBackground(new Color(54, 61, 75)); // Original color when not hovering
             }
         });
-        btnAltaActividadDeportiva.setBounds(83, 355, 213, 53);
+        btnAltaActividadDeportiva.setBounds(83, 355, 273, 53);
         panelPrincipal.add(btnAltaActividadDeportiva);
         
         // Boton alta dictado clase
@@ -431,7 +442,7 @@ public class Principal {
             	btnAltaDictadoDeClase.setBackground(new Color(54, 61, 75)); // Original color when not hovering
             }
         });
-        btnAltaDictadoDeClase.setBounds(83, 436, 213, 53);
+        btnAltaDictadoDeClase.setBounds(83, 436, 273, 53);
         panelPrincipal.add(btnAltaDictadoDeClase);
         
         
@@ -443,6 +454,7 @@ public class Principal {
         lblMenu.setBounds(250, 22, 282, 148);
         panelPrincipal.add(lblMenu);
         
+        // Botón Informaciónn deportiva
         JButton btnInformacionActividadDeportiva = new JButton("Informacion Actividad Deportiva");
         btnInformacionActividadDeportiva.setIcon(iconoInfo);
         btnInformacionActividadDeportiva.setSize(new Dimension(9, 10));
@@ -450,7 +462,7 @@ public class Principal {
         btnInformacionActividadDeportiva.setForeground(Color.WHITE);
         btnInformacionActividadDeportiva.setBorder(new LineBorder(new Color(33, 37, 43), 3, true));
         btnInformacionActividadDeportiva.setBackground(new Color(54, 61, 75));
-        btnInformacionActividadDeportiva.setBounds(319, 355, 273, 53);
+        btnInformacionActividadDeportiva.setBounds(387, 355, 273, 53);
         btnInformacionActividadDeportiva.addActionListener(new ActionListener() {
         	public void actionPerformed(ActionEvent arg0) {
         		consultaActividadInternalFrame.inciarComboBoxActividadDeportiva();
@@ -469,9 +481,33 @@ public class Principal {
             }
         });
         panelPrincipal.add(btnInformacionActividadDeportiva);
-        // Crear el contenido para el panel de otro menú aquí
         
-
+        // Botón Registro a dictado clase
+        JButton btnRegistroDictadoClase = new JButton("Registro A Dictado De Clase");
+        btnRegistroDictadoClase.setIcon(iconoMas);
+        btnRegistroDictadoClase.setSelected(true);
+        btnRegistroDictadoClase.setForeground(Color.WHITE);
+        btnRegistroDictadoClase.setBorder(new LineBorder(new Color(33, 37, 43), 3, true));
+        btnRegistroDictadoClase.setBackground(new Color(54, 61, 75));
+        btnRegistroDictadoClase.setBounds(83, 515, 273, 53);
+        btnRegistroDictadoClase.addActionListener(new ActionListener() {
+        	public void actionPerformed(ActionEvent e) {
+        		registroADictadoClaseInternalFrame.inicializarComboBoxes();
+        		registroADictadoClaseDialog.setVisible(true);
+        	}
+        });
+        btnRegistroDictadoClase.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseEntered(MouseEvent e) {
+            	btnRegistroDictadoClase.setBackground(new Color(69, 78, 95)); // Lighter blue when hovering
+            }
+            @Override
+            public void mouseExited(MouseEvent e) {
+            	btnRegistroDictadoClase.setBackground(new Color(54, 61, 75)); // Original color when not hovering
+            }
+        });
+        panelPrincipal.add(btnRegistroDictadoClase);
+        
         return panelPrincipal;
     } 
     

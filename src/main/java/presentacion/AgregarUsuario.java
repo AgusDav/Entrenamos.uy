@@ -41,14 +41,14 @@ public class AgregarUsuario extends JInternalFrame {
 	private JTextField textFieldDescripcion;
 	private JTextField textFieldWeb;
 	private JTextField textFieldBio;
-	private JComboBox seleccionarTipoUser;
+	private JComboBox<String> seleccionarTipoUser;
 	private JComboBox<String> comboBoxNombreInstitucion;
 	
 	public AgregarUsuario(IControlador icon, JDialog dialogoPadre) {
 		setTitle("Agregar Usuario");
 		this.dialogoPadre = dialogoPadre;
 		this.icon = icon;
-		setBounds(100, 100, 450, 400);
+		setBounds(100, 100, 350, 400);
 		getContentPane().setLayout(null);
 		getContentPane().setBackground(new Color(54, 61, 75));;
 		
@@ -59,7 +59,7 @@ public class AgregarUsuario extends JInternalFrame {
 		getContentPane().add(lblNickname);
 		
 		textFieldNick = new JTextField();
-        textFieldNick.setBounds(160, 20, 114, 19);
+        textFieldNick.setBounds(160, 20, 150, 19);
         getContentPane().add(textFieldNick);
         textFieldNick.setColumns(10);
 		
@@ -70,7 +70,7 @@ public class AgregarUsuario extends JInternalFrame {
 		getContentPane().add(lblEmail);
 		
 		textFieldEmail = new JTextField();
-        textFieldEmail.setBounds(160, 47, 114, 19);
+        textFieldEmail.setBounds(160, 47, 150, 19);
         getContentPane().add(textFieldEmail);
         textFieldEmail.setColumns(10);
 		
@@ -81,7 +81,7 @@ public class AgregarUsuario extends JInternalFrame {
 		getContentPane().add(lblNombre);
 		
 		textFieldNombre = new JTextField();
-        textFieldNombre.setBounds(160, 74, 114, 19);
+        textFieldNombre.setBounds(160, 74, 150, 19);
         getContentPane().add(textFieldNombre);
         textFieldNombre.setColumns(10);
 		
@@ -92,7 +92,7 @@ public class AgregarUsuario extends JInternalFrame {
 		getContentPane().add(lblApellido);
 		
 		textFieldApellido = new JTextField();
-        textFieldApellido.setBounds(160, 101, 114, 19);
+        textFieldApellido.setBounds(160, 101, 150, 19);
         getContentPane().add(textFieldApellido);
         textFieldApellido.setColumns(10);
         
@@ -119,7 +119,7 @@ public class AgregarUsuario extends JInternalFrame {
 		getContentPane().add(lblDescripcion);
 		
 		textFieldDescripcion = new JTextField();
-		textFieldDescripcion.setBounds(160, 197, 114, 19);
+		textFieldDescripcion.setBounds(160, 197, 150, 19);
 		getContentPane().add(textFieldDescripcion);
 		textFieldDescripcion.setColumns(10);
 		
@@ -131,7 +131,7 @@ public class AgregarUsuario extends JInternalFrame {
 		
 		textFieldWeb = new JTextField();
 		textFieldWeb.setText("");
-		textFieldWeb.setBounds(160, 224, 114, 19);
+		textFieldWeb.setBounds(160, 224, 150, 19);
 		getContentPane().add(textFieldWeb);
 		textFieldWeb.setColumns(10);
 		
@@ -143,7 +143,7 @@ public class AgregarUsuario extends JInternalFrame {
 				
 		textFieldBio = new JTextField();
 		textFieldBio.setText("");
-		textFieldBio.setBounds(160, 251, 114, 19);
+		textFieldBio.setBounds(160, 251, 150, 19);
 		getContentPane().add(textFieldBio);
 		textFieldBio.setColumns(10);
 		
@@ -155,11 +155,11 @@ public class AgregarUsuario extends JInternalFrame {
 		getContentPane().add(lblInstitucion);
 
 		comboBoxNombreInstitucion = new JComboBox<String>();
-		comboBoxNombreInstitucion.setBounds(160, 282, 114, 19);
+		comboBoxNombreInstitucion.setBounds(160, 282, 150, 19);
 		getContentPane().add(comboBoxNombreInstitucion);
 		
 		
-		seleccionarTipoUser = new JComboBox();
+		seleccionarTipoUser = new JComboBox<String>();
 		seleccionarTipoUser.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				String selectedItem = (String) seleccionarTipoUser.getSelectedItem();
@@ -184,8 +184,8 @@ public class AgregarUsuario extends JInternalFrame {
 		        }
 			}
 		});
-		seleccionarTipoUser.setModel(new DefaultComboBoxModel(new String[] {"Profesor", "Socio"}));
-		seleccionarTipoUser.setBounds(160, 161, 117, 24);
+		seleccionarTipoUser.setModel(new DefaultComboBoxModel<String>(new String[] {"Profesor", "Socio"}));
+		seleccionarTipoUser.setBounds(160, 161, 150, 24);
 		getContentPane().add(seleccionarTipoUser);
 		
 		
@@ -210,7 +210,7 @@ public class AgregarUsuario extends JInternalFrame {
             	btnAceptar.setBackground(new Color(54, 61, 75)); // Original color when not hovering
             }
         });
-		btnAceptar.setBounds(92, 319, 124, 37);
+		btnAceptar.setBounds(12, 319, 124, 37);
 		getContentPane().add(btnAceptar);
 		
 		// Botón cancelar
@@ -233,7 +233,7 @@ public class AgregarUsuario extends JInternalFrame {
             	btnCancelar.setBackground(new Color(54, 61, 75)); // Original color when not hovering
             }
         });
-		btnCancelar.setBounds(239, 319, 117, 37);
+		btnCancelar.setBounds(193, 319, 117, 37);
 		getContentPane().add(btnCancelar);
 	}
 	
@@ -245,14 +245,13 @@ public class AgregarUsuario extends JInternalFrame {
 		String web = this.textFieldWeb.getText();
 		String bio = this.textFieldBio.getText();
 		String desc = this.textFieldDescripcion.getText();
-		Date selectedDate = fecNac.getDate();
+		Date fecha = fecNac.getDate();
 		String tipoUser = this.seleccionarTipoUser.getSelectedItem().toString();
 		DtUsuario dtU = null;
-		if (nombre.isEmpty() || nick.isEmpty() || apellido.isEmpty() || selectedDate == null || (tipoUser.equals("Profesor") && (desc.isEmpty() || bio.isEmpty() || web.isEmpty() || this.comboBoxNombreInstitucion.getSelectedItem() == null))){
+		if (nombre.isEmpty() || nick.isEmpty() || apellido.isEmpty() || fecha == null || (tipoUser.equals("Profesor") && (desc.isEmpty() || bio.isEmpty() || web.isEmpty() || this.comboBoxNombreInstitucion.getSelectedItem() == null))){
         	JOptionPane.showMessageDialog(this, "No puede haber campos vacíos", "Agregar Usuario", JOptionPane.ERROR_MESSAGE);
         }else{
             try {
-            	LocalDate fecha = selectedDate.toInstant().atZone(java.time.ZoneId.systemDefault()).toLocalDate();
             	if(tipoUser.equals("Profesor")) {
 					String inst = this.comboBoxNombreInstitucion.getSelectedItem().toString();
         			dtU = new DtProfesor(nick, nombre, apellido, email, fecha, desc, bio, web);

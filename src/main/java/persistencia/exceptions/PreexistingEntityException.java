@@ -1,7 +1,8 @@
 package persistencia.exceptions;
 
 public class PreexistingEntityException extends Exception {
-    public PreexistingEntityException(String message, Throwable cause) {
+    private static final long serialVersionUID = 1L;
+	public PreexistingEntityException(String message, Throwable cause) {
         super(message, cause);
     }
     public PreexistingEntityException(String message) {

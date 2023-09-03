@@ -1,16 +1,19 @@
 package datatypes;
 
+import java.sql.Time;
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.time.ZoneId;
+import java.util.Date;
 
 public class DtClase {
 	private String nombre;	
-	private LocalDate fecha;
-	private LocalTime horaInicio;
+	private Date fecha;
+	private Date horaInicio;
 	private String url;
-	private LocalDate fechaReg;
+	private Date fechaReg;
 	
-	public DtClase(String n, LocalDate f, LocalTime h, String u, LocalDate fR) {
+	public DtClase(String n, Date f, Date h, String u, Date fR) {
 		super();
 		this.nombre = n;
 		this.fecha = f;
@@ -24,16 +27,19 @@ public class DtClase {
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
 	}
-	public LocalDate getFecha() {
+	public Date getFecha() {
 		return fecha;
 	}
-	public void setFecha(LocalDate fecha) {
+	public void setFecha(Date fecha) {
 		this.fecha = fecha;
 	}
-	public LocalTime getHoraInicio() {
+	public Date getHoraInicio() {
 		return horaInicio;
 	}
-	public void setHoraInicio(LocalTime horaInicio) {
+	public Time getHoraInicioLocalDate() {
+		return (horaInicio.toLocalDate()).atStartOfDay(ZoneId.systemDefault()).toInstant();
+	}
+	public void setHoraInicio(Date horaInicio) {
 		this.horaInicio = horaInicio;
 	}
 	public String getUrl() {
@@ -42,10 +48,10 @@ public class DtClase {
 	public void setUrl(String url) {
 		this.url = url;
 	}
-	public LocalDate getFechaReg() {
+	public Date getFechaReg() {
 		return fechaReg;
 	}
-	public void setFechaReg(LocalDate fechaReg) {
+	public void setFechaReg(Date fechaReg) {
 		this.fechaReg = fechaReg;
 	}
 	@Override

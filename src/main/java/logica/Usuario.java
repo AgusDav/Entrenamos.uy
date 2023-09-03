@@ -24,8 +24,6 @@ import javax.persistence.TemporalType;
 public abstract class Usuario implements Serializable {
     private static final long serialVersionUID = 1L;
 	@Id
-    @GeneratedValue(strategy=GenerationType.IDENTITY)
-    @Column(name="Nickname")
     protected String nickname;
     protected String nombre;
     protected String apellido;
@@ -47,6 +45,7 @@ public abstract class Usuario implements Serializable {
     }
     
     public abstract DtUsuario getDtUsuario();
+    public abstract void añadirRegistro(Registro reg);
 
     public String getNickname(){
         return this.nickname;

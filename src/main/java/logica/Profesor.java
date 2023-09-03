@@ -11,14 +11,17 @@ import datatypes.DtUsuario;
 import java.io.Serializable;
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
+import javax.persistence.ManyToOne;
 
 @Entity
 @DiscriminatorValue("P")
 public class Profesor extends Usuario implements Serializable{
-    private  String descripcion;
+    private static final long serialVersionUID = 1L;
+	private  String descripcion;
     private String biografia;
     private String sitioWeb;
     //pseudos
+    @ManyToOne
     private InstitucionDeportiva institucion;
 
     public Profesor(){
@@ -59,7 +62,11 @@ public class Profesor extends Usuario implements Serializable{
     
     @Override
 	public DtUsuario getDtUsuario() {
-    	LocalDate fecha = this.fecNac.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
-		return new DtProfesor(this.nickname,this.nombre,this.apellido,this.email,fecha,this.descripcion, this.biografia, this.sitioWeb);
+		return new DtProfesor(this.nickname,this.nombre,this.apellido,this.email,this.fecNac,this.descripcion, this.biografia, this.sitioWeb);
+	}
+
+	@Override
+	public void añadirRegistro(Registro reg) {
+		//Ta pelao
 	}
 }

@@ -11,28 +11,30 @@ import datatypes.DtActividadDeportiva;
 import datatypes.DtClase;
 import java.io.Serializable;
 import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 @Entity
 public class ActividadDeportiva implements Serializable {
 
-    @Id
-    @GeneratedValue(strategy=GenerationType.IDENTITY)
-    @Column (name="Nombre")
+    private static final long serialVersionUID = 1L;
+	@Id
     private String nombre;
-    @Basic
     private String descripcion;
     private int duracion;
     private float costo;
     @Temporal(TemporalType.DATE)
     private Date fecReg;
-
+    @ManyToOne
     private InstitucionDeportiva institucion;
+    @OneToMany(mappedBy = "actividad", cascade = CascadeType.ALL)
     private List<Clase> clases = new ArrayList<>();
 
     public ActividadDeportiva() {
@@ -92,17 +94,23 @@ public class ActividadDeportiva implements Serializable {
 	}
 	
 	public void agregarClase(DtClase data, Profesor profe){
-		Date fecha = Date.from(data.getFecha().atStartOfDay(ZoneId.systemDefault()).toInstant());
-		Date fechaReg = Date.from(data.getFechaReg().atStartOfDay(ZoneId.systemDefault()).toInstant());
-		
-		LocalDateTime localDateTimeHora = LocalDateTime.of(LocalDate.now(), data.getHoraInicio());
-		Date hora = Date.from(localDateTimeHora.atZone(ZoneId.systemDefault()).toInstant());
-		Clase i = new Clase(data.getNombre(), fecha, hora, data.getUrl(), fechaReg, profe);
+		Clase i = new Clase(data.getNombre(), data.getFecha(), data.getHoraInicio(), data.getUrl(), data.getFechaReg(), profe);
 		clases.add(i);
+		i.setActividad(this);
 	}
+	
+	public Clase obtenerClase(String nombre) {
+    	Clase aRetornar;
+    	aRetornar = new Clase();
+    	for(Clase i:clases) {
+    		if (i.getNombre().equals(nombre))
+				aRetornar=i;
+    	}
+    	return aRetornar;
+    }
+	
 
 	public DtActividadDeportiva getDtActividadDeportiva() {
-		LocalDate fecha = this.fecReg.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
-		return new DtActividadDeportiva(this.nombre, this.descripcion, this.duracion, this.costo, fecha);
+		return new DtActividadDeportiva(this.nombre, this.descripcion, this.duracion, this.costo, this.getFecReg());
 	}
 }

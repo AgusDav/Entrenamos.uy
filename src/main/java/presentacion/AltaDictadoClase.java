@@ -32,9 +32,9 @@ import javax.swing.JDialog;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.sql.Time;
 import java.time.Instant;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.ZoneId;
 import java.util.Calendar;
@@ -42,8 +42,6 @@ import java.util.Date;
 import java.awt.event.ActionEvent;
 import javax.swing.JComboBox;
 import javax.swing.JSpinner;
-import javax.swing.JList;
-import javax.swing.JProgressBar;
 
 
 public class AltaDictadoClase extends JInternalFrame {
@@ -66,7 +64,7 @@ public class AltaDictadoClase extends JInternalFrame {
 		setTitle("Alta Dictado clase");
 		this.dialogoPadre = dialogoPadre;
 		this.icon = icon;
-		setBounds(100, 100, 377, 443);
+		setBounds(100, 100, 377, 410);
 		getContentPane().setLayout(null);
 		getContentPane().setBackground(new Color(54, 61, 75));
 		
@@ -249,8 +247,10 @@ public class AltaDictadoClase extends JInternalFrame {
 				String nomInstitucion = this.comboBoxNombreInstitucion.getSelectedItem().toString();
 				String actDepor =  this.comboBoxActividadesDeportivas.getSelectedItem().toString();
 				LocalTime horaClase = convertToLocalTime(this.timeSpinnerHoraClase);
-				LocalDate fecha = fechaClase.toInstant().atZone(java.time.ZoneId.systemDefault()).toLocalDate();
-				DtClase dtC = new DtClase(nomClase, fecha, horaClase, urlClase, fecha);
+				LocalDate localDate = LocalDate.now();
+				LocalDateTime localDateTime = localDate.atTime(horaClase);
+				Date date = Date.from(localDateTime.atZone(ZoneId.systemDefault()).toInstant());
+				DtClase dtC = new DtClase(nomClase, fechaClase, date, urlClase, fechaReg);
 				this.icon.altaDictadoClase(dtC, nomInstitucion, actDepor, profe);
 				JOptionPane.showMessageDialog(this, "Se ha registrado con éxito el dictado de la clase", "Alta Dictado Clase", JOptionPane.INFORMATION_MESSAGE);
 				limpiar();
@@ -302,12 +302,6 @@ public class AltaDictadoClase extends JInternalFrame {
 		return true;
 	}
 	
-	// Método para convertir de JSpinner a LocalDateTime (hora local)
-    /*public static LocalTime convertToLocalTime(JSpinner jSpinner) {
-        int horas = (int) jSpinner.getValue();
-        LocalTime horaLocalTime = LocalTime.of(horas, 0);
-        return horaLocalTime;
-    }*/
 	public static LocalTime convertToLocalTime(JSpinner jSpinner) {
         Date dateValue = (Date) jSpinner.getValue();
 
