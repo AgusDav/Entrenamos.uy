@@ -208,7 +208,7 @@ public class Controlador implements IControlador{
 		Usuario us = mU.buscarUsuario(nick);
 		ManejadorClase mC = ManejadorClase.getInstancia();
 		Clase clas = mC.buscarClase(clase);
-		if(clas.obtenerRegistro(nick)){
+		if(mU.SocioEnClase(nick, clase)){
 			throw new RegistroAClaseRepetidoException("El registro del socio " + nick + " ya existe");
 		}
 		else{

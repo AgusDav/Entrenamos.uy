@@ -9,6 +9,7 @@ import interfaces.IControlador;
 import javax.swing.JLabel;
 
 import datatypes.DtClase;
+import datatypes.DtSocio;
 import datatypes.DtUsuario;
 
 import javax.swing.DefaultComboBoxModel;
@@ -43,7 +44,7 @@ public class ConsultaUsuario extends JInternalFrame{
 				comboBoxNickname = new JComboBox<String>();
 				comboBoxNickname.setBackground(new Color(54, 61, 75));
 				comboBoxNickname.setForeground(new Color(255, 255, 255));
-				comboBoxNickname.setBounds(174, 16, 115, 24);
+				comboBoxNickname.setBounds(174, 16, 135, 24);
 				comboBoxNickname.addActionListener(this::comboBoxNicknameActionPerformed);
 				getContentPane().add(comboBoxNickname);
 				
@@ -91,6 +92,17 @@ public class ConsultaUsuario extends JInternalFrame{
 				datoFecNac.setForeground(Color.WHITE);
 				datoFecNac.setBounds(174, 141, 115, 15);
 				getContentPane().add(datoFecNac);
+				
+				JLabel lblClases = new JLabel("Clases:");
+				lblClases.setForeground(Color.WHITE);
+				lblClases.setBounds(23, 169, 83, 20);
+				getContentPane().add(lblClases);
+				
+				JComboBox<String> comboBoxNickname_1 = new JComboBox<String>();
+				comboBoxNickname_1.setForeground(Color.WHITE);
+				comboBoxNickname_1.setBackground(new Color(54, 61, 75));
+				comboBoxNickname_1.setBounds(174, 168, 135, 24);
+				getContentPane().add(comboBoxNickname_1);
 	}
 	
 	private void comboBoxNicknameActionPerformed(ActionEvent evt) {
@@ -102,6 +114,9 @@ public class ConsultaUsuario extends JInternalFrame{
 	        datoApellido.setText(dtu.getApellido());
 	        datoEmail.setText(dtu.getEmail());
 	        datoFecNac.setText(dtu.getFecNac().toString());
+	        if(dtu instanceof DtSocio) {
+	        	
+	        }
 	    }
 	}
 	

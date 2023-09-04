@@ -67,4 +67,24 @@ public class ManejadorUsuario {
 		}
 		return aRetornar;
 	}
+	
+	public Boolean SocioEnClase(String Socio, String Clase) {
+		Conexion conexion = Conexion.getInstancia();
+		EntityManager em = conexion.getEntityManager();
+		
+		Query query = em.createQuery("select r from Registro r");
+		List<Registro> listReg = (List<Registro>) query.getResultList();
+		for(Registro r:listReg) {
+			if(r.getClase().getNombre().equals(Clase) && r.getSocio().getNickname().equals(Socio)) {
+				return true;
+			}
+		}
+		return false;
+	}
+	
+	/*public ArrayList<String> obtenerClasesSocio(String socio){
+		Conexion conexion = Conexion.getInstancia();
+		EntityManager em = conexion.getEntityManager();
+		Query query = em.createQuery("select c from Clase c join Usuario on ");
+	}*/
 }

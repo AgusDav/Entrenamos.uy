@@ -248,6 +248,11 @@ public class RegistroADictadoClase extends JInternalFrame{
 	        return localTime;
 	    }
 		
+		private void actualizarComboBoxes() {
+			actualizarComboBoxActividades();
+			actualizarComboBoxClase();
+		}
+		
 		private void actualizarComboBoxActividades() {
 			DefaultComboBoxModel<String> modelActDepor = new DefaultComboBoxModel<String>(icon.listarActividadesDeportivas(this.comboBoxNombreInstitucion.getSelectedItem().toString()));
 			comboBoxActividadesDeportivas.setModel(modelActDepor);
