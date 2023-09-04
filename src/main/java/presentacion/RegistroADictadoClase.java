@@ -3,6 +3,7 @@ package presentacion;
 import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.text.SimpleDateFormat;
 import java.time.Instant;
 import java.time.LocalDate;
 import java.time.LocalTime;
@@ -180,10 +181,10 @@ public class RegistroADictadoClase extends JInternalFrame{
 	}
 	
 	protected void registroADictadoClaseAceptarActionPerformed(ActionEvent arg0) {
-		String nomClase = this.comboBoxClases.getSelectedItem().toString();
-		String nickSocio = this.comboBoxSocio.getSelectedItem().toString();
-		Date fechaReg = this.fecReg.getDate();
 		if(checkearComboBoxes()) {
+			String nomClase = this.comboBoxClases.getSelectedItem().toString();
+			String nickSocio = this.comboBoxSocio.getSelectedItem().toString();
+			Date fechaReg = this.fecReg.getDate();
 			try {
 				this.icon.registroADictadoClase(nickSocio, nomClase, fechaReg);
 				JOptionPane.showMessageDialog(this, "Se ha registrado con éxito el socio a la clase", "Registro a dictado de Clase", JOptionPane.INFORMATION_MESSAGE);
@@ -253,12 +254,22 @@ public class RegistroADictadoClase extends JInternalFrame{
 	    }
 		
 		private void actualizarComboBoxClase() {
-			DefaultComboBoxModel<String> modelClase = new DefaultComboBoxModel<String>(icon.listarClases(this.comboBoxNombreInstitucion.getSelectedItem().toString(), this.comboBoxActividadesDeportivas.getSelectedItem().toString()));	
-			comboBoxClases.setModel(modelClase);
+			if(this.comboBoxNombreInstitucion.getSelectedItem() != null && this.comboBoxActividadesDeportivas.getSelectedItem() != null) {
+				DefaultComboBoxModel<String> modelClase = new DefaultComboBoxModel<String>(icon.listarClases(this.comboBoxNombreInstitucion.getSelectedItem().toString(), this.comboBoxActividadesDeportivas.getSelectedItem().toString()));
+				comboBoxClases.setModel(modelClase);
+			
 			datoNombreClase.setText(comboBoxClases.getSelectedItem().toString());
-			datoFechaClase.setText(icon.obtenerClase(comboBoxClases.getSelectedItem().toString()).getFecha().toString());
-			datoHoraInicioClase.setText(icon.obtenerClase(comboBoxClases.getSelectedItem().toString()).getHoraInicioLocalDate().toString());
-	    }
+			Date fechaClase = icon.obtenerClase(comboBoxClases.getSelectedItem().toString()).getFecha();
+
+			// Crea un objeto SimpleDateFormat para formatear la fecha en el formato deseado
+			SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy"); // Cambia el formato según tus preferencias
+
+			// Formatea la fecha como una cadena
+			String fecha = sdf.format(fechaClase);
+			datoFechaClase.setText(fecha.toString());
+			datoHoraInicioClase.setText(icon.obtenerClase(comboBoxClases.getSelectedItem().toString()).getHoraInicio());
+			}
+		}
 		
 		public void inicializarComboBoxes() {
 			DefaultComboBoxModel<String> modelInstitutos = new DefaultComboBoxModel<String>(icon.listarInstitutos());
@@ -279,7 +290,9 @@ public class RegistroADictadoClase extends JInternalFrame{
 				else
 					comboBoxClases.setVisible(false);
 			}
-			DefaultComboBoxModel<String> modelSocio = new DefaultComboBoxModel<String>(icon.listarSocios(this.comboBoxClases.getSelectedItem().toString()));
-			comboBoxSocio.setModel(modelSocio);
+			if(this.comboBoxClases.getSelectedItem() != null) {
+				DefaultComboBoxModel<String> modelSocio = new DefaultComboBoxModel<String>(icon.listarSocios(this.comboBoxClases.getSelectedItem().toString()));
+				comboBoxSocio.setModel(modelSocio);
+			}
 		}
 }

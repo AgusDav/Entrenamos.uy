@@ -32,6 +32,7 @@ import javax.swing.JDialog;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.text.SimpleDateFormat;
 import java.time.Instant;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -246,11 +247,12 @@ public class AltaDictadoClase extends JInternalFrame {
 				String profe =  this.comboBoxProfesores.getSelectedItem().toString();
 				String nomInstitucion = this.comboBoxNombreInstitucion.getSelectedItem().toString();
 				String actDepor =  this.comboBoxActividadesDeportivas.getSelectedItem().toString();
-				LocalTime horaClase = convertToLocalTime(this.timeSpinnerHoraClase);
-				LocalDate localDate = LocalDate.now();
-				LocalDateTime localDateTime = localDate.atTime(horaClase);
-				Date date = Date.from(localDateTime.atZone(ZoneId.systemDefault()).toInstant());
-				DtClase dtC = new DtClase(nomClase, fechaClase, date, urlClase, fechaReg);
+				Date dateValue = (Date) timeSpinnerHoraClase.getValue();
+
+				// Formatear la fecha como una cadena en el formato "HH:mm"
+				SimpleDateFormat sdf = new SimpleDateFormat("HH:mm");
+				String horaClase = sdf.format(dateValue);
+				DtClase dtC = new DtClase(nomClase, fechaClase, horaClase, urlClase, fechaReg);
 				this.icon.altaDictadoClase(dtC, nomInstitucion, actDepor, profe);
 				JOptionPane.showMessageDialog(this, "Se ha registrado con éxito el dictado de la clase", "Alta Dictado Clase", JOptionPane.INFORMATION_MESSAGE);
 				limpiar();

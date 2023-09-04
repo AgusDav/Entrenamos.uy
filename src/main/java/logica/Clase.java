@@ -30,8 +30,7 @@ public class Clase implements Serializable {
     private String nombre;
     @Temporal(TemporalType.DATE)
     private Date fecha;
-    @Temporal(TemporalType.DATE)
-    private Date hora;
+    private String hora;
     private String url;
     @Temporal(TemporalType.DATE)
     private Date fechaReg;
@@ -49,7 +48,7 @@ public class Clase implements Serializable {
         super();
     }
 
-    public Clase(String nombre, Date fecha, Date hora, String url, Date fechaReg, Profesor profe){
+    public Clase(String nombre, Date fecha, String hora, String url, Date fechaReg, Profesor profe){
         super();
         this.nombre = nombre;
         this.fecha = fecha;
@@ -75,11 +74,11 @@ public class Clase implements Serializable {
         this.fecha = fecha;
     }
 
-    public Date getHora(){
+    public String getHora(){
         return this.hora;
     }
 
-    public void setHora(Time hora){
+    public void setHora(String hora){
         this.hora = hora;
     }
 

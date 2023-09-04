@@ -9,11 +9,11 @@ import java.util.Date;
 public class DtClase {
 	private String nombre;	
 	private Date fecha;
-	private Date horaInicio;
+	private String horaInicio;
 	private String url;
 	private Date fechaReg;
 	
-	public DtClase(String n, Date f, Date h, String u, Date fR) {
+	public DtClase(String n, Date f, String h, String u, Date fR) {
 		super();
 		this.nombre = n;
 		this.fecha = f;
@@ -33,13 +33,10 @@ public class DtClase {
 	public void setFecha(Date fecha) {
 		this.fecha = fecha;
 	}
-	public Date getHoraInicio() {
+	public String getHoraInicio() {
 		return horaInicio;
 	}
-	public Time getHoraInicioLocalDate() {
-		return (horaInicio.toLocalDate()).atStartOfDay(ZoneId.systemDefault()).toInstant();
-	}
-	public void setHoraInicio(Date horaInicio) {
+	public void setHoraInicio(String horaInicio) {
 		this.horaInicio = horaInicio;
 	}
 	public String getUrl() {
