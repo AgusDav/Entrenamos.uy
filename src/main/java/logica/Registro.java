@@ -5,11 +5,15 @@ import java.util.Date;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.IdClass;
 import javax.persistence.ManyToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
-//@Entity
+import persistencia.RegistroID;
+
+@Entity
+@IdClass(RegistroID.class)
 public class Registro {
 	@Id
 	@ManyToOne
@@ -17,6 +21,8 @@ public class Registro {
 	@Id
 	@ManyToOne
 	private Clase clase;
+	
+	
 	@Temporal(TemporalType.DATE)
 	private Date fechaReg;
 	

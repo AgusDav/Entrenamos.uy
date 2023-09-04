@@ -1,15 +1,16 @@
 package datatypes;
 
 import java.time.LocalDate;
+import java.util.Date;
 
 public class DtActividadDeportiva {
 	private String nombre;
 	private String descripcion;
 	private int duracion;
 	private float costo;
-	private LocalDate fecReg;
+	private Date fecReg;
 	
-	public DtActividadDeportiva(String n, String d, int dur, float c, LocalDate f) {
+	public DtActividadDeportiva(String n, String d, int dur, float c, Date f) {
 		super();
 		this.nombre = n;
 		this.descripcion = d;
@@ -42,10 +43,10 @@ public class DtActividadDeportiva {
 	public void setCosto(float costo) {
 		this.costo = costo;
 	}
-	public LocalDate getFecReg() {
+	public Date getFecReg() {
 		return fecReg;
 	}
-	public void setFecReg(LocalDate fecReg) {
+	public void setFecReg(Date fecReg) {
 		this.fecReg = fecReg;
 	}
 	@Override

@@ -36,7 +36,7 @@ public class AgregarInstitucion extends JInternalFrame {
 		setTitle("Agregar Institucion");
 		this.dialogoPadre = dialogoPadre;
 		this.icon = icon;
-		setBounds(100, 100, 340, 300);
+		setBounds(100, 100, 350, 280);
 		getContentPane().setLayout(null);
 		getContentPane().setBackground(new Color(54, 61, 75));
 		
@@ -47,7 +47,7 @@ public class AgregarInstitucion extends JInternalFrame {
 		getContentPane().add(lblNombre);
 		
 		textFieldNombre = new JTextField();
-		textFieldNombre.setBounds(132, 43, 114, 19);
+		textFieldNombre.setBounds(189, 43, 114, 19);
 		getContentPane().add(textFieldNombre);
 		textFieldNombre.setColumns(10);
 		
@@ -59,7 +59,7 @@ public class AgregarInstitucion extends JInternalFrame {
 		
 		textFieldDescripcion = new JTextField();
 		textFieldDescripcion.setText("");
-		textFieldDescripcion.setBounds(132, 83, 114, 19);
+		textFieldDescripcion.setBounds(189, 83, 114, 19);
 		getContentPane().add(textFieldDescripcion);
 		textFieldDescripcion.setColumns(10);
 		
@@ -71,7 +71,7 @@ public class AgregarInstitucion extends JInternalFrame {
 				
 		textFieldUrl = new JTextField();
 		textFieldUrl.setText("");
-		textFieldUrl.setBounds(132, 127, 114, 19);
+		textFieldUrl.setBounds(189, 127, 114, 19);
 		getContentPane().add(textFieldUrl);
 		textFieldUrl.setColumns(10);
 		

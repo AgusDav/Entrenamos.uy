@@ -22,14 +22,12 @@ import javax.persistence.OneToMany;
 public class InstitucionDeportiva implements Serializable {
     private static final long serialVersionUID = 1L;
 	@Id
-    @GeneratedValue(strategy=GenerationType.IDENTITY)
-    @Column (name="Nombre")
     private String nombre;
-    @Basic
     private String descripcion;
     private String url;
-    @OneToMany(mappedBy = "institucion", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy="institucion",cascade=CascadeType.ALL,orphanRemoval=true)
     private List<ActividadDeportiva> actD = new ArrayList<>();
+    
     @OneToMany(mappedBy = "institucion", cascade = CascadeType.ALL)
     private List<Profesor> profesores = new ArrayList<>();
     
@@ -69,8 +67,7 @@ public class InstitucionDeportiva implements Serializable {
     }
 
     public void agregarActividadDeportiva(DtActividadDeportiva data){
-    	Date fecha = Date.from(data.getFecReg().atStartOfDay(ZoneId.systemDefault()).toInstant());
-        ActividadDeportiva i = new ActividadDeportiva(data.getNombre(),data.getDescripcion(),data.getDuracion(),data.getCosto(), fecha);
+        ActividadDeportiva i = new ActividadDeportiva(data.getNombre(),data.getDescripcion(),data.getDuracion(),data.getCosto(), data.getFecReg());
 		actD.add(i);
 		i.setInstitucion(this);
     }
@@ -99,6 +96,15 @@ public class InstitucionDeportiva implements Serializable {
 				aRetornar=i;
     	}
     	return aRetornar;
+    }
+    
+    public boolean buscarActividad2(String nombre) {
+    	
+    	for(ActividadDeportiva i:actD) {
+    		if (i.getNombre().equals(nombre))
+				return true;
+    	}
+    	return false;
     }
     
     public void agregarProfesor(Profesor profe){

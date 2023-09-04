@@ -2,6 +2,7 @@ package interfaces;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import datatypes.DtActividadDeportiva;
@@ -15,6 +16,7 @@ import excepciones.InstitucionDeportivaRepetidaException;
 import excepciones.ActividadDeportivaRepetidaException;
 import excepciones.DictadoRepetidoException;
 import excepciones.UsuarioRepetidoException;
+import excepciones.RegistroAClaseRepetidoException;
 
 //import excepciones.SocioRepetidoExcepcion;
 
@@ -24,14 +26,17 @@ public interface IControlador {
 	public void altaActividadDeportiva(String nombreIns,DtActividadDeportiva data) throws ActividadDeportivaRepetidaException;
 	public void agregarUsuario(DtUsuario user, String inst) throws UsuarioRepetidoException;
 	public void altaDictadoClase(DtClase clase, String nomIns, String nomAct, String profe) throws DictadoRepetidoException;
-	
+	public void registroADictadoClase(String nick,String clase,Date fechaReg) throws RegistroAClaseRepetidoException;
+
 	
 	public String[] listarInstitutos();
 	public String[] listarActividadesDeportivas(String nombre);
 	public String[] listarProfesores(String nombre);
+	public String[] listarSocios(String nombre);
 	public String[] listarUsuarios();
 	public DtUsuario obtenerUsuario(String nick);
 	public DtActividadDeportiva obtenerActividad(String instituto, String actividad);
 	public List<Clase> obtenerClases(String instituto, String actividad);
 	public String[] listarClases(String instituto, String actividad);
+	public DtClase obtenerClase(String nombreClase);
 }

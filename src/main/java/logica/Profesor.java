@@ -62,7 +62,11 @@ public class Profesor extends Usuario implements Serializable{
     
     @Override
 	public DtUsuario getDtUsuario() {
-    	LocalDate fecha = this.fecNac.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
-		return new DtProfesor(this.nickname,this.nombre,this.apellido,this.email,fecha,this.descripcion, this.biografia, this.sitioWeb);
+		return new DtProfesor(this.nickname,this.nombre,this.apellido,this.email,this.fecNac,this.descripcion, this.biografia, this.sitioWeb);
+	}
+
+	@Override
+	public void añadirRegistro(Registro reg) {
+		//Ta pelao
 	}
 }

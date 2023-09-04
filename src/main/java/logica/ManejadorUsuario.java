@@ -3,6 +3,11 @@ package logica;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.EntityManager;
+import javax.persistence.Query;
+
+import persistencia.Conexion;
+
 public class ManejadorUsuario {
 	private static ManejadorUsuario instancia = null;
 	private List<Usuario> users = new ArrayList<>();
@@ -16,25 +21,50 @@ public class ManejadorUsuario {
 	}
 	
 	public void addUser(Usuario user) {
-		users.add(user);
+		Conexion conexion = Conexion.getInstancia();
+        EntityManager em = conexion.getEntityManager();
+        em.getTransaction().begin();
+
+        em.persist(user);
+
+        em.getTransaction().commit();
 	}
 
 	public Usuario buscarUsuario(String nick){
-		Usuario ret = null;
-		for(Usuario u: users){
-			if(u.getNickname().equals(nick)){
-				ret = u;
-			}
-		}
-		return ret;
+		Conexion conexion = Conexion.getInstancia();
+		EntityManager em = conexion.getEntityManager();
+		
+		Usuario aretornar = em.find(Usuario.class, nick);
+		return aretornar;
 	}
 	
 	public ArrayList<String> obtenerUsuariosNick(){
-        ArrayList<String> aRetornar = new ArrayList<>();
-        for(Usuario u: users) {
-            aRetornar.add(u.getNickname());
-        }
-        return aRetornar;
+		Conexion conexion = Conexion.getInstancia();
+		EntityManager em = conexion.getEntityManager();
+		
+		Query query = em.createQuery("select u from Usuario u");
+		List<Usuario> listUs = (List<Usuario>) query.getResultList();
+		
+		ArrayList<String> aRetornar = new ArrayList<>();
+		for(Usuario i: listUs) {
+			aRetornar.add(i.getNickname());
+		}
+		return aRetornar;
     }
 	
+	public String[] obtenerSocios() {
+		Conexion conexion = Conexion.getInstancia();
+		EntityManager em = conexion.getEntityManager();
+		
+		Query query = em.createQuery("select u from Usuario u where tipousuario = 'S'");
+		List<Usuario> listUs = (List<Usuario>) query.getResultList();
+		
+		String[] aRetornar = new String[listUs.size()];
+		int i = 0;
+		for(Usuario u: listUs) {
+			aRetornar[i] = u.getNickname();
+			i++;
+		}
+		return aRetornar;
+	}
 }

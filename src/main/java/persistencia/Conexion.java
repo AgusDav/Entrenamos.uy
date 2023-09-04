@@ -12,10 +12,10 @@ public class Conexion {
 	
 	private Conexion(){}
 	
-	public Conexion getInstancia() {
+	public static Conexion getInstancia() {
 		if (instancia == null) {
 			instancia = new Conexion();
-			emf = Persistence.createEntityManagerFactory("Entrenamos_uy");
+			emf = Persistence.createEntityManagerFactory("Entrenamos");
 			em=emf.createEntityManager();
 		}
 		return instancia;

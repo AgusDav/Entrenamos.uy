@@ -190,14 +190,13 @@ public class AgregarActividadDeportiva extends JInternalFrame {
 		String descripcion= this.textFieldDescripcion.getText();
 		String strDur= this.textFieldDuracion.getText();
 		String strCosto= this.textFieldCosto.getText();
-		LocalDate fecha = this.fechaSistemaLabel.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
 		DtActividadDeportiva dt = null;
 		if(checkFormulario()){
             try {
         		String instituto = this.comboBoxNombreInstitucion.getSelectedItem().toString();
             	int duracion = Integer.parseInt(strDur);
             	float costo = Float.parseFloat(strCosto);
-            	dt = new DtActividadDeportiva(nombre,descripcion,duracion,costo,fecha);
+            	dt = new DtActividadDeportiva(nombre,descripcion,duracion,costo,this.fechaSistemaLabel.getDate());
                 this.icon.altaActividadDeportiva(instituto,dt);
                 JOptionPane.showMessageDialog(this, "La Actividad Deportiva se ha creado con éxito", "Agregar Actividad Deportiva ", JOptionPane.INFORMATION_MESSAGE);
                 limpiar();
