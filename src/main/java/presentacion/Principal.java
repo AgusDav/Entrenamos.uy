@@ -46,6 +46,8 @@ public class Principal {
     private JDialog consultaActividadDialog;
     private RegistroADictadoClase registroADictadoClaseInternalFrame;
     private JDialog registroADictadoClaseDialog;
+    private RankingClase rankingClaseInternalFrame;
+    private JDialog rankingClaseDialog;
 
     public static void main(String[] args) {
         EventQueue.invokeLater(new Runnable() {
@@ -141,6 +143,17 @@ public class Principal {
         registroADictadoClaseDialog.setLocationRelativeTo(null);
         registroADictadoClaseDialog.setVisible(false);
         registroADictadoClaseInternalFrame.setVisible(true);
+        
+        rankingClaseDialog = new JDialog(frame, "Ranking de Clases", true);
+        rankingClaseDialog.setSize(400, 480);
+        rankingClaseDialog.setLocationRelativeTo(frame);
+        rankingClaseDialog.getContentPane().setLayout(new BorderLayout());
+        
+        rankingClaseInternalFrame = new RankingClase(icon, rankingClaseDialog);
+        rankingClaseDialog.getContentPane().add(rankingClaseInternalFrame);
+        rankingClaseDialog.setLocationRelativeTo(null);
+        rankingClaseDialog.setVisible(false);
+        rankingClaseInternalFrame.setVisible(true);
     }
 
     public void iniciar() {
@@ -507,6 +520,22 @@ public class Principal {
             }
         });
         panelPrincipal.add(btnRegistroDictadoClase);
+        
+        // Boton Ranking de Clases
+        JButton btnRankingClases = new JButton("Ranking de Clases");
+        btnRankingClases.setIcon(iconoMas);
+        btnRankingClases.setSelected(true);
+        btnRankingClases.setForeground(Color.WHITE);
+        btnRankingClases.setBorder(new LineBorder(new Color(33, 37, 43), 3, true));
+        btnRankingClases.setBackground(new Color(54, 61, 75));
+        btnRankingClases.setBounds(83, 593, 273, 53);
+        btnRankingClases.addActionListener(new ActionListener() {
+        	public void actionPerformed(ActionEvent e) {
+        		rankingClaseInternalFrame.iniciarComboBoxClase();
+        		rankingClaseDialog.setVisible(true);
+        	}
+        });
+        panelPrincipal.add(btnRankingClases);
         
         return panelPrincipal;
     } 

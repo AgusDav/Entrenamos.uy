@@ -38,5 +38,7 @@ public interface IControlador {
 	public DtActividadDeportiva obtenerActividad(String instituto, String actividad);
 	public List<Clase> obtenerClases(String instituto, String actividad);
 	public String[] listarClases(String instituto, String actividad);
+	public String[] listarClases2();	// lista la coleccion de clases sin importar instituto ni actDep
 	public DtClase obtenerClase(String nombreClase);
+	
 }

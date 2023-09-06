@@ -51,6 +51,20 @@ public class ManejadorClase{
 		return aRetornar;
 	}
 	
+	public ArrayList<String> obtenerClasesRanking() {
+		Conexion conexion = Conexion.getInstancia();
+		EntityManager em = conexion.getEntityManager();
+		
+		Query query = em.createQuery("select r from Registro r order by clase_nombre");
+		List<Registro> listClas = (List<Registro>) query.getResultList();
+		
+		ArrayList<String> aRetornar = new ArrayList<>();
+		for(Registro i: listClas) {
+			aRetornar.add(i.getClase().getNombre());
+		}
+		return aRetornar;
+	}
+
 }
 	
 

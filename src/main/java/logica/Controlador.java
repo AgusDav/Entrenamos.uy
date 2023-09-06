@@ -112,6 +112,7 @@ public class Controlador implements IControlador{
         }
         return institutos_ret;
 	}
+	
 	@Override
 	public String[] listarUsuarios() {
 		ArrayList<String> users;
@@ -203,6 +204,20 @@ public class Controlador implements IControlador{
 	}
 	
 	@Override
+	public String[] listarClases2(){
+		List<String> clases;
+		ManejadorClase mC = ManejadorClase.getInstancia();
+		clases = mC.obtenerClasesRanking();
+		String[] ret = new String[clases.size()];
+		int i = 0;
+		for(String ins:clases){
+			ret[i] = ins;
+			i++;
+		}
+		return ret;
+	}
+
+	@Override
 	public void registroADictadoClase(String nick,String clase,Date fechaReg)throws RegistroAClaseRepetidoException{
 		ManejadorUsuario mU = ManejadorUsuario.getInstancia();
 		Usuario us = mU.buscarUsuario(nick);
@@ -230,4 +245,6 @@ public class Controlador implements IControlador{
 		DtClase dtC = c.getDtClase();
 		return dtC;
 	}
+
+	
 }
