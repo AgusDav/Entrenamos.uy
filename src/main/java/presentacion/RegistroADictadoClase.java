@@ -93,7 +93,17 @@ public class RegistroADictadoClase extends JInternalFrame{
 		getContentPane().add(lblClases);
 		
 		comboBoxClases = new JComboBox<String>();
+		comboBoxClases.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				actualizarInfoClase();
+			}
+		});
 		comboBoxClases.setBounds(210, 90, 150, 19);
+		/*comboBoxClases.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				actualizarComboBoxClase();
+			}
+		});*/
 		getContentPane().add(comboBoxClases);
 		
 		// Información de la clase
@@ -263,6 +273,11 @@ public class RegistroADictadoClase extends JInternalFrame{
 				DefaultComboBoxModel<String> modelClase = new DefaultComboBoxModel<String>(icon.listarClases(this.comboBoxNombreInstitucion.getSelectedItem().toString(), this.comboBoxActividadesDeportivas.getSelectedItem().toString()));
 				comboBoxClases.setModel(modelClase);
 			
+				actualizarInfoClase();
+			}
+		}
+		
+		private void actualizarInfoClase() {
 			datoNombreClase.setText(comboBoxClases.getSelectedItem().toString());
 			Date fechaClase = icon.obtenerClase(comboBoxClases.getSelectedItem().toString()).getFecha();
 
@@ -273,8 +288,8 @@ public class RegistroADictadoClase extends JInternalFrame{
 			String fecha = sdf.format(fechaClase);
 			datoFechaClase.setText(fecha.toString());
 			datoHoraInicioClase.setText(icon.obtenerClase(comboBoxClases.getSelectedItem().toString()).getHoraInicio());
-			}
-		}
+		};
+		
 		
 		public void inicializarComboBoxes() {
 			DefaultComboBoxModel<String> modelInstitutos = new DefaultComboBoxModel<String>(icon.listarInstitutos());
