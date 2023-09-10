@@ -223,7 +223,9 @@ public class AltaDictadoClase extends JInternalFrame {
 			}
 			else
 				comboBoxActividadesDeportivas.setVisible(false);
-		}
+		}else 
+			actualizarComboBoxActividades();
+		
 		if(comboBoxProfesores.getSelectedItem() == null) {
 			if(comboBoxNombreInstitucion.getSelectedItem() != null){
 				actualizarComboBoxProfesores();
@@ -231,7 +233,8 @@ public class AltaDictadoClase extends JInternalFrame {
 			}
 			else
 				comboBoxProfesores.setVisible(false);
-		}
+		}else
+			actualizarComboBoxProfesores();
 	}
 	
 	protected void altaDictadoClaseAceptarActionPerformed(ActionEvent arg0) {

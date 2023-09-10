@@ -112,7 +112,7 @@ public class Principal {
         altaDictadoClaseInternalFrame.setVisible(true);
         
         consultaUsuarioDialog = new JDialog(frame, "Consulta Usuario", true);
-        consultaUsuarioDialog.setSize(400, 430);
+        consultaUsuarioDialog.setSize(700, 400);
         consultaUsuarioDialog.setLocationRelativeTo(frame);
         consultaUsuarioDialog.getContentPane().setLayout(new BorderLayout());
 

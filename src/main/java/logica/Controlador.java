@@ -56,6 +56,7 @@ public class Controlador implements IControlador{
 			em.getTransaction().begin();
 			em.persist(i);
 			em.getTransaction().commit();
+			em.refresh(i);
 		}
 	}
 
@@ -77,6 +78,8 @@ public class Controlador implements IControlador{
 			nuevoUser = new Socio(user.getNickname(),user.getNombre(),user.getApellido(),user.getEmail(),user.getFecNac());
 		}
 		mU.addUser(nuevoUser);
+		
+		
 	}
 	
 	@Override
@@ -95,7 +98,9 @@ public class Controlador implements IControlador{
 		}
 		else {
 			actD.agregarClase(clase, profesor);
+			profesor.añadirClase(cl);
 			mC.addClase(actD.obtenerClase(clase.getNombre()));
+			
 		}
 	}
 	
@@ -172,6 +177,13 @@ public class Controlador implements IControlador{
 	}
 	
 	@Override
+	public Usuario obtenerUsuarioReal(String nick) {
+		ManejadorUsuario mU = ManejadorUsuario.getInstancia();
+		Usuario u = mU.buscarUsuario(nick);
+		return u;
+	}
+	
+	@Override
 	public DtActividadDeportiva obtenerActividad(String instituto, String actividad) {
 		ManejadorInstitucion mI = ManejadorInstitucion.getInstancia();
 		InstitucionDeportiva I = mI.buscarInstitucionDeportiva(instituto);
@@ -244,6 +256,30 @@ public class Controlador implements IControlador{
 		Clase c = mC.buscarClase(nombreClase);
 		DtClase dtC = c.getDtClase();
 		return dtC;
+	}
+	
+	@Override
+	public Clase obtenerClaseR(String nombreClase){
+		ManejadorClase mC = ManejadorClase.getInstancia();
+		Clase c = mC.buscarClase(nombreClase);
+		return c;
+	}
+	
+	@Override
+	public String obtenerInstitucionActividad(String nombreAct){
+		ManejadorInstitucion mI = ManejadorInstitucion.getInstancia();
+		ArrayList<String> inst = mI.obtenerInstitutos();
+		String ret = null;
+		for (String ins : inst) {
+	        InstitucionDeportiva institucion = mI.buscarInstitucionDeportiva(ins);
+	        ActividadDeportiva actividad = institucion.buscarActividad(nombreAct);
+
+	        if (actividad != null && actividad.getNombre().equals(nombreAct)) {
+	            ret = ins;
+	            break; // Terminar el bucle si se encuentra una coincidencia
+	        }
+	    }
+		return ret;
 	}
 
 	

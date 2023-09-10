@@ -48,4 +48,22 @@ public class Socio extends Usuario implements Serializable{
 	public void añadirRegistro(Registro reg){
         registros.add(reg);
     }
+	
+	@Override
+	public void añadirClase(Clase reg) {
+		//Ta pelao
+	}
+	
+	
+	public String[] obtenerClases(){
+		String[] clases = new String[registros.size()];
+		int i=0;
+		for(Registro registro:registros) {
+	        clases[i]=registro.getClase().getNombre();
+	        i++;
+		}
+		return clases;
+	}
+	
+	
 }

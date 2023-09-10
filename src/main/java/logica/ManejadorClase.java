@@ -35,6 +35,9 @@ public class ManejadorClase{
         em.persist(clas);
         
         em.getTransaction().commit();
+        em.refresh(clas);        
+        //refresca profesor para ver nueva intancia en su lista de clases en la misma aplicacion
+        em.refresh(clas.getProfe());
 	}
 	
 	public ArrayList<String> obtenerClase(){

@@ -213,6 +213,9 @@ public class RegistroADictadoClase extends JInternalFrame{
 		}
 		
 		private void limpiar() {
+			comboBoxActividadesDeportivas.removeAllItems();
+			comboBoxClases.removeAllItems();
+			comboBoxNombreInstitucion.removeAllItems();
 			datoNombreClase.setText("");
 			datoFechaClase.setText("");
 			datoHoraInicioClase.setText("");
@@ -258,26 +261,33 @@ public class RegistroADictadoClase extends JInternalFrame{
 	        return localTime;
 	    }
 		
-		private void actualizarComboBoxes() {
+		/*private void actualizarComboBoxes() {
 			actualizarComboBoxActividades();
 			actualizarComboBoxClase();
-		}
+		}*/
 		
 		private void actualizarComboBoxActividades() {
+			if(this.comboBoxNombreInstitucion.getSelectedItem() != null) {
 			DefaultComboBoxModel<String> modelActDepor = new DefaultComboBoxModel<String>(icon.listarActividadesDeportivas(this.comboBoxNombreInstitucion.getSelectedItem().toString()));
 			comboBoxActividadesDeportivas.setModel(modelActDepor);
+			actualizarComboBoxClase();}
 	    }
 		
 		private void actualizarComboBoxClase() {
 			if(this.comboBoxNombreInstitucion.getSelectedItem() != null && this.comboBoxActividadesDeportivas.getSelectedItem() != null) {
 				DefaultComboBoxModel<String> modelClase = new DefaultComboBoxModel<String>(icon.listarClases(this.comboBoxNombreInstitucion.getSelectedItem().toString(), this.comboBoxActividadesDeportivas.getSelectedItem().toString()));
 				comboBoxClases.setModel(modelClase);
+				}else
+					comboBoxClases.removeAllItems();
+					
 			
 				actualizarInfoClase();
-			}
+			
+				
 		}
 		
 		private void actualizarInfoClase() {
+			if(comboBoxClases.getSelectedItem() != null) {
 			datoNombreClase.setText(comboBoxClases.getSelectedItem().toString());
 			Date fechaClase = icon.obtenerClase(comboBoxClases.getSelectedItem().toString()).getFecha();
 
@@ -286,8 +296,14 @@ public class RegistroADictadoClase extends JInternalFrame{
 
 			// Formatea la fecha como una cadena
 			String fecha = sdf.format(fechaClase);
-			datoFechaClase.setText(fecha.toString());
+			datoFechaClase.setText(fecha);
 			datoHoraInicioClase.setText(icon.obtenerClase(comboBoxClases.getSelectedItem().toString()).getHoraInicio());
+			}else {
+				datoNombreClase.setText("");
+				datoFechaClase.setText("");
+				datoHoraInicioClase.setText("");
+			};
+			 
 		};
 		
 		

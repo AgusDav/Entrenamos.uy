@@ -2,16 +2,20 @@ package logica;
 
 import java.time.LocalDate;
 import java.time.ZoneId;
+import java.util.ArrayList;
 import java.util.Date;
-
+import java.util.List;
 
 import datatypes.DtProfesor;
 import datatypes.DtSocio;
 import datatypes.DtUsuario;
 import java.io.Serializable;
+
+import javax.persistence.CascadeType;
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 
 @Entity
 @DiscriminatorValue("P")
@@ -23,6 +27,14 @@ public class Profesor extends Usuario implements Serializable{
     //pseudos
     @ManyToOne
     private InstitucionDeportiva institucion;
+    
+    @OneToMany(mappedBy="profe",cascade=CascadeType.ALL,orphanRemoval=true)
+	private List<Clase> clases = new ArrayList<>();
+    
+    public void añadirClase(Clase reg){
+        clases.add(reg);
+    }
+    
 
     public Profesor(){
     	super();
@@ -69,4 +81,15 @@ public class Profesor extends Usuario implements Serializable{
 	public void añadirRegistro(Registro reg) {
 		//Ta pelao
 	}
+	
+	public String[] obtenerClases(){
+		String[] clase = new String[clases.size()];
+		int i=0;
+		for(Clase clasecopia:this.clases) {
+	        clase[i]=clasecopia.getNombre();
+	        i++;
+		}
+		return clase;
+	}
+	
 }

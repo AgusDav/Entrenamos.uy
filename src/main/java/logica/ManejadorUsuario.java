@@ -10,7 +10,6 @@ import persistencia.Conexion;
 
 public class ManejadorUsuario {
 	private static ManejadorUsuario instancia = null;
-	private List<Usuario> users = new ArrayList<>();
 
 	private ManejadorUsuario(){}
 	
@@ -28,6 +27,7 @@ public class ManejadorUsuario {
         em.persist(user);
 
         em.getTransaction().commit();
+        em.refresh(user);
 	}
 
 	public Usuario buscarUsuario(String nick){

@@ -46,6 +46,9 @@ public abstract class Usuario implements Serializable {
     
     public abstract DtUsuario getDtUsuario();
     public abstract void añadirRegistro(Registro reg);
+    public abstract void añadirClase(Clase reg);
+    
+    public abstract String[] obtenerClases();
 
     public String getNickname(){
         return this.nickname;

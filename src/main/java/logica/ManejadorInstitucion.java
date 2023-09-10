@@ -34,6 +34,7 @@ public class ManejadorInstitucion{
         em.persist(inst);
 
         em.getTransaction().commit();
+        em.refresh(inst);
 	}
 	
 	public ArrayList<String> obtenerInstitutos(){

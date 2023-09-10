@@ -12,6 +12,7 @@ import datatypes.DtSocio;
 import datatypes.DtUsuario;
 import logica.Clase;
 import logica.InstitucionDeportiva;
+import logica.Usuario;
 import excepciones.InstitucionDeportivaRepetidaException;
 import excepciones.ActividadDeportivaRepetidaException;
 import excepciones.DictadoRepetidoException;
@@ -35,10 +36,13 @@ public interface IControlador {
 	public String[] listarSocios(String nombre);
 	public String[] listarUsuarios();
 	public DtUsuario obtenerUsuario(String nick);
+	public Usuario obtenerUsuarioReal(String nick);
 	public DtActividadDeportiva obtenerActividad(String instituto, String actividad);
 	public List<Clase> obtenerClases(String instituto, String actividad);
 	public String[] listarClases(String instituto, String actividad);
 	public String[] listarClases2();	// lista la coleccion de clases sin importar instituto ni actDep
 	public DtClase obtenerClase(String nombreClase);
+	public Clase obtenerClaseR(String nombreClase);
+	public String obtenerInstitucionActividad(String nombreAct);
 	
 }
