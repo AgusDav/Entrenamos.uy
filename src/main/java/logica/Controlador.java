@@ -82,6 +82,20 @@ public class Controlador implements IControlador{
 		
 	}
 	
+	public void ModificarUsuario(String nick, String nombre, String apellido, Date fecNac) {
+		Conexion conexion = Conexion.getInstancia();
+		EntityManager em = conexion.getEntityManager();
+		ManejadorUsuario mU = ManejadorUsuario.getInstancia();
+		Usuario User = mU.buscarUsuario(nick);
+		User.setNombre(nombre);
+		User.setApellido(apellido);
+		User.setFecNac(fecNac);
+		em.getTransaction().begin();
+		em.persist(User);
+		em.getTransaction().commit();
+		em.refresh(User);
+	}
+	
 	@Override
 	public void altaDictadoClase(DtClase clase, String nomIns, String nomAct, String profe) throws DictadoRepetidoException{
 		ManejadorInstitucion mI = ManejadorInstitucion.getInstancia();

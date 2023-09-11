@@ -48,6 +48,8 @@ public class Principal {
     private JDialog registroADictadoClaseDialog;
     private RankingClase rankingClaseInternalFrame;
     private JDialog rankingClaseDialog;
+    private ModificarUsuario modificarUsuarioInternalFrame;
+    private JDialog modificarUsuarioDialog;
 
     public static void main(String[] args) {
         EventQueue.invokeLater(new Runnable() {
@@ -154,6 +156,17 @@ public class Principal {
         rankingClaseDialog.setLocationRelativeTo(null);
         rankingClaseDialog.setVisible(false);
         rankingClaseInternalFrame.setVisible(true);
+        
+        modificarUsuarioDialog = new JDialog(frame, "Modificar Usuario", true);
+        modificarUsuarioDialog.setSize(400, 500);
+        modificarUsuarioDialog.setLocationRelativeTo(frame);
+        modificarUsuarioDialog.getContentPane().setLayout(new BorderLayout());
+        
+        modificarUsuarioInternalFrame = new ModificarUsuario(icon, modificarUsuarioDialog);
+        modificarUsuarioDialog.getContentPane().add(modificarUsuarioInternalFrame);
+        modificarUsuarioDialog.setLocationRelativeTo(null);
+        modificarUsuarioDialog.setVisible(false);
+        modificarUsuarioInternalFrame.setVisible(true);
     }
 
     public void iniciar() {
@@ -457,6 +470,33 @@ public class Principal {
         });
         btnAltaDictadoDeClase.setBounds(83, 436, 273, 53);
         panelPrincipal.add(btnAltaDictadoDeClase);
+        
+        JButton btnModificarUsuario = new JButton("Modificar Usuario");
+        btnModificarUsuario.setIcon(iconoMas);
+        btnModificarUsuario.addActionListener(new ActionListener() {
+        	public void actionPerformed(ActionEvent e) {
+        		//if(!altaDictadoClaseInternalFrame.checkearComboBoxes()) {
+        			modificarUsuarioInternalFrame.inciarComboBoxUsuario();
+            		modificarUsuarioDialog.setVisible(true);
+        		//}
+        	}
+        });
+        btnModificarUsuario.setForeground(Color.WHITE);
+        btnModificarUsuario.setBackground(new Color(54, 61, 75));
+        btnModificarUsuario.setBorder(new LineBorder(new Color(33, 37, 43), 3, true));
+        btnModificarUsuario.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseEntered(MouseEvent e) {
+            	btnModificarUsuario.setBackground(new Color(69, 78, 95)); // Lighter blue when hovering
+            	//moveButtonRandomly(btnAltaDictadoDeClase, frame);
+            }
+            @Override
+            public void mouseExited(MouseEvent e) {
+            	btnModificarUsuario.setBackground(new Color(54, 61, 75)); // Original color when not hovering
+            }
+        });
+        btnModificarUsuario.setBounds(387, 276, 273, 53);
+        panelPrincipal.add(btnModificarUsuario);
         
         
         JLabel lblMenu = new JLabel("Menu");
