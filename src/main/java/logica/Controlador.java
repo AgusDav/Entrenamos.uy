@@ -274,9 +274,11 @@ public class Controlador implements IControlador{
 	        InstitucionDeportiva institucion = mI.buscarInstitucionDeportiva(ins);
 	        ActividadDeportiva actividad = institucion.buscarActividad(nombreAct);
 
-	        if (actividad != null && actividad.getNombre().equals(nombreAct)) {
-	            ret = ins;
-	            break; // Terminar el bucle si se encuentra una coincidencia
+	        if (actividad != null && actividad.getNombre() != null) {
+	        	if(actividad.getNombre().equals(nombreAct)) {
+	        		ret = ins;
+	        		break; // Terminar el bucle si se encuentra una coincidencia
+	        	}
 	        }
 	    }
 		return ret;

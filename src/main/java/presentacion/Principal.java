@@ -79,7 +79,7 @@ public class Principal {
         agregarInstitutoInternalFrame.setVisible(true);
 
         agregarUsuarioDialog = new JDialog(frame, "Agregar Usuario", true);
-        agregarUsuarioDialog.setSize(400, 430);
+        agregarUsuarioDialog.setSize(350, 450);
         agregarUsuarioDialog.setLocationRelativeTo(frame);
         agregarUsuarioDialog.getContentPane().setLayout(new BorderLayout());
 
@@ -90,7 +90,7 @@ public class Principal {
         agregarUsuarioInternalFrame.setVisible(true);
         
         agregarActividadDeportivaDialog = new JDialog(frame, "Agregar Actividad Deportiva", true);
-        agregarActividadDeportivaDialog.setSize(350, 360);
+        agregarActividadDeportivaDialog.setSize(320, 340);
         agregarActividadDeportivaDialog.setLocationRelativeTo(frame);
         agregarActividadDeportivaDialog.getContentPane().setLayout(new BorderLayout());
 
@@ -101,7 +101,7 @@ public class Principal {
         agregarActividadDeportivaInternalFrame.setVisible(true);
         
         altaDictadoClaseDialog = new JDialog(frame, "Agregar Clase", true);
-        altaDictadoClaseDialog.setSize(375, 450);
+        altaDictadoClaseDialog.setSize(345, 420);
         altaDictadoClaseDialog.setLocationRelativeTo(frame);
         altaDictadoClaseDialog.getContentPane().setLayout(new BorderLayout());
 
@@ -134,7 +134,7 @@ public class Principal {
         consultaActividadInternalFrame.setVisible(true);
         
         registroADictadoClaseDialog = new JDialog(frame, "Registro a Dictado Clase", true);
-        registroADictadoClaseDialog.setSize(400, 480);
+        registroADictadoClaseDialog.setSize(390, 420);
         registroADictadoClaseDialog.setLocationRelativeTo(frame);
         registroADictadoClaseDialog.getContentPane().setLayout(new BorderLayout());
 
@@ -145,7 +145,7 @@ public class Principal {
         registroADictadoClaseInternalFrame.setVisible(true);
         
         rankingClaseDialog = new JDialog(frame, "Ranking de Clases", true);
-        rankingClaseDialog.setSize(400, 480);
+        rankingClaseDialog.setSize(300, 210);
         rankingClaseDialog.setLocationRelativeTo(frame);
         rankingClaseDialog.getContentPane().setLayout(new BorderLayout());
         

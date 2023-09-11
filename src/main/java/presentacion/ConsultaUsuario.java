@@ -121,10 +121,14 @@ public class ConsultaUsuario extends JInternalFrame{
 				getContentPane().add(comboBoxClase);
 				
 				textPaneClase = new JTextPane();
+				textPaneClase.setForeground(new Color(255, 255, 255));
+				textPaneClase.setBackground(new Color(54, 61, 75));
 				textPaneClase.setBounds(353, 18, 149, 230);
 				getContentPane().add(textPaneClase);
 				
 				textPaneActDepor = new JTextPane();
+				textPaneActDepor.setForeground(new Color(255, 255, 255));
+				textPaneActDepor.setBackground(new Color(54, 61, 75));
 				textPaneActDepor.setBounds(514, 18, 149, 230);
 				getContentPane().add(textPaneActDepor);
 				

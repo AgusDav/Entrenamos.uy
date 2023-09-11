@@ -58,7 +58,7 @@ public class AgregarActividadDeportiva extends JInternalFrame {
 		getContentPane().add(lblInstitucion);
 		
 		comboBoxNombreInstitucion = new JComboBox<String>();
-		comboBoxNombreInstitucion.setBounds(123, 30, 114, 19);
+		comboBoxNombreInstitucion.setBounds(188, 28, 114, 19);
 		getContentPane().add(comboBoxNombreInstitucion);
 		
 		// Campo nombre
@@ -68,7 +68,7 @@ public class AgregarActividadDeportiva extends JInternalFrame {
 		getContentPane().add(lblNombre);
 		
 		textFieldNombre = new JTextField();
-		textFieldNombre.setBounds(123, 60, 114, 19);
+		textFieldNombre.setBounds(188, 58, 114, 19);
 		getContentPane().add(textFieldNombre);
 		textFieldNombre.setColumns(10);
 		
@@ -81,7 +81,7 @@ public class AgregarActividadDeportiva extends JInternalFrame {
 		
 		textFieldDescripcion = new JTextField();
 		textFieldDescripcion.setColumns(10);
-		textFieldDescripcion.setBounds(123, 90, 114, 19);
+		textFieldDescripcion.setBounds(188, 89, 114, 19);
 		getContentPane().add(textFieldDescripcion);
 		
 		// Campo duracion
@@ -93,7 +93,7 @@ public class AgregarActividadDeportiva extends JInternalFrame {
 		
 		textFieldDuracion = new JTextField();
 		textFieldDuracion.setColumns(10);
-		textFieldDuracion.setBounds(123, 120, 114, 19);
+		textFieldDuracion.setBounds(188, 120, 114, 19);
 		getContentPane().add(textFieldDuracion);
 		
 		// Campo costo
@@ -105,7 +105,7 @@ public class AgregarActividadDeportiva extends JInternalFrame {
 		
 		textFieldCosto = new JTextField();
 		textFieldCosto.setColumns(10);
-		textFieldCosto.setBounds(123, 150, 114, 19);
+		textFieldCosto.setBounds(188, 148, 114, 19);
 		getContentPane().add(textFieldCosto);
 		
 		// Campo fecha de alta
@@ -115,7 +115,7 @@ public class AgregarActividadDeportiva extends JInternalFrame {
 		getContentPane().add(lblFechaDeAlta);
 		
 		fechaSistemaLabel = new JDateChooser();
-		fechaSistemaLabel.setBounds(123, 176, 114, 19);
+		fechaSistemaLabel.setBounds(188, 179, 114, 19);
         getContentPane().add(fechaSistemaLabel);
 		
 //		JLabel lblFechaDeAlta = new JLabel("Fecha de Alta");
@@ -152,7 +152,7 @@ public class AgregarActividadDeportiva extends JInternalFrame {
             	btnAceptar.setBackground(new Color(54, 61, 75)); // Original color when not hovering
             }
         });
-		btnAceptar.setBounds(27, 219, 124, 37);
+		btnAceptar.setBounds(12, 219, 124, 37);
 		getContentPane().add(btnAceptar);
 		
 		// Botón cancelar
