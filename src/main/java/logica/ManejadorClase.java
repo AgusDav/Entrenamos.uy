@@ -2,6 +2,8 @@ package logica;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Collections;
+import java.util.Comparator;
 
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
@@ -58,12 +60,19 @@ public class ManejadorClase{
 		Conexion conexion = Conexion.getInstancia();
 		EntityManager em = conexion.getEntityManager();
 		
-		Query query = em.createQuery("select r from Registro r order by clase_nombre");
-		List<Registro> listClas = (List<Registro>) query.getResultList();
+		Query query = em.createQuery("select c from Clase c");
+		List<Clase> listClas = (List<Clase>) query.getResultList();
+		
+		Collections.sort(listClas, new Comparator<Clase>() {
+	        @Override
+	        public int compare(Clase clase1, Clase clase2) {
+	            return Integer.compare(clase2.getCantidadInscriptos(), clase1.getCantidadInscriptos());
+	        }
+	    });
 		
 		ArrayList<String> aRetornar = new ArrayList<>();
-		for(Registro i: listClas) {
-			aRetornar.add(i.getClase().getNombre());
+		for(Clase i: listClas) {
+			aRetornar.add(i.getNombre());
 		}
 		return aRetornar;
 	}

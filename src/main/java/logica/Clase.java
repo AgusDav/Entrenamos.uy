@@ -139,4 +139,8 @@ public class Clase implements Serializable {
     public DtClase getDtClase() {
     	return new DtClase(this.nombre, this.fecha, this.hora, this.url, this.fechaReg);
     }
+    
+    public int getCantidadInscriptos() {
+    	return registros.size();
+    }
 }
