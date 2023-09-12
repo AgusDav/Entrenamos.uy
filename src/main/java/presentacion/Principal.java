@@ -50,6 +50,10 @@ public class Principal {
     private JDialog rankingClaseDialog;
     private ModificarUsuario modificarUsuarioInternalFrame;
     private JDialog modificarUsuarioDialog;
+    private JDialog consultaDictadoClaseDialog;
+    private ConsultaDictadoClase consultaDictadoClaseInternalFrame;
+    private ModificarActividadDeportiva modificarActividadDeportivaInternalFrame;
+    private JDialog modificarActividadDeportivaDialog;
 
     public static void main(String[] args) {
         EventQueue.invokeLater(new Runnable() {
@@ -167,6 +171,28 @@ public class Principal {
         modificarUsuarioDialog.setLocationRelativeTo(null);
         modificarUsuarioDialog.setVisible(false);
         modificarUsuarioInternalFrame.setVisible(true);
+        
+        consultaDictadoClaseDialog = new JDialog(frame, "Consulta Dictado Clase", true);
+        consultaDictadoClaseDialog.setSize(390, 450);
+        consultaDictadoClaseDialog.setLocationRelativeTo(frame);
+        consultaDictadoClaseDialog.getContentPane().setLayout(new BorderLayout());
+        
+        consultaDictadoClaseInternalFrame = new ConsultaDictadoClase(icon, consultaDictadoClaseDialog);
+        consultaDictadoClaseDialog.getContentPane().add(consultaDictadoClaseInternalFrame);
+        consultaDictadoClaseDialog.setLocationRelativeTo(null);
+        consultaDictadoClaseDialog.setVisible(false);
+        consultaDictadoClaseInternalFrame.setVisible(true);
+        
+        modificarActividadDeportivaDialog = new JDialog(frame, "Consulta Dictado Clase", true);
+        modificarActividadDeportivaDialog.setSize(390, 450);
+        modificarActividadDeportivaDialog.setLocationRelativeTo(frame);
+        modificarActividadDeportivaDialog.getContentPane().setLayout(new BorderLayout());
+        
+        modificarActividadDeportivaInternalFrame = new ModificarActividadDeportiva(icon, modificarActividadDeportivaDialog);
+        modificarActividadDeportivaDialog.getContentPane().add(modificarActividadDeportivaInternalFrame);
+        modificarActividadDeportivaDialog.setLocationRelativeTo(null);
+        modificarActividadDeportivaDialog.setVisible(false);
+        modificarActividadDeportivaInternalFrame.setVisible(true);
     }
 
     public void iniciar() {
@@ -495,8 +521,70 @@ public class Principal {
             	btnModificarUsuario.setBackground(new Color(54, 61, 75)); // Original color when not hovering
             }
         });
-        btnModificarUsuario.setBounds(387, 276, 273, 53);
+        btnModificarUsuario.setBounds(387, 276, 273, 53);  
         panelPrincipal.add(btnModificarUsuario);
+        
+        
+        ////////////////////
+        
+        JButton btnConsultaClase = new JButton("Consulta Dictado Clase");
+        btnConsultaClase.setIcon(iconoInfo);
+        btnConsultaClase.addActionListener(new ActionListener() {
+        	public void actionPerformed(ActionEvent e) {
+        		//if(!altaDictadoClaseInternalFrame.checkearComboBoxes()) {
+        			consultaDictadoClaseInternalFrame.inicializarComboBoxes();
+        			consultaDictadoClaseDialog.setVisible(true);
+        		//}
+        	}
+        });
+        btnConsultaClase.setForeground(Color.WHITE);
+        btnConsultaClase.setBackground(new Color(54, 61, 75));
+        btnConsultaClase.setBorder(new LineBorder(new Color(33, 37, 43), 3, true));
+        btnConsultaClase.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseEntered(MouseEvent e) {
+            	btnConsultaClase.setBackground(new Color(69, 78, 95)); // Lighter blue when hovering
+            	//moveButtonRandomly(btnAltaDictadoDeClase, frame);
+            }
+            @Override
+            public void mouseExited(MouseEvent e) {
+            	btnConsultaClase.setBackground(new Color(54, 61, 75)); // Original color when not hovering
+            }
+        });
+        btnConsultaClase.setBounds(387, 436, 273, 53);
+        panelPrincipal.add(btnConsultaClase);
+        
+        
+        
+        //////////////////////////
+        
+        
+        JButton btnModificarActividadDeportiva = new JButton("Modificar Actividad Deportiva");
+        btnModificarActividadDeportiva.setIcon(iconoMas);
+        btnModificarActividadDeportiva.addActionListener(new ActionListener() {
+        	public void actionPerformed(ActionEvent e) {
+        		//if(!altaDictadoClaseInternalFrame.checkearComboBoxes()) {
+        			modificarActividadDeportivaInternalFrame.inciarComboBoxUsuario();
+            		modificarActividadDeportivaDialog.setVisible(true);
+        		//}
+        	}
+        });
+        btnModificarActividadDeportiva.setForeground(Color.WHITE);
+        btnModificarActividadDeportiva.setBackground(new Color(54, 61, 75));
+        btnModificarActividadDeportiva.setBorder(new LineBorder(new Color(33, 37, 43), 3, true));
+        btnModificarActividadDeportiva.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseEntered(MouseEvent e) {
+            	btnModificarActividadDeportiva.setBackground(new Color(69, 78, 95)); // Lighter blue when hovering
+            	//moveButtonRandomly(btnAltaDictadoDeClase, frame);
+            }
+            @Override
+            public void mouseExited(MouseEvent e) {
+            	btnModificarActividadDeportiva.setBackground(new Color(54, 61, 75)); // Original color when not hovering
+            }
+        });
+        btnModificarActividadDeportiva.setBounds(387, 515, 273, 53);  
+        panelPrincipal.add(btnModificarActividadDeportiva);
         
         
         JLabel lblMenu = new JLabel("Menu");
@@ -515,7 +603,7 @@ public class Principal {
         btnInformacionActividadDeportiva.setForeground(Color.WHITE);
         btnInformacionActividadDeportiva.setBorder(new LineBorder(new Color(33, 37, 43), 3, true));
         btnInformacionActividadDeportiva.setBackground(new Color(54, 61, 75));
-        btnInformacionActividadDeportiva.setBounds(387, 355, 273, 53);
+        btnInformacionActividadDeportiva.setBounds(387, 355, 273, 53); 
         btnInformacionActividadDeportiva.addActionListener(new ActionListener() {
         	public void actionPerformed(ActionEvent arg0) {
         		consultaActividadInternalFrame.inciarComboBoxActividadDeportiva();

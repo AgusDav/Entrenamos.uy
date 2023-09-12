@@ -231,7 +231,7 @@ public class ConsultaUsuario extends JInternalFrame{
 			
 	}
 	
-	private void actualizarInfoActividad() { //Falta arreglar
+	private void actualizarInfoActividad() { 
 		textPaneActDepor.setText("");
 		if(this.comboBoxActividad.getSelectedItem() != null) {
 			DtActividadDeportiva act = icon.obtenerActividad(icon.obtenerInstitucionActividad(this.comboBoxActividad.getSelectedItem().toString()) , this.comboBoxActividad.getSelectedItem().toString());

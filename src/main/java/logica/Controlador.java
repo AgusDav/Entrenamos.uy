@@ -15,6 +15,7 @@ import java.util.Date;
 import java.util.List;
 
 import javax.persistence.EntityManager;
+import javax.persistence.Query;
 
 import datatypes.DtActividadDeportiva;
 import datatypes.DtClase;
@@ -100,6 +101,38 @@ public class Controlador implements IControlador{
 		em.persist(User);
 		em.getTransaction().commit();
 		em.refresh(User);
+	}
+	
+	@Override
+	public void ModificarActividadDeportiva(String actividad, String descripcion, int duracion, float costo) {
+		Conexion conexion = Conexion.getInstancia();
+		EntityManager em = conexion.getEntityManager();
+		ManejadorInstitucion mI = ManejadorInstitucion.getInstancia();
+		InstitucionDeportiva Ins = mI.buscarInstitucionDeportiva(obtenerInstitucionActividad(actividad));
+		ActividadDeportiva Act = Ins.buscarActividad(actividad);
+		Act.setDescripcion(descripcion);
+		Act.setDuracion(duracion);
+		Act.setCosto(costo);
+		em.getTransaction().begin();
+		em.persist(Ins);
+		em.getTransaction().commit();
+		em.refresh(Ins);
+	}
+	
+	
+	@Override
+	public String[] obtenerTodasActividadesDeportivas(){
+		Conexion conexion = Conexion.getInstancia();
+	    EntityManager em = conexion.getEntityManager();
+	    
+	    Query query = em.createQuery("select a.nombre from ActividadDeportiva a");
+	    List<String> nombres = (List<String>) query.getResultList();
+	    
+	    // Convertir la lista de nombres a un arreglo de cadenas
+	    String[] nombresArray = nombres.toArray(new String[0]);
+	    
+	    // Devolver el arreglo de nombres de actividades deportivas
+	    return nombresArray;
 	}
 	
 	@Override
