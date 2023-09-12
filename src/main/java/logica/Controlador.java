@@ -82,7 +82,8 @@ public class Controlador implements IControlador{
 		
 	}
 	
-	public void ModificarUsuario(String nick, String nombre, String apellido, Date fecNac) {
+	@Override
+	public void ModificarUsuario(String nick, String nombre, String apellido, Date fecNac , String Descripcion , String Biografia , String Sitio ) {
 		Conexion conexion = Conexion.getInstancia();
 		EntityManager em = conexion.getEntityManager();
 		ManejadorUsuario mU = ManejadorUsuario.getInstancia();
@@ -90,6 +91,11 @@ public class Controlador implements IControlador{
 		User.setNombre(nombre);
 		User.setApellido(apellido);
 		User.setFecNac(fecNac);
+		if(User instanceof Profesor) {
+			((Profesor) User).setBiografia(Biografia);
+			((Profesor) User).setDescripcion(Descripcion);
+			((Profesor) User).setSitioWeb(Sitio);
+		}
 		em.getTransaction().begin();
 		em.persist(User);
 		em.getTransaction().commit();

@@ -44,6 +44,6 @@ public interface IControlador {
 	public DtClase obtenerClase(String nombreClase);
 	public Clase obtenerClaseR(String nombreClase);
 	public String obtenerInstitucionActividad(String nombreAct);
-	public void ModificarUsuario(String nick, String nombre, String apellido, Date fecNac);
+	public void ModificarUsuario(String nick, String nombre, String apellido, Date fecNac, String Descripcion , String Biografia , String Sitio );
 	
 }

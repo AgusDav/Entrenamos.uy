@@ -158,7 +158,7 @@ public class Principal {
         rankingClaseInternalFrame.setVisible(true);
         
         modificarUsuarioDialog = new JDialog(frame, "Modificar Usuario", true);
-        modificarUsuarioDialog.setSize(400, 500);
+        modificarUsuarioDialog.setSize(350, 550);
         modificarUsuarioDialog.setLocationRelativeTo(frame);
         modificarUsuarioDialog.getContentPane().setLayout(new BorderLayout());
         
