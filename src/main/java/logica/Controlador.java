@@ -151,6 +151,23 @@ public class Controlador implements IControlador{
 	}
 	
 	@Override
+	public String[] obtenerRankingActividadesDeportivas(){
+		Conexion conexion = Conexion.getInstancia();
+	    EntityManager em = conexion.getEntityManager();
+	    
+	    Query query = em.createQuery("select a2.nombre from Clase a1 right join ActividadDeportiva a2 on a1.actividad.nombre=a2.nombre group by a2.nombre order by count(a1.nombre) desc");
+	    List<String> nombres = (List<String>) query.getResultList();
+	    
+	    // Convertir la lista de nombres a un arreglo de cadenas
+	    String[] nombresArray = nombres.toArray(new String[0]);
+	    
+	    // Devolver el arreglo de nombres de actividades deportivas
+	    return nombresArray;
+	}
+	
+	
+	
+	@Override
 	public void altaDictadoClase(DtClase clase, String nomIns, String nomAct, String profe) throws DictadoRepetidoException{
 		ManejadorInstitucion mI = ManejadorInstitucion.getInstancia();
 		InstitucionDeportiva aux;
@@ -266,6 +283,14 @@ public class Controlador implements IControlador{
 		ActividadDeportiva a = I.buscarActividad(actividad);
 		DtActividadDeportiva dtA = a.getDtActividadDeportiva();
 		return dtA;
+	}
+	
+	@Override
+	public ActividadDeportiva obtenerActividadR(String instituto, String actividad) {
+		ManejadorInstitucion mI = ManejadorInstitucion.getInstancia();
+		InstitucionDeportiva I = mI.buscarInstitucionDeportiva(instituto);
+		ActividadDeportiva a = I.buscarActividad(actividad);
+		return a;
 	}
 	
 	@Override

@@ -56,6 +56,9 @@ public class Principal {
     private JDialog modificarActividadDeportivaDialog;
     private ModificarInstitucion modificarInstitucionInternalFrame;
     private JDialog modificarInstitucionDialog;
+    private RankingActividadDeportiva rankingActividadDeportivaInternalFrame;
+    private JDialog rankingActividadDeportivaDialog;
+    
 
 
     public static void main(String[] args) {
@@ -207,6 +210,18 @@ public class Principal {
         modificarActividadDeportivaDialog.setLocationRelativeTo(null);
         modificarActividadDeportivaDialog.setVisible(false);
         modificarActividadDeportivaInternalFrame.setVisible(true);
+        
+        
+        rankingActividadDeportivaDialog = new JDialog(frame, "Consulta Dictado Clase", true);
+        rankingActividadDeportivaDialog.setSize(390, 450);
+        rankingActividadDeportivaDialog.setLocationRelativeTo(frame);
+        rankingActividadDeportivaDialog.getContentPane().setLayout(new BorderLayout());
+        
+        rankingActividadDeportivaInternalFrame = new RankingActividadDeportiva(icon, rankingActividadDeportivaDialog);
+        rankingActividadDeportivaDialog.getContentPane().add(rankingActividadDeportivaInternalFrame);
+        rankingActividadDeportivaDialog.setLocationRelativeTo(null);
+        rankingActividadDeportivaDialog.setVisible(false);
+        rankingActividadDeportivaInternalFrame.setVisible(true);
     }
 
     public void iniciar() {
@@ -596,6 +611,31 @@ public class Principal {
         
         
         //////////////////////////
+        
+        JButton btnRankingActividad = new JButton("Ranking Actividad Deportiva");
+        btnRankingActividad.setIcon(iconoInfo);
+        btnRankingActividad.addActionListener(new ActionListener() {
+        	public void actionPerformed(ActionEvent e) {
+        			rankingActividadDeportivaInternalFrame.iniciarComboBoxRankingActividad();
+        			rankingActividadDeportivaDialog.setVisible(true);
+        	}
+        });
+        btnRankingActividad.setForeground(Color.WHITE);
+        btnRankingActividad.setBackground(new Color(54, 61, 75));
+        btnRankingActividad.setBorder(new LineBorder(new Color(33, 37, 43), 3, true));
+        btnRankingActividad.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseEntered(MouseEvent e) {
+            	btnRankingActividad.setBackground(new Color(69, 78, 95)); // Lighter blue when hovering
+            	//moveButtonRandomly(btnAltaDictadoDeClase, frame);
+            }
+            @Override
+            public void mouseExited(MouseEvent e) {
+            	btnRankingActividad.setBackground(new Color(54, 61, 75)); // Original color when not hovering
+            }
+        });
+        btnRankingActividad.setBounds(387, 620, 273, 53);
+        panelPrincipal.add(btnRankingActividad);
         
         
         JButton btnModificarActividadDeportiva = new JButton("Modificar Actividad Deportiva");

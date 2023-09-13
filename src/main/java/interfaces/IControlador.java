@@ -10,6 +10,7 @@ import datatypes.DtClase;
 import datatypes.DtInstitucionDeportiva;
 import datatypes.DtSocio;
 import datatypes.DtUsuario;
+import logica.ActividadDeportiva;
 import logica.Clase;
 import logica.InstitucionDeportiva;
 import logica.Usuario;
@@ -38,6 +39,7 @@ public interface IControlador {
 	public DtUsuario obtenerUsuario(String nick);
 	public Usuario obtenerUsuarioReal(String nick);
 	public DtActividadDeportiva obtenerActividad(String instituto, String actividad);
+	public ActividadDeportiva obtenerActividadR(String instituto, String actividad);
 	public List<Clase> obtenerClases(String instituto, String actividad);
 	public String[] listarClases(String instituto, String actividad);
 	public String[] listarClases2();	// lista la coleccion de clases sin importar instituto ni actDep
@@ -49,4 +51,5 @@ public interface IControlador {
 	public String[] obtenerTodasActividadesDeportivas();
 	public DtInstitucionDeportiva obtenerInstitucion(String nombre);
 	public void ModificarInstitucion(String nombre,String desc,String url);
+	public String[] obtenerRankingActividadesDeportivas();
 }

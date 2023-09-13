@@ -146,7 +146,8 @@ public class ModificarInstitucion extends JInternalFrame{
 	public void inciarComboBoxInstitucion() {
 		DefaultComboBoxModel<String> modelInstitucion = new DefaultComboBoxModel<String>(icon.listarInstitutos());
 		comboBoxInstituicion.setModel(modelInstitucion);
-		actualizarInfoInstitucion();
+		if(this.comboBoxInstituicion.getSelectedItem()!=null)
+			actualizarInfoInstitucion();
 	}
 	
 	public void actualizarInfoInstitucion() {
