@@ -47,4 +47,6 @@ public interface IControlador {
 	public void ModificarUsuario(String nick, String nombre, String apellido, Date fecNac, String Descripcion , String Biografia , String Sitio );
 	public void ModificarActividadDeportiva(String actividad, String descripcion, int duracion, float costo);
 	public String[] obtenerTodasActividadesDeportivas();
+	public DtInstitucionDeportiva obtenerInstitucion(String nombre);
+	public void ModificarInstitucion(String nombre,String desc,String url);
 }

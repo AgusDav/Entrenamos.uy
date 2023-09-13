@@ -54,6 +54,9 @@ public class Principal {
     private ConsultaDictadoClase consultaDictadoClaseInternalFrame;
     private ModificarActividadDeportiva modificarActividadDeportivaInternalFrame;
     private JDialog modificarActividadDeportivaDialog;
+    private ModificarInstitucion modificarInstitucionInternalFrame;
+    private JDialog modificarInstitucionDialog;
+
 
     public static void main(String[] args) {
         EventQueue.invokeLater(new Runnable() {
@@ -73,6 +76,17 @@ public class Principal {
         Fabrica fabrica = Fabrica.getInstancia();
         IControlador icon = fabrica.getIControlador();
 
+        modificarInstitucionDialog = new JDialog(frame, "Modificar Institución", true);
+        modificarInstitucionDialog.setSize(350, 450);
+        modificarInstitucionDialog.setLocationRelativeTo(frame);
+        modificarInstitucionDialog.getContentPane().setLayout(new BorderLayout());
+
+        modificarInstitucionInternalFrame = new ModificarInstitucion(icon, modificarInstitucionDialog);
+        modificarInstitucionDialog.getContentPane().add(modificarInstitucionInternalFrame);
+        modificarInstitucionDialog.setLocationRelativeTo(null);
+        modificarInstitucionDialog.setVisible(false);
+        modificarInstitucionInternalFrame.setVisible(true);
+        
         agregarInstitutoDialog = new JDialog(frame, "Agregar Institución", true);
         agregarInstitutoDialog.setSize(340, 310);
         agregarInstitutoDialog.setLocationRelativeTo(frame);
@@ -553,6 +567,31 @@ public class Principal {
         });
         btnConsultaClase.setBounds(387, 436, 273, 53);
         panelPrincipal.add(btnConsultaClase);
+        
+        JButton btnModificarInstitucion = new JButton("Modificar Institucion");
+        btnModificarInstitucion.setIcon(iconoInfo);
+        btnModificarInstitucion.addActionListener(new ActionListener() {
+        	public void actionPerformed(ActionEvent e) {
+        			modificarInstitucionInternalFrame.inciarComboBoxInstitucion();
+        			modificarInstitucionDialog.setVisible(true);
+        	}
+        });
+        btnModificarInstitucion.setForeground(Color.WHITE);
+        btnModificarInstitucion.setBackground(new Color(54, 61, 75));
+        btnModificarInstitucion.setBorder(new LineBorder(new Color(33, 37, 43), 3, true));
+        btnModificarInstitucion.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseEntered(MouseEvent e) {
+            	btnModificarInstitucion.setBackground(new Color(69, 78, 95)); // Lighter blue when hovering
+            	//moveButtonRandomly(btnAltaDictadoDeClase, frame);
+            }
+            @Override
+            public void mouseExited(MouseEvent e) {
+            	btnModificarInstitucion.setBackground(new Color(54, 61, 75)); // Original color when not hovering
+            }
+        });
+        btnModificarInstitucion.setBounds(387, 593, 273, 53);
+        panelPrincipal.add(btnModificarInstitucion);
         
         
         

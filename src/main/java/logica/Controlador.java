@@ -19,6 +19,7 @@ import javax.persistence.Query;
 
 import datatypes.DtActividadDeportiva;
 import datatypes.DtClase;
+import datatypes.DtInstitucionDeportiva;
 import datatypes.DtUsuario;
 import datatypes.DtProfesor;
 import datatypes.DtSocio;
@@ -113,6 +114,20 @@ public class Controlador implements IControlador{
 		Act.setDescripcion(descripcion);
 		Act.setDuracion(duracion);
 		Act.setCosto(costo);
+		em.getTransaction().begin();
+		em.persist(Ins);
+		em.getTransaction().commit();
+		em.refresh(Ins);
+	}
+	
+	@Override
+	public void ModificarInstitucion(String nombre,String desc,String url) {
+		Conexion conexion = Conexion.getInstancia();
+		EntityManager em = conexion.getEntityManager();
+		ManejadorInstitucion mI = ManejadorInstitucion.getInstancia();
+		InstitucionDeportiva Ins = mI.buscarInstitucionDeportiva(nombre);
+		Ins.setDescripcion(desc);
+		Ins.setUrl(url);
 		em.getTransaction().begin();
 		em.persist(Ins);
 		em.getTransaction().commit();
@@ -227,6 +242,14 @@ public class Controlador implements IControlador{
 		Usuario u = mU.buscarUsuario(nick);
 		DtUsuario dtU = u.getDtUsuario();
 		return dtU;
+	}
+	
+	@Override
+	public DtInstitucionDeportiva obtenerInstitucion(String nombre) {
+		ManejadorInstitucion mI = ManejadorInstitucion.getInstancia();
+		InstitucionDeportiva iD = mI.buscarInstitucionDeportiva(nombre);
+		DtInstitucionDeportiva dtI  = iD.getDtInstitucion();
+		return dtI;
 	}
 	
 	@Override

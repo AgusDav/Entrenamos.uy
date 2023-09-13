@@ -5,6 +5,9 @@ import java.util.Date;
 import java.util.List;
 
 import datatypes.DtActividadDeportiva;
+import datatypes.DtInstitucionDeportiva;
+import datatypes.DtUsuario;
+
 import java.io.Serializable;
 import java.time.ZoneId;
 
@@ -41,6 +44,11 @@ public class InstitucionDeportiva implements Serializable {
         this.descripcion = descripcion;
         this.url = url;
     }
+    
+    public DtInstitucionDeportiva getDtInstitucion() {
+		return (new DtInstitucionDeportiva(this.nombre,this.descripcion,this.url));
+	}
+    
 
     public String getNombre(){
         return this.nombre;
