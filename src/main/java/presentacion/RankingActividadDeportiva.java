@@ -78,8 +78,8 @@ public class RankingActividadDeportiva extends JInternalFrame {
 		getContentPane().add(datoCantidadClases);
 	}
 	private void comboBoxActividadActionPerformed(ActionEvent evt){
-		String actividad = (String) comboBoxActividad.getSelectedItem();
-		if (!actividad.isEmpty()) {
+		if(comboBoxActividad.getSelectedItem()!=null) {
+			String actividad = (String) comboBoxActividad.getSelectedItem();
 			DtActividadDeportiva dtc = icon.obtenerActividad(icon.obtenerInstitucionActividad(actividad),actividad);
 			datoCosto.setText(Float.toString(dtc.getCosto()));
 			datoDescripcion.setText(dtc.getDescripcion());
