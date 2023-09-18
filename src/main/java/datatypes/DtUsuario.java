@@ -8,16 +8,22 @@ public abstract class DtUsuario {
 	protected String nombre;
 	protected String apellido;
 	protected String email;
+
+	protected String password;
 	protected Date fecNac;
-	
-	public DtUsuario(String n, String nom, String a, String e, Date f) {
+
+	public DtUsuario(String n, String nom, String a, String e, String p, Date f) {
 		super();
 		this.nickname = n;
 		this.nombre = nom;
 		this.apellido = a;
 		this.email = e;
+		this.password = p;
 		this.fecNac = f;
 	}
+
+	public String getPassword() {return password;}
+	public void setPassword(String password) {this.password = password;}
 	public String getNickname() {
 		return nickname;
 	}

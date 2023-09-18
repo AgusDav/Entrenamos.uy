@@ -28,6 +28,7 @@ public abstract class Usuario implements Serializable {
     protected String nombre;
     protected String apellido;
     protected String email;
+    protected String password;
     @Temporal(TemporalType.DATE)
     protected Date fecNac;
 
@@ -35,12 +36,13 @@ public abstract class Usuario implements Serializable {
         super();
     }
 
-    public Usuario(String nickname, String nombre, String apellido, String email, Date fecNac){
+    public Usuario(String nickname, String nombre, String apellido, String email, String password, Date fecNac){
         super();
         this.nickname = nickname;
         this.nombre = nombre;
         this.apellido = apellido;
         this.email = email;
+        this.password = password;
         this.fecNac = fecNac;
     }
     
@@ -57,6 +59,10 @@ public abstract class Usuario implements Serializable {
     public void setNickname(String nickname){
         this.nickname =  nickname;
     }
+
+    public void setPassword(String password){this.password = password;}
+
+    public String getPassword(){return this.password;}
 
     public String getNombre(){
         return this.nombre;
