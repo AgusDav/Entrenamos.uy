@@ -40,8 +40,8 @@ public class Profesor extends Usuario implements Serializable{
     	super();
     }
 
-    public Profesor(String nickname, String nombre, String apellido, String email, Date fechaNac, String descripcion, String biografia, String sitioWeb, InstitucionDeportiva institucion){
-        super(nickname, nombre, apellido, email, fechaNac);
+    public Profesor(String nickname, String nombre, String apellido, String email, String password, Date fechaNac, String descripcion, String biografia, String sitioWeb, InstitucionDeportiva institucion){
+        super(nickname, nombre, apellido, email,password, fechaNac);
         this.descripcion = descripcion;
         this.biografia = biografia;
         this.sitioWeb = sitioWeb;
@@ -74,7 +74,7 @@ public class Profesor extends Usuario implements Serializable{
     
     @Override
 	public DtUsuario getDtUsuario() {
-		return new DtProfesor(this.nickname,this.nombre,this.apellido,this.email,this.fecNac,this.descripcion, this.biografia, this.sitioWeb);
+		return new DtProfesor(this.nickname,this.nombre,this.apellido,this.email,this.password,this.fecNac,this.descripcion, this.biografia, this.sitioWeb);
 	}
 
 	@Override

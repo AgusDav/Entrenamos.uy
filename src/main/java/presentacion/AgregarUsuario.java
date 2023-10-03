@@ -41,6 +41,7 @@ public class AgregarUsuario extends JInternalFrame {
 	private JTextField textFieldDescripcion;
 	private JTextField textFieldWeb;
 	private JTextField textFieldBio;
+	private JTextField textFieldPassword;
 	private JComboBox<String> seleccionarTipoUser;
 	private JComboBox<String> comboBoxNombreInstitucion;
 	
@@ -48,7 +49,7 @@ public class AgregarUsuario extends JInternalFrame {
 		setTitle("Agregar Usuario");
 		this.dialogoPadre = dialogoPadre;
 		this.icon = icon;
-		setBounds(100, 100, 350, 400);
+		setBounds(100, 100, 445, 463);
 		getContentPane().setLayout(null);
 		getContentPane().setBackground(new Color(54, 61, 75));;
 		
@@ -115,13 +116,23 @@ public class AgregarUsuario extends JInternalFrame {
 		// Campo descripción
 		JLabel lblDescripcion = new JLabel("Descripcion");
 		lblDescripcion.setForeground(new Color(255, 255, 255));
-		lblDescripcion.setBounds(12, 199, 102, 15);
+		lblDescripcion.setBounds(12, 367, 102, 15);
 		getContentPane().add(lblDescripcion);
 		
 		textFieldDescripcion = new JTextField();
-		textFieldDescripcion.setBounds(160, 197, 150, 19);
+		textFieldDescripcion.setBounds(160, 365, 150, 19);
 		getContentPane().add(textFieldDescripcion);
 		textFieldDescripcion.setColumns(10);
+		
+		JLabel lblpass = new JLabel("Password:");
+		lblpass.setForeground(new Color(255, 255, 255));
+		lblpass.setBounds(12, 199, 102, 15);
+		getContentPane().add(lblpass);
+		
+		textFieldPassword = new JTextField();
+		textFieldPassword.setBounds(160, 197, 150, 19);
+		getContentPane().add(textFieldPassword);
+		textFieldPassword.setColumns(10);
 		
 		// Campo sitio web
 		JLabel lblWeb = new JLabel("Web");
@@ -245,6 +256,7 @@ public class AgregarUsuario extends JInternalFrame {
 		String web = this.textFieldWeb.getText();
 		String bio = this.textFieldBio.getText();
 		String desc = this.textFieldDescripcion.getText();
+		String pass = this.textFieldPassword.getText();
 		Date fecha = fecNac.getDate();
 		String tipoUser = this.seleccionarTipoUser.getSelectedItem().toString();
 		DtUsuario dtU = null;
@@ -254,10 +266,10 @@ public class AgregarUsuario extends JInternalFrame {
             try {
             	if(tipoUser.equals("Profesor")) {
 					String inst = this.comboBoxNombreInstitucion.getSelectedItem().toString();
-        			dtU = new DtProfesor(nick, nombre, apellido, email, fecha, desc, bio, web);
+        			dtU = new DtProfesor(nick, nombre, apellido, email,pass, fecha, desc, bio, web);
         			this.icon.agregarUsuario(dtU, inst);
         		}else if(tipoUser.equals("Socio")){
-        			dtU = new DtSocio(nick, nombre, apellido, email, fecha);
+        			dtU = new DtSocio(nick, nombre, apellido, email,pass, fecha);
         			this.icon.agregarUsuario(dtU, "");
         		}
             	JOptionPane.showMessageDialog(this, "El usuario se ha creado con éxito", "Agregar Usuario ", JOptionPane.INFORMATION_MESSAGE);

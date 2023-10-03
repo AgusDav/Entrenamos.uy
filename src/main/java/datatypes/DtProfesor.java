@@ -8,8 +8,8 @@ public class DtProfesor extends DtUsuario{
 	private String biografia;
 	private String sitioWeb;
 	
-	public DtProfesor(String n, String nom, String a, String e, Date f, String d, String b, String w) {
-		super(n, nom, a, e, f);
+	public DtProfesor(String n, String nom, String a, String e, String p, Date f, String d, String b, String w) {
+		super(n, nom, a, e, p, f);
 		this.biografia = b;
 		this.descripcion = d;
 		this.sitioWeb = w;	

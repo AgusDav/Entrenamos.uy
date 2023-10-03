@@ -58,6 +58,8 @@ public class Principal {
     private JDialog modificarInstitucionDialog;
     private RankingActividadDeportiva rankingActividadDeportivaInternalFrame;
     private JDialog rankingActividadDeportivaDialog;
+    private LogIn LogInInternalFrame;
+    private JDialog LogInDialog;
     
 
 
@@ -89,6 +91,17 @@ public class Principal {
         modificarInstitucionDialog.setLocationRelativeTo(null);
         modificarInstitucionDialog.setVisible(false);
         modificarInstitucionInternalFrame.setVisible(true);
+        
+        LogInDialog = new JDialog(frame, "Log In", true);
+        LogInDialog.setSize(350, 450);
+        LogInDialog.setLocationRelativeTo(frame);
+        LogInDialog.getContentPane().setLayout(new BorderLayout());
+
+        LogInInternalFrame = new LogIn(icon, LogInDialog);
+        LogInDialog.getContentPane().add(LogInInternalFrame);
+        LogInDialog.setLocationRelativeTo(null);
+        LogInDialog.setVisible(false);
+        LogInInternalFrame.setVisible(true);
         
         agregarInstitutoDialog = new JDialog(frame, "Agregar Institución", true);
         agregarInstitutoDialog.setSize(340, 310);
@@ -470,8 +483,32 @@ public class Principal {
             	btnAltaUsuario.setBackground(new Color(54, 61, 75)); // Original color when not hovering
             }
         });
-        btnAltaUsuario.setBounds(83, 195, 273, 53);
+        btnAltaUsuario.setBounds(83, 136, 273, 53);
         panelPrincipal.add(btnAltaUsuario);
+        
+     // Boton alta usuario
+        JButton btnLogIn = new JButton("Log In");
+        btnLogIn.setIcon(iconoMas);
+        btnLogIn.addActionListener(new ActionListener() {
+        	public void actionPerformed(ActionEvent e) {
+        		LogInDialog.setVisible(true);
+        	}
+        });
+        btnLogIn.setForeground(Color.WHITE);
+        btnLogIn.setBackground(new Color(54, 61, 75));
+        btnLogIn.setBorder(new LineBorder(new Color(33, 37, 43), 3, true));
+        btnLogIn.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseEntered(MouseEvent e) {
+            	btnLogIn.setBackground(new Color(69, 78, 95)); // Lighter blue when hovering
+            }
+            @Override
+            public void mouseExited(MouseEvent e) {
+            	btnLogIn.setBackground(new Color(54, 61, 75)); // Original color when not hovering
+            }
+        });
+        btnLogIn.setBounds(83, 211, 273, 53);
+        panelPrincipal.add(btnLogIn);
         
         // Boton alta actividad deportiva
         JButton btnAltaActividadDeportiva = new JButton("Alta Actividad Deportiva");

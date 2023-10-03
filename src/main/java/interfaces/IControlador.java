@@ -52,4 +52,5 @@ public interface IControlador {
 	public DtInstitucionDeportiva obtenerInstitucion(String nombre);
 	public void ModificarInstitucion(String nombre,String desc,String url);
 	public String[] obtenerRankingActividadesDeportivas();
+	public Boolean logIn(String nick,String password);
 }

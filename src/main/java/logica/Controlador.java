@@ -72,12 +72,12 @@ public class Controlador implements IControlador{
 			throw new UsuarioRepetidoException("El usuario de nick "+ nuevoUser.getNickname() + " ya existe en el Sistema");
 		if (user instanceof DtProfesor) {
 			//Date fecha = Date.from(user.getFecNac().atStartOfDay(ZoneId.systemDefault()).toInstant());
-			nuevoUser = new Profesor(user.getNickname(),user.getNombre(),user.getApellido(),user.getEmail(),user.getFecNac(),((DtProfesor) user).getDescripcion(),((DtProfesor) user).getBiografia(),((DtProfesor) user).getSitioWeb(), inst); 
+			nuevoUser = new Profesor(user.getNickname(),user.getNombre(),user.getApellido(),user.getEmail(),user.getPassword(),user.getFecNac(),((DtProfesor) user).getDescripcion(),((DtProfesor) user).getBiografia(),((DtProfesor) user).getSitioWeb(), inst); 
 			inst.agregarProfesor((Profesor) nuevoUser);
 		}
 		if (user instanceof DtSocio) {
 			//Date fecha = Date.from(user.getFecNac().atStartOfDay(ZoneId.systemDefault()).toInstant());
-			nuevoUser = new Socio(user.getNickname(),user.getNombre(),user.getApellido(),user.getEmail(),user.getFecNac());
+			nuevoUser = new Socio(user.getNickname(),user.getNombre(),user.getApellido(),user.getEmail(),user.getPassword(),user.getFecNac());
 		}
 		mU.addUser(nuevoUser);
 		
@@ -102,6 +102,20 @@ public class Controlador implements IControlador{
 		em.persist(User);
 		em.getTransaction().commit();
 		em.refresh(User);
+	}
+	@Override
+	public Boolean logIn(String nick,String password) {
+		
+		Conexion conexion = Conexion.getInstancia();
+		EntityManager em = conexion.getEntityManager();
+		ManejadorUsuario mU = ManejadorUsuario.getInstancia();
+		Usuario User = mU.buscarUsuario(nick);
+		if(User != null) {
+			if(User.getPassword().equals(password)) {
+				return true;
+			}
+		}
+		return false;
 	}
 	
 	@Override

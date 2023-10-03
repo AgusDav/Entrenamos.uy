@@ -27,14 +27,14 @@ public class Socio extends Usuario implements Serializable{
     	super();
     }
 	
-	public Socio(String n, String nom, String a, String e, Date f){
-        super(n, nom, a, e, f);
+	public Socio(String n, String nom, String a, String e,String p, Date f){
+        super(n, nom, a, e,p, f);
     }
 	
 	@Override
 	public DtUsuario getDtUsuario() {
 		//LocalDate fecha = this.fecNac.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
-		return new DtSocio(this.nickname,this.nombre,this.apellido,this.email,this.fecNac);
+		return new DtSocio(this.nickname,this.nombre,this.apellido,this.email,this.password,this.fecNac);
 	}
 
 	public List<Registro> getRegistros() {
