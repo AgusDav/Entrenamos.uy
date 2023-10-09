@@ -5,11 +5,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import datatypes.DtActividadDeportiva;
-import datatypes.DtClase;
-import datatypes.DtInstitucionDeportiva;
-import datatypes.DtSocio;
-import datatypes.DtUsuario;
+import datatypes.*;
 import logica.ActividadDeportiva;
 import logica.Clase;
 import logica.InstitucionDeportiva;
@@ -27,6 +23,8 @@ public interface IControlador {
 	public void altaInstitucion(String nombre,String descripcion, String url) throws InstitucionDeportivaRepetidaException;
 	public void altaActividadDeportiva(String nombreIns,DtActividadDeportiva data) throws ActividadDeportivaRepetidaException;
 	public void agregarUsuario(DtUsuario user, String inst) throws UsuarioRepetidoException;
+	public void agregarProfesor(DtProfesor profe, String ins) throws UsuarioRepetidoException;
+	public void agregarSocio(DtSocio socio) throws UsuarioRepetidoException;
 	public void altaDictadoClase(DtClase clase, String nomIns, String nomAct, String profe) throws DictadoRepetidoException;
 	public void registroADictadoClase(String nick,String clase,Date fechaReg) throws RegistroAClaseRepetidoException;
 

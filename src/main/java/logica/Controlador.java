@@ -80,10 +80,31 @@ public class Controlador implements IControlador{
 			nuevoUser = new Socio(user.getNickname(),user.getNombre(),user.getApellido(),user.getEmail(),user.getPassword(),user.getFecNac());
 		}
 		mU.addUser(nuevoUser);
-		
-		
 	}
-	
+	@Override
+	public void agregarProfesor(DtProfesor profe, String ins) throws UsuarioRepetidoException {
+		ManejadorUsuario mU = ManejadorUsuario.getInstancia();
+		Usuario nuevoUser = mU.buscarUsuario(profe.getNickname());
+		ManejadorInstitucion mI = ManejadorInstitucion.getInstancia();
+		InstitucionDeportiva inst = mI.buscarInstitucionDeportiva(ins);
+		if (nuevoUser != null){
+			throw new UsuarioRepetidoException("El usuario de nick "+ nuevoUser.getNickname() + " ya existe en el Sistema");
+		}
+		nuevoUser = new Profesor(profe.getNickname(),profe.getNombre(),profe.getApellido(),profe.getEmail(),profe.getPassword(),profe.getFecNac(), profe.getDescripcion(),profe.getBiografia(),profe.getSitioWeb(), inst);
+		inst.agregarProfesor((Profesor) nuevoUser);
+		mU.addUser(nuevoUser);
+	}
+	@Override
+	public void agregarSocio(DtSocio socio) throws UsuarioRepetidoException {
+		ManejadorUsuario mU = ManejadorUsuario.getInstancia();
+		Usuario nuevoUser = mU.buscarUsuario(socio.getNickname());
+		if (nuevoUser != null){
+			throw new UsuarioRepetidoException("El usuario de nick "+ nuevoUser.getNickname() + " ya existe en el Sistema");
+		}
+		nuevoUser = new Socio(socio.getNickname(),socio.getNombre(),socio.getApellido(),socio.getEmail(),socio.getPassword(),socio.getFecNac());
+		mU.addUser(nuevoUser);
+	}
+
 	@Override
 	public void ModificarUsuario(String nick, String nombre, String apellido, Date fecNac , String Descripcion , String Biografia , String Sitio ) {
 		Conexion conexion = Conexion.getInstancia();
