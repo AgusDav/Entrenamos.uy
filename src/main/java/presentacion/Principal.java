@@ -27,6 +27,7 @@ import java.awt.event.MouseEvent;
 import javax.swing.SwingConstants;
 import java.awt.Insets;
 import persistencia.Conexion;
+import publicadores.ControladorPublish;
 
 public class Principal {
     private JFrame frame;
@@ -61,8 +62,6 @@ public class Principal {
     private LogIn LogInInternalFrame;
     private JDialog LogInDialog;
     
-
-
     public static void main(String[] args) {
         EventQueue.invokeLater(new Runnable() {
             public void run() {
@@ -77,6 +76,9 @@ public class Principal {
     }
 
     public Principal() {
+        ControladorPublish cp = new ControladorPublish();
+        cp.publicar();
+
         iniciar();
         Fabrica fabrica = Fabrica.getInstancia();
         IControlador icon = fabrica.getIControlador();
